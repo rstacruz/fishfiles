@@ -19,6 +19,21 @@ set __fish_git_prompt_char_upstream_equal ''
 set __fish_git_prompt_char_upstream_ahead '+' # '↑'
 set __fish_git_prompt_char_upstream_behind '-' # '↓'
 
+function fish_prompt_rsc_vi --description "Displays the current mode"
+  switch $fish_bind_mode
+    case default
+      set_color --bold cyan
+      echo -n "◆ "
+    case insert
+      set_color --bold white
+      echo -n "  "
+    case visual
+      set_color --bold red
+      echo -n "↔ "
+  end
+  set_color normal
+end
+
 function fish_prompt_rsc --description 'Prompt'
   set -l color1 blue
   set -l color black
@@ -66,4 +81,9 @@ end
 
 function fish_prompt --description 'Write out the prompt'
   fish_prompt_rsc $argv
+end
+
+function fish_vi_prompt --description 'Write out the prompt'
+  fish_prompt_rsc $argv
+  fish_prompt_rsc_vi
 end

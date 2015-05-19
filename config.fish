@@ -16,8 +16,8 @@ set -e fish_greeting
 #     eval (direnv hook fish)
 
 # theme
-[ -f ~/.config/fish/local/theme.fish ]; and \
-    . ~/.config/fish/local/theme.fish
+. ~/.config/fish/local/theme.fish
+set -u fish_user_paths ~/.config/fish/bin $fish_user_paths
 
 # brew install git-extras
 # ...nothing to do
