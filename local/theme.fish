@@ -60,12 +60,12 @@ function fish_prompt_rsc --description 'Prompt'
   set_color normal
 
   # -- normal?
-	if not set -q __fish_prompt_normal
-		set -g __fish_prompt_normal (set_color normal)
-	end
+  if not set -q __fish_prompt_normal
+    set -g __fish_prompt_normal (set_color normal)
+  end
 
   # -- git
-	printf '%s' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
+  printf '%s' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
 
   # -- glyph
   if not test $last_status -eq 0
