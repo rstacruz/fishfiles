@@ -1,4 +1,5 @@
 #!/usr/bin/env sh
+# Pushes the current branch via --set-upstream.
 
 remote=$1
 [ -z $remote ] && remote=origin

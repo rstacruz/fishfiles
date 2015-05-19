@@ -1,2 +1,3 @@
 #!/usr/bin/env sh
+# Watches the magnet link in the clipboard in VLC.
 peerflix `pbpaste` --vlc
