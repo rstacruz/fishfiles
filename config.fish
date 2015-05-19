@@ -19,6 +19,10 @@ set -e fish_greeting
 [ -f ~/.config/fish/local/theme.fish ]; and \
     . ~/.config/fish/local/theme.fish
 
+# https://github.com/tj/git-extras
+[ -d ~/.config/fish/bower_components/git-extras/bin ]; and \
+    set -U fish_user_paths $fish_user_paths ~/.config/fish/bower_components/git-extras/bin
+
 # so tmux won't complain
 export SHELL=/usr/local/bin/fish
 
