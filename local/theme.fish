@@ -23,13 +23,12 @@ function fish_prompt_rsc_vi --description "Displays the current mode"
   switch $fish_bind_mode
     case default
       set_color --bold cyan
-      echo -n "◆ "
+      echo -n -e "\b\b\b\bvi  "
     case insert
-      set_color --bold white
-      echo -n "  "
+      echo -n ""
     case visual
-      set_color --bold red
-      echo -n "↔ "
+      set_color --bold white
+      echo -n -e "\b\b\b\bvis "
   end
   set_color normal
 end
