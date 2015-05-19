@@ -1,3 +1,6 @@
+# suppress greeting
+set -e fish_greeting
+
 # brew install autojump
 [ -f /usr/local/share/autojump/autojump.fish ]; and \
     . /usr/local/share/autojump/autojump.fish
@@ -9,9 +12,8 @@
 
 # brew install direnv
 # https://github.com/zimbatm/direnv/
-if which direnv > /dev/null
-    eval (direnv hook fish)
-end
+# which direnv > /dev/null; and \
+#     eval (direnv hook fish)
 
 # theme
 [ -f ~/.config/fish/local/theme.fish ]; and \
