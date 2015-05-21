@@ -1,3 +1,5 @@
+![](https://raw.githubusercontent.com/rstacruz/fishfiles/gh-pages/screenshot.png)
+
 Requires fish 2.1+.
 
     brew install fish --HEAD
