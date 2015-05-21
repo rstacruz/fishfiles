@@ -8,7 +8,7 @@ Requires fish 2.1+.
 
 Load abbreviations:
 
-    . ~/.config/fish/local/abbreviations.fish
+    . ~/.config/fish/abbreviations.fish
 
 Some extras you may want to install:
 
