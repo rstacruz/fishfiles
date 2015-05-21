@@ -5,7 +5,7 @@ set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
 set __fish_git_prompt_showupstream 'yes'
 
-set __fish_git_prompt_color_branch black
+# set __fish_git_prompt_color_branch black
 set __fish_git_prompt_color_dirtystate red
 set __fish_git_prompt_color_cleanstate black
 set __fish_git_prompt_color_stagedstate green
@@ -37,10 +37,11 @@ function fish_prompt_rsc --description 'Prompt'
   set -l color1 blue
   set -l color black
   set -l last_status $status
-  set -l gitroot (printf '%s' (git rev-parse --show-toplevel 2>/dev/null))
 
   echo ""
   echo -n " "
+
+  set -l gitroot (printf '%s' (git rev-parse --show-toplevel 2>/dev/null))
 
   # -- pwd
   set_color $color1
