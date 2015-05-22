@@ -9,6 +9,8 @@ complete -c pass -n '__fish_use_subcommand' -a "find" -x -d "Finds passwords mat
 complete -c pass -n '__fish_use_subcommand' -a "init" -x -d "Initialize new password storage"
 complete -c pass -n '__fish_use_subcommand' -a "insert" -x -d "Insert a password"
 complete -c pass -n '__fish_use_subcommand' -a "edit" -x -d "Insert or edit a password"
+complete -c pass -n '__fish_use_subcommand' -a "git" -x -d "Run a git command"
+complete -c pass -n '__fish_use_subcommand' -a "show" -x -d "Show a password"
 
 complete -c pass -s c -l clip --description "Copy to clipboard"
 
