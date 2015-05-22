@@ -1,6 +1,3 @@
-complete -c pass -x
-complete -c pass -s c -l clip --description "Copy to clipboard"
-
 complete -c pass -n '__fish_use_subcommand' -a "help" -x -d "Show help"
 complete -c pass -n '__fish_use_subcommand' -a "grep" -x -d "Search for password files"
 complete -c pass -n '__fish_use_subcommand' -a "generate" -x -d "Generates a password"
@@ -12,6 +9,8 @@ complete -c pass -n '__fish_use_subcommand' -a "find" -x -d "Finds passwords mat
 complete -c pass -n '__fish_use_subcommand' -a "init" -x -d "Initialize new password storage"
 complete -c pass -n '__fish_use_subcommand' -a "insert" -x -d "Insert a password"
 complete -c pass -n '__fish_use_subcommand' -a "edit" -x -d "Insert or edit a password"
+
+complete -c pass -s c -l clip --description "Copy to clipboard"
 
 complete -c pass -n "__fish_seen_subcommand_from rm cp mv generate insert" -s f -l force
 
