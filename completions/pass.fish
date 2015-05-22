@@ -22,6 +22,6 @@ complete -c pass -n "__fish_seen_subcommand_from insert"   -s e -l echo
 complete -c pass -n "__fish_seen_subcommand_from insert"   -s m -l multiline
 complete -c pass -n "__fish_seen_subcommand_from git" -a "init push pull config log reflog rebase"
 
-set -l files (pushd $HOME/.password-store; for fn in **/*.gpg; echo $fn | sed 's/\.gpg//'; end; popd)
+set -l files (pushd $HOME/.password-store; echo **/*.gpg | sed 's/\.gpg//g'; popd)
 
 complete -c pass -n "not __fish_seen_subcommand_from git generate init help grep" -x -a "$files"
