@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+# initializes boilerplate from a given path
+#
+#  plate ~/.skels/rubygem
+#  plate ~/.skels/jekyll
+
+(cd $1 >/dev/null && git archive HEAD) | tar xv;
