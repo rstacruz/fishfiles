@@ -1,3 +1,7 @@
+# https://github.com/bpinto/oh-my-fish/blob/master/functions/restore_original_fish_colors.fish
+set fish_color_command cyan --bright
+set fish_color_param normal
+
 # https://wiki.archlinux.org/index.php/Fish#Web_interface
 # fish git prompt
 set __fish_git_prompt_showcleanstate 'yes'
