@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+if [ -z "$1" ]; then
+  echo Usage: $0 {node|ruby|...}
+  exit 1
+fi
+
+curl -q https://www.gitignore.io/api/$1 | tee -a .gitignore
