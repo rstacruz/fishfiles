@@ -13,6 +13,15 @@
 #       See: https://github.com/rstacruz/compose
 #
 source ${0%/*}/git-utils.sh
+
+case "$1" in
+  -h|--help)
+    echo "Usage: $(basename ${0})"
+    echo "Forks the current project in GitHub."
+    exit
+    ;;
+esac
+
 user=$(github_username)
 password=$(github_password)
 repo=$(github_repo)
@@ -23,18 +32,22 @@ upstream=$(git config --get remote.origin.url)
 url="https://github.com/${user}/${project}"
 origin="${url}.git"
 
+if [ "$repo" = "$user/$project" ]; then
+  die "$repo is already your project."
+fi
+
 echo "Forking $repo to $user/$project..."
 output=$(curl -s -X POST -u "$user:$password" "https://api.github.com/repos/$repo/forks")
-if [ $? != 0 ]; then exit $?; fi
+if [ $? != 0 ]; then die "curl failed"; fi
 if ! (echo $output | grep full_name >/dev/null); then
   echo $output
-  exit 1
+  die "curl failed"
 fi
 
 echo ""
 echo "    upstream  $upstream"
 git remote add upstream "$upstream"
-if [ $? != 0 ]; then exit $?; fi
+if [ $? != 0 ]; then die "failed to add upstream"; fi
 
 git remote rm origin
 echo "      origin  $origin"
