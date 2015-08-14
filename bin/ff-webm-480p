@@ -1,0 +1,17 @@
+#!/usr/bin/env sh
+input="$1"
+output="${input%.*}.webm"
+ffmpeg -i "$input" \
+  -codec:v libvpx \
+  -codec:a libvorbis \
+  -quality good \
+  -cpu-used 0 \
+  -b:v 600k \
+  -qmin 10 -qmax 42 \
+  -maxrate 500k -bufsize 1000k \
+  -threads 2 \
+  -vf scale=-1:480 \
+  -b:a 128k \
+  -f webm \
+  "$output"
+
