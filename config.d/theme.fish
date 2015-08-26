@@ -90,7 +90,7 @@ function fish_prompt --description 'Write out the prompt'
   fish_prompt_rsc $argv
 end
 
-function fish_vi_prompt --description 'Write out the prompt'
-  fish_prompt_rsc $argv
+function fish_mode_prompt --description 'Write out the prompt'
+  # fish_prompt_rsc $argv
   fish_prompt_rsc_vi
 end
