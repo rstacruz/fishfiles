@@ -5,9 +5,11 @@ if [ -z "$1" ]; then
   echo "  gh-clone user/repo"
   exit 1
 fi
+
 repo="$1"
 if ! echo "$repo" | grep / > /dev/null; then
   user="$(git config github.user)"
   repo="${user}/${repo}"
 fi
-echo git clone https://github.com/${repo}.git
+
+git clone https://github.com/${repo}.git
