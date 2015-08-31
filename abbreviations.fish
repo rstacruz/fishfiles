@@ -1,34 +1,34 @@
-abbr -a '1 prevd'
-abbr -a '2 nextd'
-abbr -a ':E nvim'
-abbr -a ':e nvim'
-abbr -a 'bandle bundle install --jobs=5 --path=vendor/bundle'
-abbr -a 'be bundle exec'
-abbr -a 'cask brew cask'
-abbr -a 'cl clear'
-abbr -a 'd dirh'
-abbr -a 'fig docker-compose'
-abbr -a 'g git'
-abbr -a 'ga git add'
-abbr -a 'gaa git add --all .'
-abbr -a 'gac git add --all .; and git commit'
-abbr -a 'gacm git add --all .; and git commit -m'
-abbr -a 'gc git commit'
-abbr -a 'gcam git commit --amend -m'
-abbr -a 'gcm git commit -m'
-abbr -a 'gd git diff'
-abbr -a 'gg ag'
-abbr -a 'gpr git pull --rebase'
-abbr -a 'hi hicat -N'
-abbr -a 'l ls'
-abbr -a 'macdown open -a MacDown.app'
-abbr -a 'n npm'
-abbr -a 'nr npm run'
-abbr -a 'nt npm test'
-abbr -a 'nv nvim'
-abbr -a 'sha256 shasum -a 256'
-abbr -a 't timetip'
-abbr -a 'ta tmux attach'
-abbr -a 'tigs tig status'
-abbr -a 'v nvim'
-abbr -a 'vim nvim'
+abbr 1 prevd
+abbr 2 nextd
+abbr ':E' nvim
+abbr ':e' nvim
+abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
+abbr be 'bundle exec'
+abbr cask 'brew cask'
+abbr cl clear
+abbr d dirh
+abbr fig 'docker-compose'
+abbr g git
+abbr ga 'git add'
+abbr gaa 'git add --all .'
+abbr gac 'git add --all .; and git commit'
+abbr gacm 'git add --all .; and git commit -m'
+abbr gc 'git commit'
+abbr gcam 'git commit --amend -m'
+abbr gcm 'git commit -m'
+abbr gd 'git diff'
+abbr gg ag
+abbr gpr 'git pull --rebase'
+abbr hi 'hicat -N'
+abbr l ls
+abbr macdown 'open -a MacDown.app'
+abbr n npm
+abbr nr 'npm run'
+abbr nt 'npm test'
+abbr nv nvim
+abbr sha256 'shasum -a 256'
+abbr t timetip
+abbr ta 'tmux attach'
+abbr tigs 'tig status'
+abbr v nvim
+abbr vim nvim
