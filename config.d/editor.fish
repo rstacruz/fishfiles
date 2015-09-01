@@ -1,3 +1,3 @@
 if which nvim > /dev/null
-  set -U EDITOR nvim
+  set -x EDITOR nvim
 end
