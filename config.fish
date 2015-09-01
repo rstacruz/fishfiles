@@ -4,6 +4,10 @@ set -e fish_greeting
 # bins
 set -u fish_user_paths ~/.config/fish/bin $fish_user_paths
 
+if test -d ~/Config/bin
+  set -u fish_user_paths ~/Config/bin $fish_user_paths
+end
+
 # autoload files
 for f in ~/.config/fish/config.d/*.fish; . $f; end
 
