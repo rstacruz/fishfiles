@@ -1,3 +1,4 @@
+abbr k beep
 abbr 1 prevd
 abbr 2 nextd
 abbr ':E' nvim
@@ -32,3 +33,4 @@ abbr ta 'tmux attach'
 abbr tigs 'tig status'
 abbr v nvim
 abbr vim nvim
+abbr psaux 'ps aux'
