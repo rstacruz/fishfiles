@@ -1,3 +1,5 @@
+abbr psgrep 'ps aux | grep'
+abbr ':q' exit
 abbr k beep
 abbr 1 prevd
 abbr 2 nextd
