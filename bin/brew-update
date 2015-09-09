@@ -1,7 +1,18 @@
 #!/usr/bin/env sh
 # Updates homebrew
-brew update
-brew upgrade brew-cask
-brew cleanup
-brew cask cleanup
+status () {
+  color=1 printf "\n\033[32;1m==>\033[0;${color}m %s\033[0m\n" "$*"
+}
+
+_ () {
+  status $*
+  $*
+}
+
+_ brew update
+_ brew upgrade brew-cask
+_ brew cleanup
+_ brew cask cleanup
+status "Outdated packages:"
+printf "\033[33;1m==>\033[0m %s\033[0m\n" "Run 'brew upgrade' to update."
 brew outdated
