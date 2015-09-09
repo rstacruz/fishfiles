@@ -1,3 +1,4 @@
+abbr tg 'tig grep'
 abbr psgrep 'ps aux | grep'
 abbr ':q' exit
 abbr k beep
