@@ -7,6 +7,7 @@ set fish_color_param normal
 set __fish_git_prompt_showcleanstate 'yes'
 set __fish_git_prompt_showdirtystate 'yes'
 set __fish_git_prompt_showstashstate 'yes'
+set __fish_git_prompt_showuntrackedfiles 'yes'
 set __fish_git_prompt_showupstream 'verbose'
 
 # set __fish_git_prompt_color_branch black
@@ -14,11 +15,13 @@ set __fish_git_prompt_color_dirtystate red
 set __fish_git_prompt_color_cleanstate black
 set __fish_git_prompt_color_stagedstate green
 set __fish_git_prompt_color_upstream green
+set __fish_git_prompt_color_untrackedfiles yellow
 
 # Status Chars
 set __fish_git_prompt_char_cleanstate '•'
 set __fish_git_prompt_char_dirtystate '•'
 set __fish_git_prompt_char_stagedstate '•'
+set __fish_git_prompt_char_untrackedfiles '•'
 set __fish_git_prompt_char_stashstate ''
 set __fish_git_prompt_char_upstream_equal '' #(set_color green)'✓'
 set __fish_git_prompt_char_upstream_prefix ''
