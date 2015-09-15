@@ -40,4 +40,4 @@ abbr tigs 'tig status'
 abbr v nvim
 abbr vim nvim
 abbr psaux 'ps aux'
-abbr mm '~/Config/_mm/bin/mm'
+abbr mm '~/Config/_/bin/mm'
