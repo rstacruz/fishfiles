@@ -1,3 +1,4 @@
+abbr gcempty 'git commit --allow-empty -m'
 abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
 abbr bs 'brew services'
 abbr tg 'tig grep'
