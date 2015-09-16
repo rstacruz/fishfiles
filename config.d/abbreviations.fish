@@ -1,20 +1,3 @@
-abbr gcempty 'git commit --allow-empty -m'
-abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
-abbr bs 'brew services'
-abbr tg 'tig grep'
-abbr psgrep 'ps aux | grep'
-abbr ':q' exit
-abbr k beep
-abbr 1 prevd
-abbr 2 nextd
-abbr ':E' nvim
-abbr ':e' nvim
-abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
-abbr be 'bundle exec'
-abbr cask 'brew cask'
-abbr cl clear
-abbr d dirh
-abbr fig 'docker-compose'
 abbr g git
 abbr ga 'git add'
 abbr gaa 'git add --all .'
@@ -41,3 +24,20 @@ abbr v nvim
 abbr vim nvim
 abbr psaux 'ps aux'
 abbr mm '~/Config/_/bin/mm'
+abbr gcempty 'git commit --allow-empty -m'
+abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
+abbr bs 'brew services'
+abbr tg 'tig grep'
+abbr psgrep 'ps aux | grep'
+abbr ':q' exit
+abbr k beep
+abbr 1 prevd
+abbr 2 nextd
+abbr ':E' nvim
+abbr ':e' nvim
+abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
+abbr be 'bundle exec'
+abbr cask 'brew cask'
+abbr cl clear
+abbr d dirh
+abbr fig 'docker-compose'
