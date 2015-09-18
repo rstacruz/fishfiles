@@ -18,7 +18,7 @@ abbr nt 'npm test'
 abbr nv nvim
 abbr sha256 'shasum -a 256'
 abbr t timetip
-abbr ta 'tmux attach'
+abbr ta 'tmux attach; or tmux'
 abbr tigs 'tig status'
 abbr v nvim
 abbr vim nvim
