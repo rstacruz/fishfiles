@@ -1,3 +1,6 @@
+abbr ms metalstart
+abbr k7 'katflix --peerflix="--vlc" --subliminal="--language en"'
+abbr sub 'subliminal download -l en'
 abbr g git
 abbr ga 'git add'
 abbr gaa 'git add --all .'

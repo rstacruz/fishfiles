@@ -3,4 +3,4 @@ link:
 	ln -nfs "`pwd -LP`" ~/.config/fish
 
 update:
-	fish -c 'abbr -s' > ./config.d/abbreviations.fish
+	fish -c 'abbr -s' > ./abbreviations.fish

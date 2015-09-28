@@ -10,7 +10,9 @@ if test -d ~/Config/_/bin
 end
 
 # autoload files
-for f in ~/.config/fish/config.d/*.fish; . $f; end
+for f in ~/.config/fish/config.d/*.fish
+  source $f
+end
 
 for f in ~/.config/fish/_packages/*/bin
   set -u fish_user_paths $fish_user_paths $f
