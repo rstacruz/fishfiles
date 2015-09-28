@@ -26,7 +26,6 @@ abbr tigs 'tig status'
 abbr v nvim
 abbr vim nvim
 abbr psaux 'ps aux'
-abbr mm '~/Config/_/bin/mm'
 abbr gcempty 'git commit --allow-empty -m'
 abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
 abbr bs 'brew services'
@@ -44,3 +43,4 @@ abbr cask 'brew cask'
 abbr cl clear
 abbr d dirh
 abbr fig 'docker-compose'
+abbr mm '~/Config/bin/mm'
