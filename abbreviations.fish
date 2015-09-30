@@ -44,3 +44,6 @@ abbr cl clear
 abbr d dirh
 abbr fig 'docker-compose'
 abbr mm '~/Config/bin/mm'
+abbr gri 'git rebase --interactive'
+abbr gr 'git rebase'
+abbr gcp 'git cherry-pick'
