@@ -32,13 +32,13 @@ set __fish_git_prompt_char_upstream_diverged ' ↔'
 function fish_prompt_rsc_vi --description "Displays the current mode"
   switch $fish_bind_mode
     case default
-      set_color --bold cyan
-      echo -n -e "\b\b\b\bvi  "
+      set_color cyan
+      echo -n -e " (vi mode)"
     case insert
-      echo -n ""
+      echo -n -e "          " 
     case visual
       set_color --bold white
-      echo -n -e "\b\b\b\bvis "
+      echo -n -e " (visual) "
   end
   set_color normal
 end
@@ -81,11 +81,12 @@ function fish_prompt_rsc --description 'Prompt'
   # -- glyph
   if not test $last_status -eq 0
     set_color $fish_color_error
+    echo -n ' ✗  '
   else
     set_color $color
+    echo -n ' →  '
   end
 
-  echo -n ' →  '
   set_color normal
 end
 
