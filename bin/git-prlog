@@ -1,0 +1,12 @@
+#!/usr/bin/env sh
+
+commits=$(git log "$@" --oneline | grep "Merge pull request" | awk '{print $1}')
+
+for commit in $commits; do
+  pr=$(git show $commit --pretty="%s" | head -n 1 | awk '{print $4}')
+  description=$(git show $commit --pretty="%b" | head -n 1)
+  mergesource=$(git show $commit | grep "Merge: " | head -n 1 | awk '{print $3}')
+  author=$(git show $mergesource --pretty="%an" | head -n 1)
+  # echo - \[ $commit \] $pr: $description - \*$author\*
+  echo - $pr $description - \*$author\*
+done
