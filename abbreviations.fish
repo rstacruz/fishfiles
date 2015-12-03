@@ -58,3 +58,4 @@ abbr gfrh 'git fetch; and git reset --hard'
 abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
 abbr sstop 'brew services stop'
+abbr hl hledger
