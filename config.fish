@@ -1,3 +1,4 @@
+printf '\033[?25l\033[90m Loading...'
 # suppress greeting
 set -e fish_greeting
 
@@ -12,3 +13,5 @@ end
 for f in ~/.config/fish/_packages/*/bin
   set -gx fish_user_paths $fish_user_paths $f
 end
+
+printf '\r\033[K\033[0m\033[?25h'
