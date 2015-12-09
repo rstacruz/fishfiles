@@ -64,4 +64,4 @@ abbr t task
 abbr vl 'nvim $LEDGER_FILE'
 abbr 'g.' 'git commit -m Update'
 abbr hlr 'hledger reg --cleared --cost --empty -e tomorrow'
-abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree'
+abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree --historical'
