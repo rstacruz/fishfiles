@@ -1,4 +1,4 @@
-abbr ms metalstart
+[?25l[90m Loading...[K[0m[?25habbr ms metalstart
 abbr k7 'katflix --peerflix="--vlc" --subliminal="--language en"'
 abbr sub 'subliminal download -l en'
 abbr g git
@@ -20,7 +20,6 @@ abbr nr 'npm run'
 abbr nt 'npm test'
 abbr nv nvim
 abbr sha256 'shasum -a 256'
-abbr t timetip
 abbr ta 'tmux attach; or tmux'
 abbr tigs 'tig status'
 abbr v nvim
@@ -59,3 +58,10 @@ abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
 abbr sstop 'brew services stop'
 abbr hl hledger
+abbr hla 'hledger add'
+abbr 'stash-pub' 'git add --all .; git stash; git pull --rebase; git stash pop; npm update; and npm test; and npm publish'
+abbr t task
+abbr vl 'nvim $LEDGER_FILE'
+abbr 'g.' 'git commit -m Update'
+abbr hlr 'hledger reg --cleared --cost --empty -e tomorrow'
+abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree'
