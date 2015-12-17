@@ -35,7 +35,7 @@ abbr gr 'git rebase'
 abbr gri 'git rebase --interactive'
 abbr hi 'hicat -N'
 abbr hl hledger
-abbr hla 'hledger add'
+abbr hla 'grep alias $LEDGER_FILE; hledger add'
 abbr hlac 'hledger accounts --tree'
 abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree --historical'
 abbr hlbs 'hledger balancesheet --cleared --cost --empty -e tomorrow'
