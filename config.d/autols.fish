@@ -1,7 +1,6 @@
 function __autols_hook --description "Auto ls" --on-event fish_prompt
   if test "$__autols_last" != (pwd)
     if test "$HOME" = (pwd)
-      motd
     else
       echo; ls
     end
