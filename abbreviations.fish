@@ -13,6 +13,7 @@ abbr bs 'brew services'
 abbr cask 'brew cask'
 abbr cl clear
 abbr d dirh
+abbr duh 'du -d 1 | sort -n'
 abbr fig 'docker-compose'
 abbr g git
 abbr ga 'git add'
@@ -66,4 +67,5 @@ abbr tg 'tig grep'
 abbr tigs 'tig status'
 abbr v nvim
 abbr vim nvim
+abbr vj 'nvim ~/.journal'
 abbr vl 'nvim $LEDGER_FILE'
