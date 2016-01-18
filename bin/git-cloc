@@ -1,0 +1,10 @@
+#!/usr/bin/env bash
+git ls-files $* | \
+  grep -v -E '(node_modules|bower_components|coverage|log|tmp|temp|vendor|fixture|fixtures|dist|cassettes)/' | \
+  tr '\n' '\0' | \
+  xargs -0 cloc \
+   --categorized=/tmp/log.txt \
+   --force-lang=sass,styl \
+   --force-lang=javascript,es6 \
+   --force-lang=javascript,jsx \
+   --by-percent cmb \

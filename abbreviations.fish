@@ -45,11 +45,13 @@ abbr k beep
 abbr k7 'katflix --peerflix="--vlc" --subliminal="--language en"'
 abbr l ls
 abbr macdown 'open -a MacDown.app'
+abbr mled 'make -f $HOME/Config/ledger/Makefile'
 abbr mm '~/Config/bin/mm'
 abbr mochaw 'mocha -b -R min --watch'
 abbr n npm
 abbr npmi 'npm install --save --save-exact'
 abbr npmid 'npm install --save-dev --save-exact'
+abbr npminit 'echo node_modules >> .gitignore; npm init'
 abbr npmr 'npm prune; and npm update; and npm test; and npm publish; and git release'
 abbr nr 'npm run'
 abbr nt 'npm test'
