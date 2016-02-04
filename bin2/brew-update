@@ -10,6 +10,7 @@ _ () {
 }
 
 _ brew update
+_ brew upgrade brew-cask
 _ brew cleanup
 _ brew cask cleanup
 status "Outdated packages:"

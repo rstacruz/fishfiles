@@ -1,0 +1,15 @@
+#!/usr/bin/env sh
+# Inspects what happened to a given function block over time
+
+if [ -z "$*" ]; then
+  echo "Usage: git log-block <indent> <start> <end> <file>"
+  echo "Example: git log-block '  ' 'def start' 'end'  index.rb"
+  exit 0
+fi
+
+indent=$1
+start=$2
+end=$3
+file=$4
+
+git log -L "/^${indent}${start}/,/^${end}/:${file}"

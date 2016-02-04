@@ -1,0 +1,8 @@
+#!/usr/bin/env sh
+# Pushes the current branch via --set-upstream.
+
+remote=$1
+[ -z $remote ] && remote=origin
+
+git push --set-upstream $remote `git rev-parse --abbrev-ref HEAD`
+

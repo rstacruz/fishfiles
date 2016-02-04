@@ -1,0 +1,7 @@
+#!/usr/bin/env sh
+
+# Force updates a Homebrew package.
+#
+#    brew-fupdate fish
+
+brew uninstall $1 --force && brew install $1 --HEAD --force

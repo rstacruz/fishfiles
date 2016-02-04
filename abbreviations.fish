@@ -62,7 +62,7 @@ abbr sha256 'shasum -a 256'
 abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
 abbr sstop 'brew services stop'
-abbr sub 'subliminal download -l en'
+abbr sub 'subtitler --lang eng *.{mp4,mkv}'
 abbr t task
 abbr ta 'tmux attach; or tmux'
 abbr tg 'tig grep'
