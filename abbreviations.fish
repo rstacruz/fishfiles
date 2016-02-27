@@ -7,6 +7,7 @@ abbr 'g.' 'git add --all .; and git commit -m Update'
 abbr 'stash-pub' 'git add --all .; git stash; git pull --rebase; git stash pop; npm update; and npm test; and npm publish'
 abbr 1 prevd
 abbr 2 nextd
+abbr aoeu asdf
 abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
 abbr be 'bundle exec'
 abbr bs 'brew services'
@@ -41,6 +42,7 @@ abbr hlac 'hledger accounts --tree'
 abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree --historical'
 abbr hlbs 'hledger balancesheet --cleared --cost --empty -e tomorrow'
 abbr hlr 'hledger reg --cleared --cost --empty -e tomorrow'
+abbr ixs 'iex -S mix'
 abbr k beep
 abbr k7 'katflix --peerflix="--vlc" --subliminal="--language en"'
 abbr l ls

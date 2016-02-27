@@ -91,10 +91,19 @@ function fish_prompt_rsc --description 'Prompt'
 end
 
 function fish_prompt --description 'Write out the prompt'
-  fish_prompt_rsc $argv
+  if test "$MIN_PROMPT" = ""
+    fish_prompt_rsc $argv
+  else
+    echo ""
+    set_color black
+    echo -n '→ '
+    set_color normal
+  end
 end
 
 function fish_mode_prompt --description 'Write out the prompt'
-  # fish_prompt_rsc $argv
-  fish_prompt_rsc_vi
+  if test "$MIN_PROMPT" = ""
+  else
+    fish_prompt_rsc_vi
+  end
 end
