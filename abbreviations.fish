@@ -8,6 +8,7 @@ abbr 'stash-pub' 'git add --all .; git stash; git pull --rebase; git stash pop; 
 abbr 1 prevd
 abbr 2 nextd
 abbr aoeu asdf
+abbr aria 'aria2c -j16 -x16'
 abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
 abbr be 'bundle exec'
 abbr bs 'brew services'
@@ -57,6 +58,7 @@ abbr npminit 'echo node_modules >> .gitignore; npm init'
 abbr npmr 'npm prune; and npm update; and npm test; and npm publish; and git release'
 abbr nr 'npm run'
 abbr nt 'npm test'
+abbr ntw 'npm test -- --watch'
 abbr nv nvim
 abbr psaux 'ps aux'
 abbr psgrep 'ps aux | grep'
