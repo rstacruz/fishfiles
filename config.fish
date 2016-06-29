@@ -18,3 +18,4 @@ for f in ~/.config/fish/_packages/*/bin
 end
 
 printf '\r\033[K\033[0m\033[?25h'
+source ~/.asdf/asdf.fish
