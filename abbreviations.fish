@@ -4,6 +4,7 @@ abbr ':e' nvim
 abbr ':q' exit
 abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
 abbr 'g.' 'git add --all .; and git commit -m Update'
+abbr 'g..' 'git add --all .; and git commit --amend -m Update; git push --force'
 abbr 'stash-pub' 'git add --all .; git stash; git pull --rebase; git stash pop; npm update; and npm test; and npm publish'
 abbr 1 prevd
 abbr 2 nextd
@@ -28,6 +29,7 @@ abbr gcempty 'git commit --allow-empty -m'
 abbr gcm 'git commit -m'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff'
+abbr gentr 'git ls-files | entr'
 abbr gfR 'git fetch; and git reset --hard'
 abbr gfr 'git fetch; and git rebase'
 abbr gfrb 'git fetch; and git rebase'
@@ -43,14 +45,19 @@ abbr hlac 'hledger accounts --tree'
 abbr hlb 'hledger balance --cleared --cost --empty -e tomorrow --tree --historical'
 abbr hlbs 'hledger balancesheet --cleared --cost --empty -e tomorrow'
 abbr hlr 'hledger reg --cleared --cost --empty -e tomorrow'
+abbr ixp 'iex -S mix phoenix.server'
 abbr ixs 'iex -S mix'
 abbr k beep
 abbr k7 'katflix --peerflix="--vlc" --subliminal="--language en"'
 abbr l ls
+abbr m mix
 abbr macdown 'open -a MacDown.app'
 abbr mled 'make -f $HOME/Config/ledger/Makefile'
 abbr mm '~/Config/bin/mm'
 abbr mochaw 'mocha -b -R min --watch'
+abbr mt 'mix test'
+abbr mts 'mix test --stale --trace --exclude pending'
+abbr mtx 'mix test --exclude pending'
 abbr n npm
 abbr npmi 'npm install --save --save-exact'
 abbr npmid 'npm install --save-dev --save-exact'
