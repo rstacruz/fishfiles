@@ -25,7 +25,6 @@ abbr gac 'git add --all .; and git commit'
 abbr gacm 'git add --all .; and git commit -m'
 abbr gc 'git commit'
 abbr gcam 'git commit --amend -m'
-abbr gcempty 'git commit --allow-empty -m'
 abbr gcm 'git commit -m'
 abbr gcp 'git cherry-pick'
 abbr gd 'git diff'
@@ -83,3 +82,5 @@ abbr v nvim
 abbr vim nvim
 abbr vj 'nvim ~/.journal'
 abbr vl 'nvim $LEDGER_FILE'
+abbr w3c 'curl -H "Content-Type: text/html; charset=utf-8" --data-binary @- "https://validator.w3.org/nu/?out=gnu"'
+abbr y yarn

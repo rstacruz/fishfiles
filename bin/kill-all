@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+
+killflags=""
+killcmd="kill"
+
+while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+  -s | --simulate )
+    killcmd="echo kill"
+    ;;
+  -9 )
+    killflags="-9"
+    ;;
+esac; shift; done
+if [[ "$1" == '--' ]]; then shift; fi
+
+ps aux | grep "$1" | grep -v grep | grep -v $$
+ps aux | grep "$1" | grep -v grep | grep -v $$ | awk '{print $2}' | xargs $killcmd $killflags
