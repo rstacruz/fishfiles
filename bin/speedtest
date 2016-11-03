@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+wget --output-document=/dev/null http://speedtest.wdc01.softlayer.com/downloads/test10.zip
