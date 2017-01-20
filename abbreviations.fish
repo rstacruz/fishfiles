@@ -67,6 +67,7 @@ abbr nr 'npm run'
 abbr nt 'npm test'
 abbr ntw 'npm test -- --watch'
 abbr nv nvim
+abbr opne open
 abbr psaux 'ps aux'
 abbr psgrep 'ps aux | grep'
 abbr sha256 'shasum -a 256'
