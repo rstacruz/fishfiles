@@ -1,4 +1,3 @@
-[?25l[90m Loading...[K[0m[?25habbr ms metalstart
 abbr ':E' nvim
 abbr ':e' nvim
 abbr ':q' exit
@@ -54,6 +53,7 @@ abbr macdown 'open -a MacDown.app'
 abbr mled 'make -f $HOME/Config/ledger/Makefile'
 abbr mm '~/Config/bin/mm'
 abbr mochaw 'mocha -b -R min --watch'
+abbr ms metalstart
 abbr mt 'mix test'
 abbr mts 'mix test --stale --exclude pending'
 abbr mtx 'mix test --exclude pending'
