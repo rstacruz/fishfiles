@@ -1,6 +1,7 @@
 # https://github.com/bpinto/oh-my-fish/blob/master/functions/restore_original_fish_colors.fish
 set fish_color_command cyan --bright
 set fish_color_param normal
+set __fish_prompt_normal (set_color normal)
 
 # https://wiki.archlinux.org/index.php/Fish#Web_interface
 # fish git prompt
@@ -23,38 +24,70 @@ set __fish_git_prompt_char_dirtystate '•'
 set __fish_git_prompt_char_stagedstate '•'
 set __fish_git_prompt_char_untrackedfiles '•'
 set __fish_git_prompt_char_stashstate ''
-set __fish_git_prompt_char_upstream_equal '' #(set_color green)'✓'
+set __fish_git_prompt_char_upstream_equal '' # '✓'
 set __fish_git_prompt_char_upstream_prefix ''
 set __fish_git_prompt_char_upstream_ahead ' +'
 set __fish_git_prompt_char_upstream_behind ' -'
 set __fish_git_prompt_char_upstream_diverged ' ↔'
 
-function fish_prompt_rsc_vi --description "Displays the current mode"
-  switch $fish_bind_mode
-    case default
-      set_color cyan
-      echo -n -e " (vi mode)"
-    case insert
-      echo -n -e "          " 
-    case visual
-      set_color --bold white
-      echo -n -e " (visual) "
-  end
-  set_color normal
-end
+set rsc_color1 blue
+set rsc_color3 black
+
+# function fish_prompt_rsc_vi --description "Displays the current mode"
+#   switch $fish_bind_mode
+#     case default
+#       set_color cyan
+#       echo -n -e " (vi mode)"
+#     case insert
+#       echo -n -e "          "
+#     case visual
+#       set_color --bold white
+#       echo -n -e " (visual) "
+#   end
+#   set_color normal
+# end
 
 function fish_prompt_rsc --description 'Prompt'
-  set -l color1 blue
-  set -l color black
   set -l last_status $status
 
   echo ""
   echo -n " "
 
-  set -l gitroot (printf '%s' (git rev-parse --show-toplevel 2>/dev/null))
+  fishrsc_pwd
+  fishrsc_git
 
-  # -- pwd
-  set_color $color1
+  # -- glyph
+  set_color $rsc_color3
+  echo -n ' › '
+
+  set_color normal
+end
+
+function fish_prompt --description 'Write out the prompt'
+  fish_prompt_rsc $argv
+end
+
+function fish_mode_prompt --description 'Write out the prompt'
+  # fish_prompt_rsc_vi
+end
+
+function fish_right_prompt -d "Write out the right prompt"
+  set -l last_status $status
+
+  if not test $last_status -eq 0
+    set_color $fish_color_error
+    echo -n " ✗ $last_status "
+  end
+end
+
+#
+# Prints pwd based on Git root
+#
+
+function fishrsc_pwd -d "Prints pwd"
+  set_color $rsc_color1
+
+  set -l gitroot (printf '%s' (git rev-parse --show-toplevel 2>/dev/null))
   if test -n "$gitroot"
     set -l gitsubdir (pwd | sed -e "s|^$gitroot||")
     echo -n (basename $gitroot)
@@ -63,48 +96,22 @@ function fish_prompt_rsc --description 'Prompt'
     if test -n "$gitsubdir"
       echo -n "$gitsubdir"
     end
+
+    set_color $rsc_color3
+    echo -n ' ⋅'
   else
     echo -n (prompt_pwd)
   end
-  set_color normal
-
-  # -- normal?
-  if not set -q __fish_prompt_normal
-    set -g __fish_prompt_normal (set_color normal)
-  end
-
-  # -- glyph
-  if not test $last_status -eq 0
-    set_color $fish_color_error
-    echo -n ' ✗ '
-  else
-    set_color $color
-    echo -n ' › '
-  end
 
   set_color normal
 end
 
-function fish_prompt --description 'Write out the prompt'
-  if test "$MIN_PROMPT" = ""
-    fish_prompt_rsc $argv
-  else
-    echo ""
-    set_color black
-    echo -n '→ '
-    set_color normal
-  end
-end
+#
+# Prints git info
+#
 
-function fish_mode_prompt --description 'Write out the prompt'
-  if test "$MIN_PROMPT" = ""
-  else
-    fish_prompt_rsc_vi
-  end
-end
-
-function fish_right_prompt -d "Write out the right prompt"
-  set_color black
-  printf '%s ' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
+function fishrsc_git -d "Prints git info"
+  set_color $rsc_color3
+  printf '%s' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
   set_color normal
 end
