@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
 git ls-files $* | \
-  grep -v -E '(node_modules|bower_components|coverage|log|tmp|temp|vendor|fixture|fixtures|dist|cassettes)/' | \
+  grep -v -E '(node_modules|bower_components|coverage|log|tmp|temp|vendor|fixture|fixtures|dist|cassettes|flow-typed\/npm)/' | \
   tr '\n' '\0' | \
   xargs -0 cloc \
    --categorized=/tmp/log.txt \

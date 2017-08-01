@@ -1,6 +1,6 @@
 function motd --description "Shows motd"
   echo
-  echo -n " 🍔  "
+  echo -n " ∷ "
   set_color blue
   echo -n (date +"%I:%M %p")
   set_color normal
@@ -9,7 +9,6 @@ function motd --description "Shows motd"
   date +"%A"
   set_color normal
   if test -f ~/.motd
-    echo
     cat ~/.motd | sed 's/^/    /g'
   end
 end
