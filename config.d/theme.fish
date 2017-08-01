@@ -63,8 +63,6 @@ function fish_prompt_rsc --description 'Prompt'
     if test -n "$gitsubdir"
       echo -n "$gitsubdir"
     end
-      set_color $color
-      echo -n " —"
   else
     echo -n (prompt_pwd)
   end
@@ -75,16 +73,13 @@ function fish_prompt_rsc --description 'Prompt'
     set -g __fish_prompt_normal (set_color normal)
   end
 
-  # -- git
-  printf '%s' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
-
   # -- glyph
   if not test $last_status -eq 0
     set_color $fish_color_error
-    echo -n ' ✗  '
+    echo -n ' ✗ '
   else
     set_color $color
-    echo -n ' →  '
+    echo -n ' › '
   end
 
   set_color normal
@@ -106,4 +101,10 @@ function fish_mode_prompt --description 'Write out the prompt'
   else
     fish_prompt_rsc_vi
   end
+end
+
+function fish_right_prompt -d "Write out the right prompt"
+  set_color black
+  printf '%s ' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
+  set_color normal
 end
