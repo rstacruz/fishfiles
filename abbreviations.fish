@@ -1,12 +1,9 @@
-abbr ':E' nvim
-abbr ':e' nvim
-abbr ':q' exit
-abbr 'cloc.' 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
-abbr 'g.' 'git add --all .; and git commit -m Update'
-abbr 'g..' 'git add --all .; and git commit --amend -m Update; git push --force'
-abbr 'stash-pub' 'git add --all .; git stash; git pull --rebase; git stash pop; npm update; and npm test; and npm publish'
+Ptmux;]1337;CursorShape=0\abbr ms metalstart
 abbr 1 prevd
 abbr 2 nextd
+abbr :E nvim
+abbr :e nvim
+abbr :q exit
 abbr aoeu asdf
 abbr aria 'aria2c -j16 -x16'
 abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
@@ -14,10 +11,13 @@ abbr be 'bundle exec'
 abbr bs 'brew services'
 abbr cask 'brew cask'
 abbr cl clear
+abbr cloc. 'cloc --exclude-dir=vendor,db,log,node_modules,tmp --found=_list.txt .'
 abbr d dirh
 abbr duh 'du -d 1 | sort -n'
-abbr fig 'docker-compose'
+abbr fig docker-compose
 abbr g git
+abbr g. 'git add --all .; and git commit -m Update'
+abbr g.. 'git add --all .; and git commit --amend -m Update; git push --force'
 abbr ga 'git add'
 abbr gaa 'git add --all .'
 abbr gac 'git add --all .; and git commit'
@@ -53,15 +53,12 @@ abbr macdown 'open -a MacDown.app'
 abbr mled 'make -f $HOME/Config/ledger/Makefile'
 abbr mm '~/Config/bin/mm'
 abbr mochaw 'mocha -b -R min --watch'
-abbr ms metalstart
 abbr mt 'mix test'
 abbr mts 'mix test --stale --exclude pending'
 abbr mtx 'mix test --exclude pending'
 abbr n npm
-abbr npmi 'npm install --cache-min 99999999 --save --save-exact'
-abbr npmic 'npm install --cache-min 99999999'
-abbr npmid 'npm install --cache-min 99999999 --save-dev --save-exact'
-abbr npminit 'echo node_modules >> .gitignore; npm init'
+abbr nids 'npm install --save-dev --save-exact'
+abbr nis 'npm install --save --save-exact'
 abbr npmr 'npm prune; and npm update; and npm test; and npm publish; and git release'
 abbr nr 'npm run'
 abbr nt 'npm test'
@@ -74,14 +71,18 @@ abbr sha256 'shasum -a 256'
 abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
 abbr sstop 'brew services stop'
+abbr stash-pub 'git add --all .; git stash; git pull --rebase; git stash pop; npm update; and npm test; and npm publish'
 abbr sub 'subtitler --lang eng *.{mp4,mkv}'
 abbr t task
 abbr ta 'tmux attach; or tmux'
 abbr tg 'tig grep'
 abbr tigs 'tig status'
 abbr v nvim
-abbr vim nvim
 abbr vj 'nvim ~/.journal'
 abbr vl 'nvim $LEDGER_FILE'
 abbr w3c 'curl -H "Content-Type: text/html; charset=utf-8" --data-binary @- "https://validator.w3.org/nu/?out=gnu"'
 abbr y yarn
+abbr ya 'yarn add --exact'
+abbr yad 'yarn add --exact --dev'
+abbr yr 'yarn run'
+abbr z zeus

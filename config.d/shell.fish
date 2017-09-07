@@ -1,2 +1,2 @@
 # this is for tmux
-export SHELL=/usr/local/bin/fish
+set -gx SHELL /usr/local/bin/fish
