@@ -32,6 +32,7 @@ set __fish_git_prompt_char_upstream_diverged ' ↔'
 
 set rsc_color1 blue
 set rsc_color3 black
+set rsc_color4 red
 
 # function fish_prompt_rsc_vi --description "Displays the current mode"
 #   switch $fish_bind_mode
@@ -53,6 +54,7 @@ function fish_prompt_rsc --description 'Prompt'
   echo ""
   echo -n " "
 
+  fishrsc_ssh
   fishrsc_pwd
   fishrsc_git
 
@@ -114,4 +116,12 @@ function fishrsc_git -d "Prints git info"
   set_color $rsc_color3
   printf '%s' (echo (__fish_git_prompt) | sed -e 's|(||' | sed -e 's|)||')
   set_color normal
+end
+
+function fishrsc_ssh -d "Prints ssh info"
+  if set SSH_CONNECTION
+    set_color $rsc_color4
+    printf '%s ' (hostname)
+    set_color normal
+  end
 end
