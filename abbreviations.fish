@@ -1,4 +1,4 @@
-Ptmux;]1337;CursorShape=0\abbr ms metalstart
+abbr ms metalstart
 abbr 1 prevd
 abbr 2 nextd
 abbr :E nvim
