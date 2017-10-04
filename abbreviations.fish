@@ -1,4 +1,3 @@
-abbr ms metalstart
 abbr 1 prevd
 abbr 2 nextd
 abbr :E nvim
@@ -53,6 +52,7 @@ abbr macdown 'open -a MacDown.app'
 abbr mled 'make -f $HOME/Config/ledger/Makefile'
 abbr mm '~/Config/bin/mm'
 abbr mochaw 'mocha -b -R min --watch'
+abbr ms metalstart
 abbr mt 'mix test'
 abbr mts 'mix test --stale --exclude pending'
 abbr mtx 'mix test --exclude pending'
@@ -67,6 +67,7 @@ abbr nv nvim
 abbr opne open
 abbr psaux 'ps aux'
 abbr psgrep 'ps aux | grep'
+abbr sai 'sudo apt install'
 abbr sha256 'shasum -a 256'
 abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
