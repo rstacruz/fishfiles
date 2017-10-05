@@ -1,0 +1,2 @@
+#!/usr/bin/env sh
+mosh devbox --predict=always -- sh -c 'tmux attach || tmux'
