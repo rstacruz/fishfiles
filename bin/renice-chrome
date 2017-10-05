@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-# https://tinyapps.org/blog/mac/201107230700_throttle_process_os_x.html
-pids=$(ps ax | grep -E 'Chrome Helper' | grep -v grep | awk '{print $1}' | tr '\n' ' ')
-echo $pids
-sudo renice +15 -p $pids
