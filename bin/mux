@@ -1,2 +1,5 @@
 #!/usr/bin/env sh
-mosh devbox --predict=always -- sh -c 'tmux new-session -A -s Work'
+# Starts a tmux session to a target machine (`devbox` by default) via Mosh.
+# This allows you to keep a dev environment in a remote host.
+
+mosh ${1:-devbox} --predict=always -- sh -c 'tmux new-session -A -s Work'
