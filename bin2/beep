@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-
-if which afplay >/dev/null; then
-  afplay "${0%/*}/../extras/alert.m4a" & disown
-fi

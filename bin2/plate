@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-# initializes boilerplate from a given path
-#
-#  plate ~/.skels/rubygem
-#  plate ~/.skels/jekyll
-
-(cd $1 >/dev/null && git archive HEAD) | tar xv --exclude .platereadme `test -f $1/.plateignore && cat $1/.plateignore | sed 's/^/--exclude /g'`
-test -f $1/.platereadme && cat $1/.platereadme
