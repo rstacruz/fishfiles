@@ -1,7 +1,12 @@
-# brew install autojump
-[ -f /usr/local/share/autojump/autojump.fish ]; and \
-   . /usr/local/share/autojump/autojump.fish
+# Integrates autojump. You may install it using:
+#
+#     brew install autojump       # OSX
+#     sudo apt install autojump   # Linux
 
-# apt install autojump
-[ -f /usr/share/autojump/autojump.fish ]; and \
-   . /usr/share/autojump/autojump.fish
+if test -f /usr/local/share/autojump/autojump.fish
+  . /usr/local/share/autojump/autojump.fish
+end
+
+if test -f /usr/share/autojump/autojump.fish
+  . /usr/share/autojump/autojump.fish
+end
