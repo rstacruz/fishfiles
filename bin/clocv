@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-cloc --exclude-dir=tmp,coverage,log,node_modules,vendor,bin,cassettes --categorized=log.txt .
-echo "(see log.txt)"

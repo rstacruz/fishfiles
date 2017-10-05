@@ -1,5 +1,0 @@
-#!/usr/bin/env sh
-version=3.3.5
-wget -q -O - https://github.com/twbs/bootstrap-sass/archive/v${version}.tar.gz | tar xvf - && \
-  mv bootstrap-sass-${version}/assets/stylesheets/* . && \
-  rm -rf bootstrap-sass-${version}
