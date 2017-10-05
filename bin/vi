@@ -1,3 +1,0 @@
-#!/usr/bin/env sh
-# Spawns neovim in minimal mode
-nvim "$@"

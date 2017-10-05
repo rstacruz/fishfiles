@@ -1,6 +1,0 @@
-#!/usr/bin/env bash
-# GITHUB_URL="https://github.com/$1"
-PIVOTAL_URL="https://www.pivotaltracker.com/story/show"
-cat /dev/stdin \
-  | sed "s!#\([0-9]\{6,\}\)![#\\1]($PIVOTAL_URL/\\1)!g"
-  # | sed "s!#\([0-9]\{1,5\}\)!$GITHUB_URL/issues/\\1!g" \
