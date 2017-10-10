@@ -13,7 +13,7 @@ abbr duh 'du -d 1 | sort -n'
 abbr :e nvim
 abbr :E nvim
 abbr fig docker-compose
-abbr flow-watch 'nodemon -x "./node_modules/.bin/flow || true" --quiet --ignore node_modules --watch "*.js"'
+abbr flow-watch 'nodemon -x "clear; ./node_modules/.bin/flow || true" --quiet --ignore node_modules --watch "*.js"'
 abbr gaa 'git add --all .'
 abbr gac 'git add --all .; and git commit'
 abbr gacm 'git add --all .; and git commit -m'
