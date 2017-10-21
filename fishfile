@@ -1,1 +1,15 @@
+fisherman/await
+fisherman/fishkit
+fisherman/get
+fisherman/getopts
+fisherman/git_util
+fisherman/humanize_duration
+fisherman/last_job_id
+fisherman/menu
 
+# leaf
+rstacruz/fish-autols
+fisherman/z
+rstacruz/fish-theme-rsc
+fisherman/fzf
+fisherman/done

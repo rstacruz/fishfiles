@@ -3,3 +3,6 @@ fishd.*
 fish_read_history
 /functions/fzf_key_bindings.fish
 /functions/fish_user_key_bindings.fish
+/functions
+/conf.d
+/completions
