@@ -4,5 +4,12 @@ fish_read_history
 /functions/fzf_key_bindings.fish
 /functions/fish_user_key_bindings.fish
 /functions
-/conf.d
-/completions
+
+# These files are managed by fisherman, so let's ignore them
+/conf.d/*
+/completions/*
+
+# ALlow some locally-managed configuration
+!/conf.d/_*
+!/completions/_*
+
