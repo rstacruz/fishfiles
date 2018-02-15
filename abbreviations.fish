@@ -3,6 +3,7 @@ abbr 2 nextd
 abbr :E nvim
 abbr :e nvim
 abbr :q exit
+abbr ag 'ag --pager "less -R"'
 abbr aoeu asdf
 abbr aria 'aria2c -j16 -x16'
 abbr bandle 'bundle install --jobs=5 --path=vendor/bundle'
@@ -11,6 +12,8 @@ abbr bs 'brew services'
 abbr cask 'brew cask'
 abbr cl clear
 abbr d dirh
+abbr e 'emacsclient -t'
+abbr em 'emacsclient -t'
 abbr g git
 abbr g. 'git add --all .; and git commit -m Update'
 abbr g.. 'git add --all .; and git commit --amend -m Update; git push --force'
@@ -29,7 +32,7 @@ abbr gfR 'git fetch; and git reset --hard'
 abbr gfr 'git fetch; and git rebase'
 abbr gfrb 'git fetch; and git rebase'
 abbr gfrh 'git fetch; and git reset --hard'
-abbr gg ag
+abbr gg 'git grep --heading --break -p'
 abbr gpr 'git pull --rebase'
 abbr hl hledger
 abbr hla 'grep alias $LEDGER_FILE; hledger add'
