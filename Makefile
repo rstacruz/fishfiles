@@ -4,3 +4,6 @@ link:
 
 update:
 	fish -c 'abbr -s' | sort > ./abbreviations.fish
+
+restore:
+	source abbreviations.fish
