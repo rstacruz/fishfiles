@@ -1,7 +1,7 @@
 abbr 1 prevd
 abbr 2 nextd
 abbr :E nvim
-abbr :e 'emacsclient -t'
+abbr :e 'emacsclient -t -c -a \'\''
 abbr :q exit
 abbr ag 'ag --pager "less -R"'
 abbr aoeu asdf
@@ -12,10 +12,7 @@ abbr bs 'brew services'
 abbr cask 'brew cask'
 abbr cl clear
 abbr d dirh
-abbr e 'emacsclient -t'
-abbr ec 'emacsclient -nw -t'
-abbr em 'emacsclient -t'
-abbr et 'emacsclient -t'
+abbr e 'emacsclient -t -c -a \'\''
 abbr g git
 abbr g. 'git add --all .; and git commit -m Update'
 abbr g.. 'git add --all .; and git commit --amend -m Update; git push --force'
@@ -50,16 +47,11 @@ abbr mt 'mix test'
 abbr mts 'mix test --stale --exclude pending'
 abbr mtx 'mix test --exclude pending'
 abbr n npm
-abbr nr 'npm run'
-abbr nt 'npm test'
-abbr ntw 'npm test -- --watch'
 abbr nv nvim
-abbr opne open
 abbr org 'emacsclient -t ~/org/notes.org'
 abbr psaux 'ps aux'
 abbr psgrep 'ps aux | grep'
 abbr sai 'sudo apt install'
-abbr sha256 'shasum -a 256'
 abbr srestart 'brew services restart'
 abbr sstart 'brew services start'
 abbr sstop 'brew services stop'
