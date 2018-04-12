@@ -108,4 +108,6 @@ abbr grh       'git reset HEAD'
 abbr grhh      'git reset HEAD --hard'
 
 # Rico's additions
-abbr gg 'git grep --heading --break -p'
+abbr gg        'git grep --heading --break -p'
+abbr ggpush    'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
+abbr ggp       'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
