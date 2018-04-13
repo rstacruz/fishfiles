@@ -22,5 +22,5 @@ In a new shell:
 fisher
 
 # Load abbreviations
-. ~/.config/fish/abbreviations.fish
+source ~/.config/fish/abbreviations/all.fish
 ```
