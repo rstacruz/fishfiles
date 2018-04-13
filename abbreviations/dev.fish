@@ -2,6 +2,7 @@
 
 # Tig
 abbr tigs 'tig status'
+abbr s    'tig status' # This mirrors eshell's `s` command
 
 # Elixir
 abbr mt  'mix test'
