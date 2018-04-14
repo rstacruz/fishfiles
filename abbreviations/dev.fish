@@ -15,6 +15,10 @@ abbr ixmix 'iex -S mix'
 abbr 1 prevd
 abbr 2 nextd
 
+# exit
+abbr :q  'exit'
+abbr :q! 'exit'
+
 # Ruby
 abbr be 'bundle exec'
 
