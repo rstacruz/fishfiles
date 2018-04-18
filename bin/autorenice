@@ -1,0 +1,14 @@
+#!/usr/bin/env sh
+# https://tinyapps.org/blog/mac/201107230700_throttle_process_os_x.html
+
+# Browser derivatives
+pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +15 -p $pids
+
+# Slack
+pids=$(ps ax | grep -E 'rambox' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +20 -p $pids
+
+# Backup
+pids=$(ps ax | grep -E 'duplicity|duply|gpg' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +20 -p $pids

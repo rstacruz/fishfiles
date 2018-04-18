@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-# https://tinyapps.org/blog/mac/201107230700_throttle_process_os_x.html
-pids=$(ps ax | grep -E 'ruby|node|watchman|postgres|puma|zeus|redis|sidekiq' | grep -v -E 'grep|flow-bin' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +15 -p $pids
-pids=$(ps ax | grep -E 'fsevent_watch|htop' | grep -v 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +19 -p $pids
