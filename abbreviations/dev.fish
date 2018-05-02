@@ -30,3 +30,6 @@ abbr jo 'zo'
 abbr y  'yarn'
 abbr yt 'yarn test'
 abbr yr 'yarn run'
+
+# Tokei
+abbr toke 'tokei --sort code .'
