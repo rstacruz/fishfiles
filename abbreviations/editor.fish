@@ -4,6 +4,9 @@ abbr :e 'eval $EDITOR'
 abbr :E 'eval $EDITOR'
 abbr e 'eval $EDITOR'
 
+# Emacs
+abbr ec    'emacsclient -t -c -a \'\''
+
 # Ranger
 abbr ran     'ranger'
 

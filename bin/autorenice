@@ -12,3 +12,7 @@ sudo renice +20 -p $pids
 # Backup
 pids=$(ps ax | grep -E 'duplicity|duply|gpg' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +20 -p $pids
+
+# Dev tools
+pids=$(ps ax | grep -E 'flow' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +20 -p $pids
