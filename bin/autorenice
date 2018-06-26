@@ -14,5 +14,5 @@ pids=$(ps ax | grep -E 'duplicity|duply|gpg' | grep -v -E 'grep' | awk '{print $
 sudo renice +20 -p $pids
 
 # Dev tools
-pids=$(ps ax | grep -E 'flow|mailspring|Mailspring' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+pids=$(ps ax | grep -E 'flow|mailspring|Mailspring|docker|webpack|erlang' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +20 -p $pids
