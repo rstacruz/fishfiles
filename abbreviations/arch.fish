@@ -1,4 +1,4 @@
-# Arc Linux abbreviations
+# Arch Linux abbreviations
 
 abbr ya 'yay'      # Search
 abbr ys 'yay -Syu' # Install/update
