@@ -2,17 +2,17 @@
 # https://tinyapps.org/blog/mac/201107230700_throttle_process_os_x.html
 
 # Browser derivatives
-pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron|atom' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +15 -p $pids
+pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron|atom|visual-studio-code' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +15 -p $pids | grep "old priority 0"
 
-# Slack
-pids=$(ps ax | grep -E 'rambox' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +20 -p $pids
+# Browser derivatives that aren't important
+pids=$(ps ax | grep -E 'rambox|spotify|gnome-pomodoro' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+sudo renice +20 -p $pids | grep "old priority 0"
 
 # Backup
 pids=$(ps ax | grep -E 'duplicity|duply|gpg' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +20 -p $pids
+sudo renice +20 -p $pids | grep "old priority 0"
 
 # Dev tools
 pids=$(ps ax | grep -E 'flow|mailspring|Mailspring|docker|webpack|erlang' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +20 -p $pids
+sudo renice +20 -p $pids | grep "old priority 0"
