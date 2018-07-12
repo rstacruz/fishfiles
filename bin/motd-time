@@ -1,0 +1,6 @@
+#!/usr/bin/env sh
+echo ""
+echo ""
+date +" %H:%m %p " | toilet -f future --metal
+echo ""
+echo ""
