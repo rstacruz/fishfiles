@@ -1,5 +1,7 @@
 function fish_greeting
-  if test -f ~/.motd
+  if test -x ~/.motd
+    ~/.motd
+  else if test -f ~/.motd
     cat ~/.motd
   end
 end
