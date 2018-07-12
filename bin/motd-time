@@ -3,6 +3,10 @@ INDENT=$(echo $(tput cols) / 2 - 11 | bc)
 SPACES=$(printf %${INDENT}s)
 echo ""
 echo ""
+echo ""
+echo ""
 date +"%H:%m %p" | toilet -f future --metal | sed -s "s/^/$SPACES/g"
+echo ""
+echo ""
 echo ""
 echo ""
