@@ -1,11 +1,11 @@
 #!/usr/bin/env sh
-INDENT=$(echo $(tput cols) / 2 - 11 | bc)
+INDENT=$(echo $(tput cols) / 2 - 15 | bc)
 SPACES=$(printf %${INDENT}s)
 echo ""
 echo ""
 echo ""
 echo ""
-date +"%H:%m %p" | toilet -f future --metal | sed -s "s/^/$SPACES/g"
+date +" %H:%M %p " | toilet -f future -F border --metal | sed -s "s/^/$SPACES/g"
 echo ""
 echo ""
 echo ""
