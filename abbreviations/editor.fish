@@ -8,10 +8,13 @@ abbr e 'eval $EDITOR'
 abbr ec    'emacsclient -t -c -a \'\''
 
 # Ranger
-abbr ran     'ranger'
+abbr ra      'ranger'
 
-abbr eran    'env EDITOR="emacsclient -t -c -a \'\'" ranger'
+abbr era     'env EDITOR="emacsclient -t -c -a \'\'" ranger'
 abbr eranger 'env EDITOR="emacsclient -t -c -a \'\'" ranger'
 
-abbr cran    'env EDITOR="code" ranger'
+abbr cra     'env EDITOR="code" ranger'
 abbr cranger 'env EDITOR="code" ranger'
+
+abbr nra     'env EDITOR="nvim" ranger'
+abbr nranger 'env EDITOR="nvim" ranger'

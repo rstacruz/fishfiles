@@ -7,7 +7,7 @@ if which toilet 2>/dev/null >/dev/null; then
   echo ""
   echo ""
   echo ""
-  date +" %H:%M %p " | toilet -f future -F border --metal | sed -s "s/^/$SPACES/g"
+  date +" %I:%M %p " | toilet -f future -F border --metal | sed -s "s/^/$SPACES/g"
   echo ""
   echo ""
   echo ""
