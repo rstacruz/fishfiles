@@ -2,7 +2,10 @@
 
 abbr :e 'eval $EDITOR'
 abbr :E 'eval $EDITOR'
-abbr e 'eval $EDITOR'
+abbr e  'eval $EDITOR'
+
+abbr a  'atom-open'
+abbr a. 'atom-open .'
 
 # Emacs
 abbr ec    'emacsclient -t -c -a \'\''
@@ -18,3 +21,6 @@ abbr cranger 'env EDITOR="code" ranger'
 
 abbr nra     'env EDITOR="nvim" ranger'
 abbr nranger 'env EDITOR="nvim" ranger'
+
+abbr ara     'env EDITOR="atom-open" ranger'
+abbr aranger 'env EDITOR="atom-open" ranger'
