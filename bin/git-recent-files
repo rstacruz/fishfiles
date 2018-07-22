@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# List files that were modified `n` days ago.
+
+days=${1:-3}
+gitrevision="HEAD...HEAD@{${days} days ago}"
+
+git log \
+  --all -M -C --name-only \
+  --format='format:' \
+  "$gitrevision" \
+  | sort | grep -v '^$' | uniq -c \
+  | sort \
+  | awk 'BEGIN {print "count\tfile"} {print $1 "\t" $2}' \
+  | sed '1 d' \
+  | sort -rn \
+  | less -R
