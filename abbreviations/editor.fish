@@ -21,11 +21,11 @@ abbr eranger 'env EDITOR="emacsclient -t -c -a \'\'" ranger'
 abbr cra     'env EDITOR="code" ranger'
 abbr cranger 'env EDITOR="code" ranger'
 
-abbr Vra     'EDITOR="nvim" ranger'
-abbr Vranger 'EDITOR="nvim" ranger'
+abbr Vra     'env EDITOR="nvim" ranger'
+abbr Vranger 'env EDITOR="nvim" ranger'
 
-abbr vra     'env EDITOR="nvr" ranger'
-abbr vranger 'env EDITOR="nvr" ranger'
+abbr vra     'env EDITOR="nvr -cc split" ranger'
+abbr vranger 'env EDITOR="nvr -cc split" ranger'
 
 abbr ara     'env EDITOR="atom-open" ranger'
 abbr aranger 'env EDITOR="atom-open" ranger'
