@@ -5,7 +5,7 @@
 
 set -U __done_notification_command "rsc_done_notification \$exit_status \$title \$message"
 
-set -U __done_min_cmd_duration 1
+set -U __done_min_cmd_duration 500
 
 function rsc_done_notification
   set -l exit_status $argv[1]

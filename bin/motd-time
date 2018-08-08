@@ -1,17 +1,14 @@
 #!/usr/bin/env sh
 
 if which toilet 2>/dev/null >/dev/null; then
-  INDENT=$(echo $(tput cols) / 2 - 15 | bc)
-  SPACES=$(printf %${INDENT}s)
+  # INDENT=$(echo $(tput cols) / 2 - 15 | bc)
+  # SPACES=$(printf %${INDENT}s)
+  SPACES=" "
   echo ""
   echo ""
-  echo ""
-  date +"    %a" | toilet -f smbraille --gay | sed -s "s/^/$SPACES /g"
-  echo ""
-  date +" %I:%M %p " | toilet -f future -F border --metal | sed -s "s/^/$SPACES/g"
-  echo ""
-  date +"   %b %e" | toilet -f smbraille --gay | sed -s "s/^/$SPACES/g"
-  echo ""
+  date +" %I:%M %p " | toilet -f future --metal | sed -s "s/^/$SPACES/g"
+  echo -e "\033[32m  $SPACES $(date +"%b %e %a")"
+  # echo ""
   echo ""
   echo ""
 fi
