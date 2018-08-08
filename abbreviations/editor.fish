@@ -8,8 +8,8 @@ abbr a  'atom-open'
 abbr a. 'atom-open .'
 
 # Neovim (server and client)
-abbr v 'env NVIM_LISTEN_ADDRESS=/tmp/nvimsocket nvim'
-abbr V 'nvr'
+abbr V 'nvim'
+abbr v 'nvr'
 
 # Emacs
 abbr ec    'emacsclient -t -c -a \'\''
@@ -23,11 +23,11 @@ abbr eranger 'env EDITOR="emacsclient -t -c -a \'\'" ranger'
 abbr cra     'env EDITOR="code" ranger'
 abbr cranger 'env EDITOR="code" ranger'
 
-abbr vra     'env NVIM_LISTEN_ADDRESS=tmp/nvimsocket EDITOR="nvim" ranger'
-abbr vranger 'env NVIM_LISTEN_ADDRESS=tmp/nvimsocket EDITOR="nvim" ranger'
+abbr Vra     'EDITOR="nvim" ranger'
+abbr Vranger 'EDITOR="nvim" ranger'
 
-abbr Vra     'env EDITOR="nvr" ranger'
-abbr Vranger 'env EDITOR="nvr" ranger'
+abbr vra     'env EDITOR="nvr" ranger'
+abbr vranger 'env EDITOR="nvr" ranger'
 
 abbr ara     'env EDITOR="atom-open" ranger'
 abbr aranger 'env EDITOR="atom-open" ranger'
