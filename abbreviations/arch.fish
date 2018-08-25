@@ -1,8 +1,7 @@
 # Arch Linux abbreviations
 
-abbr ya 'yay'      # Search
-abbr ys 'yay -Syu' # Install/update
-abbr yS 'yay -S'   # Install/update without updating repo
+abbr yas 'yay --sudoloop -Syu' # Install/update
+abbr yaS 'yay --sudoloop -S'   # Install/update without updating repo
 
 abbr spr 'sudo pacman -Rsc' # Remove a package
 
