@@ -5,5 +5,11 @@ abbr dcx 'docker-compose exec'
 abbr dce 'docker-compose exec'
 abbr dcr 'docker-compose run'
 
-abbr dr 'docker-compose run --rm --service-ports web'
-abbr dr! 'docker-compose run --rm --no-deps web'
+# Run (as a server)
+abbr drs 'docker-compose run --rm --service-ports web'
+
+# Run (as a task)
+abbr drt 'docker-compose run --rm --no-deps web'
+
+# Default
+abbr dr 'docker-compose run --rm web'

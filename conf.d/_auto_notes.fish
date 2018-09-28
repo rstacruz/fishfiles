@@ -1,9 +1,14 @@
+set -gx project_notes_path "$HOME/Dev/notes"
+
 function __auto_notes_hook --description "Auto notes" --on-event fish_prompt
   if test "$__auto_notes_last" != (pwd)
-    if test -f __NOTES
+    set project_name (basename (pwd))
+    set project_note $project_notes_path"/"$project_name".txt"
+
+    if test -f $project_note
       echo -ne "\033[32m"
       echo
-      cat __NOTES | sed 's/^/  /g' | sed -e '/----/,$d'
+      cat $project_note | sed 's/^/  /g' | sed -e '/----/,$d'
       echo -ne "\033[0m"
     end
   end
