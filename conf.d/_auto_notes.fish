@@ -1,9 +1,9 @@
-set -gx project_notes_path "$HOME/Dev/notes"
+set -gx PROJECT_NOTES_PATH "$HOME/Dev/notes"
 
 function __auto_notes_hook --description "Auto notes" --on-event fish_prompt
   if test "$__auto_notes_last" != (pwd)
     set project_name (basename (pwd))
-    set project_note $project_notes_path"/"$project_name".txt"
+    set project_note $PROJECT_NOTES_PATH"/"$project_name".txt"
 
     if test -f $project_note
       echo -ne "\033[32m"
