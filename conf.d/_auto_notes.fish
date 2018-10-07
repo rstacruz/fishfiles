@@ -1,4 +1,8 @@
-set -gx PROJECT_NOTES_PATH "$HOME/Dev/notes"
+if test -e "$HOME/Dev/notes"
+  set -gx PROJECT_NOTES_PATH "$HOME/Dev/notes"
+else if test -e "$HOME/org/Projects"
+  set -gx PROJECT_NOTES_PATH "$HOME/org/Projects"
+end
 
 function __auto_notes_hook --description "Auto notes" --on-event fish_prompt
   if test "$__auto_notes_last" != (pwd)
