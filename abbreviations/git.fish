@@ -117,3 +117,4 @@ abbr g.        'git add --all .; and git commit -m Update'
 
 abbr ga        'git add'
 abbr gaa       'git add --all .'
+abbr gdev      'git checkout -b dev/(date +"%Y-%m-%d")'

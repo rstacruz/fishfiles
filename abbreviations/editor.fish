@@ -5,9 +5,10 @@ abbr a  'atom-open'
 abbr a. 'atom-open .'
 
 # Neovim (server and client)
-abbr V 'nvim'
-abbr v 'nvr -s'
-abbr v. 'nvr -s --remote-send "<Esc>:cd "(pwd)"<CR>:NERDTree<CR>"'
+abbr v 'nvim'
+abbr n 'nvim'
+# abbr v 'nvr -s'
+# abbr v. 'nvr -s --remote-send "<Esc>:cd "(pwd)"<CR>:NERDTree<CR>"'
 
 # Emacs
 abbr ec    'emacsclient -t -c -a \'\''

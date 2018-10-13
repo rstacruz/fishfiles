@@ -12,7 +12,7 @@ function __auto_notes_hook --description "Auto notes" --on-event fish_prompt
     if test -f $project_note
       echo -ne "\033[32m"
       echo
-      cat $project_note | sed 's/^/  /g' | sed -e '/----/,$d'
+      cat $project_note | sed 's/^//g' | sed -e '/----/,$d'
       echo -ne "\033[0m"
     end
   end
