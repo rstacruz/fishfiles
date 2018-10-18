@@ -1,0 +1,49 @@
+#!/usr/bin/env bash
+# Sets something as a wallpaper.
+#
+#     fillwall file.jpg
+#     fillwall -f darken50 file.jpg
+#
+# vim:foldmethod=marker:foldmarker={,}
+set -eou pipefail
+
+apply_filter () {
+  image="$1"
+  filter="$2"
+  tmpfile="/tmp/fillwall.$(whoami).jpg"
+  case "$filter" in
+    darken25 | d25)
+      gm convert "$image" -fill "#000" -colorize 25% "$tmpfile" ;;
+    darken50 | d50)
+      gm convert "$image" -fill "#000" -colorize 50% "$tmpfile" ;;
+    darken75 | d75)
+      gm convert "$image" -fill "#000" -colorize 75% "$tmpfile" ;;
+    none)
+      tmpfile="$image" ;;
+    *)
+      echo "Error: unknown filter '${filter}'" >&2
+      exit 1 ;;
+  esac
+  echo "$tmpfile"
+
+}
+
+main () {
+  filter="none"
+  while [[ "$1" =~ ^- && ! "$1" == "--" ]]; do case $1 in
+    -f | --filter )
+      shift; filter="$1"
+      ;;
+  esac; shift; done
+  image="$1"
+
+  if [ ! -f "$image" ]; then
+    echo "Can't load image"
+    exit 1
+  fi
+
+  wall_path="$(apply_filter "$image" "$filter")"
+  feh --bg-center "$wall_path"
+}
+
+main $*
