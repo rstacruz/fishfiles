@@ -1,0 +1,76 @@
+#!/usr/bin/env bash
+# vim:foldmethod=marker:foldmarker={,}
+
+# Sends a notification
+#
+#     notify "Hey" "Time's up!"
+#
+notify () {
+  if which notify-send &>/dev/null; then
+    notify-send "$1" "$2" & disown
+  fi
+}
+
+# Plays a sound file
+#
+#     play_sound /path/to/file.ogg
+#
+play_sound () {
+  if which paplay &>/dev/null; then
+    paplay "$1" & disown
+  elif which afplay &>/dev/null; then
+    afplay "$1" & disown
+  fi
+}
+
+# Plays the done sound
+play_done_sound () {
+  play_sound "$HOME/.config/fish/sounds/stairs.ogg"
+}
+
+# Plays the done sound `n` times
+#
+#     play_done_sound_repeatedly 2
+#
+play_done_sound_repeatedly () {
+  (
+    sound_count="$1"
+    while (( "$sound_count" > "0" )); do
+      play_done_sound
+      sleep 0.3
+      let sound_count--
+    done
+  ) & disown
+}
+
+show_message () {
+  echo "  $(date +"%I:%M %p")  $*"
+}
+
+# Let's go, drive safe!
+main () {
+  if ! which termdown &>/dev/null; then
+    echo "Sorry, tick requires the 'termdown' package."
+    exit 1
+  fi
+
+  # Initial
+  duration=${1:-20m}
+  count=0
+
+  echo ""
+  show_message "Counting down to ${duration}, ^C to abort!"
+
+  notify "Starting timer" "Timer for $duration, let's go!"
+
+  while true; do
+    termdown "$duration"
+    let count++
+    notify "x${count}" "Another $duration passed :)"
+    show_message "✓ x${count}"
+    play_done_sound_repeatedly $count
+    sleep 1
+  done
+}
+
+main $*

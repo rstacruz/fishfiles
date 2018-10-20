@@ -117,4 +117,4 @@ abbr g.        'git add --all .; and git commit -m Update'
 
 abbr ga        'git add'
 abbr gaa       'git add --all .'
-abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)/(date +"%Y-%m-%dT%H:%M")'
+abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)/(date +"%Y-%m-%d-%H%M")'
