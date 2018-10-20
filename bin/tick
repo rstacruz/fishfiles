@@ -16,16 +16,21 @@ notify () {
 #     play_sound /path/to/file.ogg
 #
 play_sound () {
+  soundfile="$1"
+  volume="$2"
   if which paplay &>/dev/null; then
-    paplay "$1" & disown
+    pavolume=$(echo "$volume * 65536" | bc | cut -d'.' -f1)
+    paplay "$soundfile" --volume=$pavolume & disown
   elif which afplay &>/dev/null; then
-    afplay "$1" & disown
+    afplay "$soundfile" & disown
   fi
 }
 
 # Plays the done sound
 play_done_sound () {
-  play_sound "$HOME/.config/fish/sounds/stairs.ogg"
+  # play_sound "$HOME/.config/fish/sounds/long-chime-sound.ogg"
+  play_sound "$HOME/.config/fish/sounds/long-chime-sound.ogg" "0.5"
+  play_sound "$HOME/.config/fish/sounds/oringz-w447.ogg" "1.0"
 }
 
 # Plays the done sound `n` times
@@ -37,7 +42,7 @@ play_done_sound_repeatedly () {
     sound_count="$1"
     while (( "$sound_count" > "0" )); do
       play_done_sound
-      sleep 0.3
+      sleep 1.8
       let sound_count--
     done
   ) & disown
