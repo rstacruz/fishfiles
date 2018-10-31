@@ -3,7 +3,7 @@ fishd.*
 fish_read_history
 /functions/fzf_key_bindings.fish
 /functions/fish_user_key_bindings.fish
-/functions
+/functions/*
 
 # These files are managed by fisherman, so let's ignore them
 /conf.d/*
@@ -13,4 +13,4 @@ fish_read_history
 !/conf.d/_*.fish
 !/conf.d/[0-9]*.fish
 !/completions/_*.fish
-
+!/functions/ls!.fish
