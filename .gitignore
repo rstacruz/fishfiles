@@ -9,7 +9,8 @@ fish_read_history
 /conf.d/*
 /completions/*
 
-# ALlow some locally-managed configuration
-!/conf.d/_*
-!/completions/_*
+# Allow some locally-managed configuration
+!/conf.d/_*.fish
+!/conf.d/[0-9]*.fish
+!/completions/_*.fish
 
