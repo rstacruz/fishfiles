@@ -4,5 +4,6 @@ source ./docker.fish
 source ./editor.fish
 source ./git.fish
 source ./keepass.fish
-source ./timew.fish
+#source ./timew.fish
 source ./misc.fish
+source ./exa.fish
