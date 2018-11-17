@@ -1,11 +1,6 @@
-if test -e "$HOME/Dev/notes"
-  set -gx PROJECT_NOTES_PATH "$HOME/Dev/notes"
-else if test -e "$HOME/org/Projects"
-  set -gx PROJECT_NOTES_PATH "$HOME/org/Projects"
-end
-
 function ls! --description "Auto notes" # --on-event fish_prompt
   set project_name (basename (pwd))
+  set PROJECT_NOTES_PATH "$HOME/org/Projects"
   set project_note $PROJECT_NOTES_PATH"/"$project_name".txt"
 
   if test -f $project_note
@@ -15,5 +10,9 @@ function ls! --description "Auto notes" # --on-event fish_prompt
     set_color normal
   end
 
-  ls
+  if test -x exa
+    exa
+  else
+    ls
+  end
 end
