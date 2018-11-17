@@ -24,11 +24,3 @@ fisher
 # Load abbreviations
 source ~/.config/fish/abbreviations/all.fish
 ```
-
-## MOTD's
-
-You can change your motd using this (you can use any other executable you like):
-
-```bash
-ln -nfs ~/.config/fish/bin/motd-time ~/.motd
-```
