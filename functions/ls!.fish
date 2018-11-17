@@ -14,5 +14,5 @@ function ls! --description "Auto notes" # --on-event fish_prompt
     exa
   else
     ls
-  fi
+  end
 end
