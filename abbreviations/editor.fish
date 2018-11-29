@@ -13,6 +13,10 @@ abbr n 'nvim'
 # Emacs
 abbr ec    'emacsclient -t -c -a \'\''
 
+# Code
+abbr c     'code -r'
+abbr c.    'code -r.'
+
 # Ranger
 abbr ra      'ranger'
 
