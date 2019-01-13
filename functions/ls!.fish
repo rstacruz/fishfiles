@@ -7,10 +7,11 @@ function ls! --description "Auto notes" # --on-event fish_prompt
     echo ""
     set_color -i blue
     cat $project_note | sed 's/^/    /g' | sed -e '/----/,$d'
+    echo ""
     set_color normal
   end
 
-  if test -x exa
+  if type -q exa
     exa
   else
     ls
