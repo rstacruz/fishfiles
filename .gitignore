@@ -1,6 +1,7 @@
 fish_history
 fishd.*
 fish_read_history
+fish_variables
 /functions/*
 
 # These files are managed by fisherman, so let's ignore them
