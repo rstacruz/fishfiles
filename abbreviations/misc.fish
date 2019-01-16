@@ -9,3 +9,6 @@ abbr .nomp 'set -gx MINIMAL_PROMPT'
 
 # For today (eg, `git checkout -b (today )/update`)
 abbr today "date +'%Y-%m-%d'"
+
+# Browse for wallpapers
+abbr fed 'feh --draw-filename .'
