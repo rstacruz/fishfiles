@@ -1,6 +1,11 @@
 abbr dc 'docker-compose'
-abbr dcu 'docker-compose up'
+# Bring it up, then show logs. ^C stops logs but keeps server running
+abbr dcu 'docker-compose up -d; docker-compose logs -f'
 abbr dcd 'docker-compose down'
+# Restart version of 'dcu'
+abbr dcr 'docker-compose down; docker-compose up -d; docker-compose logs -f'
+abbr dcl 'docker-compose logs'
+abbr dclf 'docker-compose logs -f'
 
 # Run (as a server)
 abbr drs 'docker-compose run --rm --service-ports web'
