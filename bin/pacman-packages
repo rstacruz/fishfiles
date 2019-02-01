@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# https://www.reddit.com/r/archlinux/comments/aldmdn/-/efddbnp
+comm -23 <(pacman -Qeq | sort) <(pacman -Qgq xorg base base-devel | sort)
