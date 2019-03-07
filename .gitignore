@@ -14,3 +14,4 @@ fish_variables
 !/completions/_*.fish
 !/functions/ls!.fish
 !/functions/fisher.fish
+!/functions/gg.fish
