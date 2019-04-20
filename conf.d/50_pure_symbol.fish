@@ -8,6 +8,6 @@ set -gx pure_color_ssh_separator (set_color brblack)
 # the glyph
 set -gx pure_symbol_prompt "─"
 
-set -gx pure_symbol_git_arrow_down "▼ "
-set -gx pure_symbol_git_arrow_up "▲ "
-set -gx pure_symbol_git_dirty " ★"
+set -gx pure_symbol_git_arrow_down "↓ "
+set -gx pure_symbol_git_arrow_up "↑ "
+set -gx pure_symbol_git_dirty " ·"

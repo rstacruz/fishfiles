@@ -5,14 +5,10 @@
 pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron|atom|visual-studio-code' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +10 -p $pids | grep "old priority 0"
 
-# Browser derivatives that aren't important
-pids=$(ps ax | grep -E 'rambox|spotify|gnome-pomodoro' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
-sudo renice +20 -p $pids | grep "old priority 0"
-
-# Backup
+# Backup tools
 pids=$(ps ax | grep -E 'duplicity|duply|gpg' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +20 -p $pids | grep "old priority 0"
 
 # Dev tools
-pids=$(ps ax | grep -E 'flow|mailspring|Mailspring|docker|webpack|erlang|catalog|tsserver|jsonServer|react-scripts' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+pids=$(ps ax | grep -E '(flow|mailspring|Mailspring|docker|webpack|erlang|catalog|tsserver|jsonServer|react-scripts|rollup|tsc)' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +20 -p $pids | grep "old priority 0"
