@@ -1,0 +1,14 @@
+#!/usr/bin/env bash
+
+# Clear screen
+echo -ne "\033[2J"
+
+# Hide cursor
+echo -ne "\033[?25l"
+
+# Pause until user presses enter
+read x
+
+# Show cursor again
+clear
+echo -ne "\033[?25h"
