@@ -1,4 +1,4 @@
-if which exa > /dev/null
+if command -v exa &> /dev/null
   abbr ls='exa'
   abbr la='exa -la'
 end
