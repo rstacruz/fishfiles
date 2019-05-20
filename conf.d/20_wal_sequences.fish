@@ -6,6 +6,8 @@ if test -e ~/.cache/wal/sequences; \
 
   if test "$TERM" = "rxvt-unicode"; \
     or test "$TERM" = "xterm-256color"; \
+    or test "$TERM" = "xterm-kitty"; \
+    or test "$TERM" = "alacritty"; \
     or test "$USE_WAL" = "1"
     cat ~/.cache/wal/sequences &
   end

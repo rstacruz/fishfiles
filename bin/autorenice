@@ -2,7 +2,7 @@
 # https://tinyapps.org/blog/mac/201107230700_throttle_process_os_x.html
 
 # Browser derivatives
-pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron|atom|visual-studio-code' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
+pids=$(ps ax | grep -E 'gnome-pomodoro|firefox|chromium|electron|atom|visual-studio-code|browserx' | grep -v -E 'grep' | awk '{print $1}' | tr '\n' ' ')
 sudo renice +10 -p $pids | grep "old priority 0"
 
 # Backup tools
