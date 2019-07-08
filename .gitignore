@@ -10,6 +10,7 @@ fish_variables
 
 # Allow some locally-managed configuration
 !/conf.d/_*.fish
+/conf.d/_pure_init.fish
 !/conf.d/[0-9]*.fish
 !/completions/_*.fish
 !/functions/ls!.fish
