@@ -11,5 +11,8 @@ link: ## Link files to ~/.config
 	mkdir -p ~/.config
 	if [ ! . -ef ~/.config/fish ]; then ln -nfs "`pwd -LP`" ~/.config/fish; fi
 
-abbrev: ## Install abbreviations
+abbrev: ## Install abbreviations [alias: a]
 	echo "cd ~/.config/fish/abbreviations; source all.fish" | fish
+
+a: abbrev
+.PHONY: a
