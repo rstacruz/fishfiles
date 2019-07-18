@@ -120,6 +120,8 @@ abbr gaa       'git add --all .'
 abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)/(date +"%Y-%m-%d-%H%M")'
 abbr gas       'git rebase --autosquash'
 
-if which ag > /dev/null
+if type -q ag
   abbr gg 'ag --pager \'less -R\''
+else
+  echo "(Skipping 'gg' abbreviations - the_silver_searcher not found)"
 end

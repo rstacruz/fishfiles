@@ -13,3 +13,16 @@ abbr fed 'feh --draw-filename .'
 # NordVPN
 abbr nord 'nordvpn'
 abbr nor 'nordvpn'
+
+# Gotop
+abbr got 'gotop -smb -c monokai'
+
+# Homebrew
+if type -q brew
+  abbr br 'brew'
+  abbr bc 'brew cask'
+  abbr bs 'brew search'
+  abbr bi 'brew install'
+else
+  echo "(Skipping 'brew' abbreviations - 'brew' not found)"
+end
