@@ -122,7 +122,7 @@ abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)/(dat
 abbr gas       'git rebase --autosquash'
 
 if type -q ag
-  abbr gg 'ag --pager \'less -R\''
+  abbr gg 'ag --pager \'less -R\' --hidden'
 else
   echo "(Skipping 'gg' abbreviations - the_silver_searcher not found)"
 end
