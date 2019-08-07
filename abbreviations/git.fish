@@ -114,6 +114,7 @@ abbr ggp       'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)
 abbr gcd       'cd (git rev-parse --show-toplevel)'
 abbr gfrh      'git fetch; and git reset --hard'
 abbr g.        'git add --all .; and git commit -m Update'
+abbr g..       'git add --all .; and git commit -m Update; git pull --rebase; git push' # sync for things like notes, etc
 abbr gpr       'git pull --rebase'
 
 abbr ga        'git add'
