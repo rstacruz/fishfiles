@@ -7,3 +7,4 @@ source ./keepass.fish
 #source ./timew.fish
 source ./misc.fish
 source ./exa.fish
+source ./cargo.fish
