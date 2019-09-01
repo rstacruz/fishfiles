@@ -1,0 +1,16 @@
+#!/usr/bin/env bash
+# Merge the current branch into another branch
+#
+#     git mergeto master
+
+branch=${1:-master}
+src=$(git rev-parse --abbrev-ref HEAD)
+
+echo -en "Merge $src → $branch? [yn] "
+read reply
+if [[ "$reply" == "n" ]]; then exit 1; fi
+
+git checkout "$branch" \
+  && git pull \
+  && git merge --no-ff "$src" \
+  && git branch -d "$src"
