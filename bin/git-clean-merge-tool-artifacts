@@ -1,0 +1,23 @@
+#!/usr/bin/env bash
+list_files() {
+  find . \
+    -name '*_BACKUP_*' -or \
+    -name '*_BASE_*' -or \
+    -name '*_LOCAL_*' -or \
+    -name '*_REMOTE_*' -or \
+    -name '*.orig'
+}
+
+files=$(list_files)
+if [[ -z "$files" ]]; then
+  echo "Nothing to do"
+  exit
+fi
+
+echo "$files"
+echo -ne "Continue? [yn] "
+read answer
+
+if [[ "$answer" == "y" ]]; then
+  list_files | xargs rm
+fi

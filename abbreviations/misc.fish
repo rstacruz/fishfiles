@@ -26,3 +26,6 @@ if type -q brew
 else
   echo "(Skipping 'brew' abbreviations - 'brew' not found)"
 end
+
+# Convert YAML to JSON
+abbr yaml 'ruby -rjson -ryaml -e "puts JSON.pretty_generate(YAML.load(STDIN.read))" <'
