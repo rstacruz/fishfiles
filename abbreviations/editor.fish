@@ -1,14 +1,21 @@
 # Editor
 
-# [Atom]
-# abbr a  'atom-open'
-# abbr a. 'atom-open .'
-
 # [Neovim]
-abbr v 'nvim'
-abbr n 'nvim'
-abbr :e 'nvim'
-abbr :E 'nvim'
+if ! type -q nvim
+  echo "(Skipping 'nvim' abbreviations - neovim not found)"
+else
+  abbr v 'nvim'
+  abbr n 'nvim'
+end
+
+# [Code]
+if ! type -q code
+  echo "(Skipping 'code' abbreviations - vscode not found)"
+else
+ abbr c     'code -r (git rev-parse --show-toplevel)'
+ abbr C     'code (git rev-parse --show-toplevel)'
+end
+
 
 # [Neovim server]
 # abbr v 'nvr -s'
@@ -16,10 +23,6 @@ abbr :E 'nvim'
 
 # [Emacs]
 # abbr ec    'emacsclient -t -c -a \'\''
-
-# [Code]
-# abbr c     'code -r'
-# abbr c.    'code -r.'
 
 # Ranger
 # abbr ra      'ranger'
