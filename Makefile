@@ -19,6 +19,6 @@ fisher:
 abbr: ## Install abbreviations [alias: a]
 	echo "cd ~/.config/fish/abbreviations; source all.fish" | fish
 
-a: abbrev
+a: abbr
 i: install
 .PHONY: a i
