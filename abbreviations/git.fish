@@ -119,8 +119,9 @@ abbr gpr       'git pull --rebase'
 
 abbr ga        'git add'
 abbr gaa       'git add --all .'
-abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)/(date +"%Y-%m-%d-%H%M")'
+abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)-(date +"%Y-%m-%d-%H%M")'
 abbr gas       'git rebase --autosquash'
+abbr gpf       'git push --force'
 
 if type -q ag
   abbr gg 'ag --pager \'less -R\' --hidden'

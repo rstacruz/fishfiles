@@ -14,6 +14,8 @@ if ! type -q code
 else
  abbr cr    'code -r (git rev-parse --show-toplevel)'
  abbr c     'code (git rev-parse --show-toplevel)'
+ abbr C     'code (git rev-parse --show-toplevel); exit'
+ abbr c.    'code (git rev-parse --show-toplevel)'
 end
 
 
