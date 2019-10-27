@@ -3,7 +3,7 @@ if ! type -q cargo
 else
   abbr ca 'cargo'
   abbr ct 'cargo test'
-  abbr cr 'cargo run'
-  abbr cf 'cargo fmt'
+  abbr car 'cargo run'
+  abbr caf 'cargo fmt'
   abbr ctw 'cargo watch -x "test -- --nocapture"'
 end
