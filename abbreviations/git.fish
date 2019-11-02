@@ -130,3 +130,10 @@ else
 end
 
 abbr amend 'git commit --amend'
+
+if type -q hub
+  abbr PR 'hub pull-request'
+  abbr pr 'hub pr'
+else
+  echo "(Skipping GitHub abbreviations - 'hub' not found)"
+end
