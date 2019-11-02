@@ -128,3 +128,5 @@ if type -q ag
 else
   echo "(Skipping 'gg' abbreviations - the_silver_searcher not found)"
 end
+
+abbr amend 'git commit --amend'
