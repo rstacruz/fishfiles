@@ -137,3 +137,8 @@ if type -q hub
 else
   echo "(Skipping GitHub abbreviations - 'hub' not found)"
 end
+
+abbr push 'git push'
+abbr PUSH 'git push --force-with-lease'
+abbr pushup 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
+abbr PUSHUP 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
