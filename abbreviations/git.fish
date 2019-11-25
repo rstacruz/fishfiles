@@ -141,3 +141,4 @@ end
 abbr push 'git push'
 abbr pushup 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
 abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
+abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
