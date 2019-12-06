@@ -138,7 +138,14 @@ else
   echo "(Skipping GitHub abbreviations - 'hub' not found)"
 end
 
-abbr push 'git push'
 abbr pushup 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
 abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
 abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
+
+# Smaller abbrevations
+abbr push 'git push'
+abbr fetch 'git fetch'
+abbr merge 'git merge'
+abbr pull 'git pull'
+abbr co 'git checkout'
+abbr rebase 'git rebase'
