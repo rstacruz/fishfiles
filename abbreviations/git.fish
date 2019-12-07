@@ -149,3 +149,10 @@ abbr merge 'git merge'
 abbr pull 'git pull'
 abbr co 'git checkout'
 abbr rebase 'git rebase'
+
+# Typos
+abbr PSUH PUSH
+abbr PLUL PULL
+abbr psuh push
+abbr plul pull
+abbr mrege merge
