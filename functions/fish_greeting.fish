@@ -2,8 +2,8 @@ function fish_greeting
     set -l time (date "+%I:%M %p")
     set -l date (date "+%A, %b %e")
     echo ""
-    echo "  $time"
-    echo "  $date"
+    echo "  "(set_color brgreen)"$time"(set_color normal)
+    echo "  "(set_color -d green)"$date"(set_color normal)
     echo ""
 
     if type -q upower
@@ -11,10 +11,12 @@ function fish_greeting
         set -l state (upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk '/state:/ {print $2}')
         if test "$state" = "discharging"
             set -l left (upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk '/time to empty:/ {print $4, $5}')
-            echo "     $perc · $left left"
+            echo "  "(set_color brgreen)"   $perc"(set_color -d green)" · $left left"
         else
             echo "  Battery ($state): $perc"
         end
         echo ""
     end
+
+    set_color normal
 end
