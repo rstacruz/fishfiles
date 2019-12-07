@@ -16,3 +16,4 @@ fish_variables
 !/functions/ls!.fish
 !/functions/fisher.fish
 !/functions/gg.fish
+!/functions/fish_greeting.fish
