@@ -18,6 +18,7 @@ fisher:
 
 abbr: ## Install abbreviations [alias: a]
 	echo "cd ~/.config/fish/abbreviations; source all.fish" | fish
+	echo "source etc/colors.fish" | fish
 
 a: abbr
 i: install
