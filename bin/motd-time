@@ -1,5 +1,4 @@
 #!/usr/bin/env sh
-exit
 
 if which toilet 2>/dev/null >/dev/null; then
   # INDENT=$(echo $(tput cols) / 2 - 15 | bc)
