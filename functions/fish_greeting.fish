@@ -1,12 +1,13 @@
 function show_battery
     set -l hilite cyan
     set -l mute brblack
+    set -l batt (upower -e /org/freedesktop/UPower/devices | grep battery | head -n 1)
 
     if type -q upower
-        set -l perc (upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk '/percentage:/ {print $2}')
-        set -l state (upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk '/state:/ {print $2}')
+        set -l perc (upower -i $batt | awk '/percentage:/ {print $2}')
+        set -l state (upower -i $batt | awk '/state:/ {print $2}')
         if test "$state" = "discharging"
-            set -l left (upower -i /org/freedesktop/UPower/devices/battery_BAT0 | awk '/time to empty:/ {print $4, $5}')
+            set -l left (upower -i $batt | awk '/time to empty:/ {print $4, $5}')
             echo (set_color $hilite)"   $perc"(set_color $mute)" · $left left"
         else if test "$state" = "fully-charged"
             echo (set_color $hilite)"   100%"
