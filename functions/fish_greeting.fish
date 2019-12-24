@@ -39,5 +39,10 @@ function fish_greeting
     echo -e $ind(show_battery)
     echo -e $ind(set_color $mute)"$time"(set_color normal)
     echo ""
+
+    if test -f $HOME/.motd
+        cat $HOME/.motd
+    end
+
     echo ""
 end

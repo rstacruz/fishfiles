@@ -1,0 +1,83 @@
+#!/usr/bin/env bash
+# Simple swaywm output management tool
+set -eou pipefail
+
+check_dependencies() {
+  if ! command -v swaymsg &>/dev/null; then
+    echo "No sway found"
+    exit 1
+  fi
+
+  if ! command -v jq &>/dev/null; then
+    echo "No jq found"
+    exit 1
+  fi
+}
+
+get_outputs() {
+  swaymsg -t get_outputs | jq -r '.[] | [.name, .active, .rect.x, .rect.y, .rect.width, .rect.height, .focused] | @sh'
+}
+
+_msg() {
+  echo "$ swaymsg $@"
+  swaymsg "$@"
+}
+
+get_unfocused_outputs() {
+  # one per line
+  swaymsg -t get_outputs | jq -r '.[] | select(.focused != true) | .name'
+}
+
+list_outputs() {
+  local output m name active x y width height focused
+  get_outputs | while read output; do
+    eval "m=($output)"
+    name="${m[0]}"
+    active="${m[1]}"
+    x="${m[2]}"
+    y="${m[3]}"
+    width="${m[4]}"
+    height="${m[5]}"
+    focused="${m[6]}"
+    if [[ "$active" == "true" ]]; then
+      label_primary="$(if [ "${x}x${y}" == "0x0" ]; then echo '(primary) '; else echo ' '; fi)"
+      label_focus="$(if [ "$focused" == "true" ]; then echo '*'; else echo ' '; fi)"
+      printf "  %-1s %-20s %10s %s\n" "$label_focus" "$name" "${width}x${height}" "$label_primary"
+    else
+      printf "  %-1s %-20s %10s %s\n" "" "$name" "[off]"
+    fi
+  done
+}
+
+help() {
+  echo "Commands:"
+  echo "  list      list displays"
+  echo "  single    turn off other displays [alias: s]"
+  echo "  switch    switch to the other display [alias: x]"
+  echo "  all       turn on all displays"
+}
+
+single_mode() {
+  local output
+  get_unfocused_outputs | while read output; do
+    _msg output "$output" disable
+  done
+}
+
+main() {
+  case "${1:-}" in
+    h | help | -h | --help)
+      help
+      ;;
+    s | single)
+      single_mode
+      list_outputs
+      ;;
+    *)
+      list_outputs
+      ;;
+  esac
+}
+
+check_dependencies
+main "$@"
