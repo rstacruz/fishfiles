@@ -39,3 +39,7 @@ abbr yaml 'ruby -rjson -ryaml -e "puts JSON.pretty_generate(YAML.load(STDIN.read
 if type -q termdown
   abbr td 'termdown -f starwars'
 end
+
+if type -q swaymsg
+  abbr so 'sway-outputs'
+end

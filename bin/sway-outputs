@@ -15,17 +15,23 @@ check_dependencies() {
 }
 
 get_outputs() {
-  swaymsg -t get_outputs | jq -r '.[] | [.name, .active, .rect.x, .rect.y, .rect.width, .rect.height, .focused] | @sh'
-}
-
-_msg() {
-  echo "$ swaymsg $@"
-  swaymsg "$@"
+  swaymsg -t get_outputs \
+    | jq -r '.[] | [.name, .active, .rect.x, .rect.y, .rect.width, .rect.height, .focused] | @sh'
 }
 
 get_unfocused_outputs() {
-  # one per line
-  swaymsg -t get_outputs | jq -r '.[] | select(.focused != true) | .name'
+  swaymsg -t get_outputs \
+    | jq -r '.[] | select(.focused != true and .active == true) | .name'
+}
+
+get_inactive_outputs() {
+  swaymsg -t get_outputs \
+    | jq -r '.[] | select(.active != true) | .name'
+}
+
+_msg() {
+  echo -e "\033[37m$ swaymsg $@\033[0m\n"
+  swaymsg "$@"
 }
 
 list_outputs() {
@@ -40,11 +46,11 @@ list_outputs() {
     height="${m[5]}"
     focused="${m[6]}"
     if [[ "$active" == "true" ]]; then
-      label_primary="$(if [ "${x}x${y}" == "0x0" ]; then echo '(primary) '; else echo ' '; fi)"
+      label_primary="$(if [ "${x}x${y}" == "0x0" ]; then echo 'primary '; else echo ' '; fi)"
       label_focus="$(if [ "$focused" == "true" ]; then echo '*'; else echo ' '; fi)"
-      printf "  %-1s %-20s %10s %s\n" "$label_focus" "$name" "${width}x${height}" "$label_primary"
+      printf "  %-1s \033[1m%-15s\033[0m %-10s \033[31m%s\033[0m\n" "$label_focus" "$name" "${width}x${height}" "$label_primary"
     else
-      printf "  %-1s %-20s %10s %s\n" "" "$name" "[off]"
+      printf "  %-1s %-15s %-10s \033[33m%s\033[0m\n" "" "$name" "-" "off"
     fi
   done
 }
@@ -54,7 +60,7 @@ help() {
   echo "  list      list displays"
   echo "  single    turn off other displays [alias: s]"
   echo "  switch    switch to the other display [alias: x]"
-  echo "  all       turn on all displays"
+  echo "  multi     turn on all displays [alias: m]"
 }
 
 single_mode() {
@@ -64,20 +70,33 @@ single_mode() {
   done
 }
 
+multi_mode() {
+  local output
+  get_inactive_outputs | while read output; do
+    _msg output "$output" enable
+  done
+}
+
 main() {
   case "${1:-}" in
     h | help | -h | --help)
       help
       ;;
     s | single)
+      check_dependencies
       single_mode
       list_outputs
       ;;
+    m | multi_mode)
+      check_dependencies
+      multi_mode
+      list_outputs
+      ;;
     *)
+      check_dependencies
       list_outputs
       ;;
   esac
 }
 
-check_dependencies
 main "$@"
