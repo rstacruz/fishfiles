@@ -8,14 +8,20 @@ abbr .nomp 'set -gx MINIMAL_PROMPT'
 abbr today "date +'%Y-%m-%d'"
 
 # Browse for wallpapers
-abbr fed 'feh --draw-filename .'
+if type -q feh
+  abbr fed 'feh --draw-filename .'
+end
 
 # NordVPN
-abbr nord 'nordvpn'
-abbr nor 'nordvpn'
+if type -q nordvpn
+  abbr nord 'nordvpn'
+  abbr nor 'nordvpn'
+end
 
 # Gotop
-abbr got 'gotop -smb -c monokai'
+if type -q gotop
+  abbr got 'gotop -smb -c monokai'
+end
 
 # Homebrew
 if type -q brew
@@ -29,3 +35,7 @@ end
 
 # Convert YAML to JSON
 abbr yaml 'ruby -rjson -ryaml -e "puts JSON.pretty_generate(YAML.load(STDIN.read))" <'
+
+if type -q termdown
+  abbr td 'termdown -f starwars'
+end
