@@ -15,6 +15,10 @@ function show_battery
             echo (set_color $mute)"Battery ($state): $perc"
         end
         echo ""
+    else if type -q pmset
+        set -l perc (pmset -g batt | grep -Eo "\d+%")
+        set -l state (pmset -g batt | grep -Eo "\d+%; .*;" | cut -d';' -f2 | xargs)
+        echo (set_color $mute)"Battery ($state): $perc"
     end
 
     set_color normal
