@@ -43,3 +43,7 @@ end
 if type -q swaymsg
   abbr so 'sway-outputs'
 end
+
+if type -q kubectl
+  abbr k 'kubectl'
+end
