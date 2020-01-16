@@ -25,6 +25,11 @@ function show_battery
 end
 
 function fish_greeting
+    if test -n "$MIN_PROMPT"
+        clear
+        return
+    end
+
     set -l hilite cyan
     set -l mute brblack
     set -l date (date "+%A, %b %e")
