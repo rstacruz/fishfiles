@@ -103,8 +103,10 @@ list_outputs() {
     model="${m[8]}"
     if [[ "$active" == "true" ]]; then
       label_primary="$(if [ "${x}x${y}" == "0x0" ]; then echo 'primary '; else echo ' '; fi)"
-      label_focus="$(if [ "$focused" == "true" ]; then echo '*'; else echo ' '; fi)"
-      printf "  %-1s \033[1m%-15s\033[0m %-10s \033[31m%s\033[0m\n" "$label_focus" "$name" "${width}x${height}" "${label_primary}"
+      label_focus="$(if [ "$focused" == "true" ]; then echo '→'; else echo ' '; fi)"
+      printf "  %-1s \033[1m%-15s\033[0m %-10s \033[32m%s\033[0m\n" "$label_focus" "$name" "${width}x${height}" "${label_primary}"
+    else
+      printf "  %-1s \033[1m%-15s\033[0m %-10s \033[31m%s\033[0m\n" "" "$name" "-" "(off)"
     fi
   done
 }
@@ -137,7 +139,6 @@ mini_usage() {
   echo -e "${h1}Tips${clear}"
 
   if (( "$inactives" > 0 )); then
-    echo -e "  Some displays are off: ${hl}$inactives_list${clear}."
     echo -e "  ${hl}$bin multi${clear} to go multi-display mode."
     echo -e "  ${hl}$bin swap${clear} to switch to ${hl}$(get_first_inactive_output)${clear}."
   fi
