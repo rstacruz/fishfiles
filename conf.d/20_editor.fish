@@ -1,4 +1,6 @@
-if test -z "$EDITOR"
+if test -n "$NVIM_LISTEN_ADDRESS"
+  set -gx EDITOR "nvr --remote"
+else if test -z "$EDITOR"
   if which nvim > /dev/null
     set -gx EDITOR "nvim"
   else if which vim > /dev/null

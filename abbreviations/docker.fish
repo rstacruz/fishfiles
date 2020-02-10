@@ -1,8 +1,5 @@
 abbr dc 'docker-compose'
 
-# Bring it up, then show logs. ^C stops logs but keeps server running
-abbr dcul 'docker-compose up -d; docker-compose logs -f --tail=0'
-
 # Just up/down
 abbr dcu 'docker-compose up'
 abbr dcd 'docker-compose down'

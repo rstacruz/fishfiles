@@ -1,0 +1,13 @@
+#!/usr/bin/env bash
+# Editor
+if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && command -v nvr &>/dev/null; then
+  nvr --remote "$@"
+elif command -v nvim &>/dev/null; then
+  nvim "$@"
+elif command -v vim &>/dev/null; then
+  vim "$@"
+elif command -v emacsclient &>/dev/null; then
+  emacsclient -t -c -a '' "$@"
+elif command -v nano &>/dev/null; then
+  nano "$@"
+fi
