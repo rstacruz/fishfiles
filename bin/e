@@ -1,7 +1,11 @@
 #!/usr/bin/env bash
 # Editor
 if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && command -v nvr &>/dev/null; then
-  nvr -o "$@"
+  if [[ "$#" == 0 ]]; then
+    echo "(No filename given)" >&2
+  else
+    nvr -o "$@"
+  fi
 elif command -v nvim &>/dev/null; then
   nvim "$@"
 elif command -v vim &>/dev/null; then
