@@ -124,7 +124,7 @@ abbr gas       'git rebase --autosquash'
 abbr gpf       'git push --force'
 
 if type -q ag
-  abbr gg 'ag --pager \'less -R\''
+  abbr gg 'ag --pager \'less -RFX\''
 else
   echo "(Skipping 'gg' abbreviations - the_silver_searcher not found)"
 end
