@@ -46,8 +46,8 @@ end
 
 function play_sound_file
   if type -q paplay
-    paplay $argv[1] &>/dev/null & disown
+    paplay $argv[1] ^/dev/null & disown
   else if type -q afplay
-    afplay $argv[1] &>/dev/null & disown
+    afplay $argv[1] ^/dev/null & disown
   end
 end

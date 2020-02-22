@@ -1,10 +1,10 @@
 # Add bin/ to the fish user paths
-if not contains ~/.config/fish/bin $fish_user_paths
-  set -gx fish_user_paths ~/.config/fish/bin $fish_user_paths
+if not contains $HOME/.config/fish/bin $fish_user_paths
+  set -gx fish_user_paths $HOME/.config/fish/bin $fish_user_paths
 end
 
-if not contains ~/bin $fish_user_paths && test -d ~/bin
-  set -gx fish_user_paths ~/bin $fish_user_paths
+if not contains $HOME/bin $fish_user_paths && test -d ~/bin
+  set -gx fish_user_paths $HOME/bin $fish_user_paths
 end
 
 # For pip3
