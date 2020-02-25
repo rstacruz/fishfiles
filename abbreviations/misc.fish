@@ -47,3 +47,5 @@ end
 if type -q kubectl
   abbr k 'kubectl'
 end
+
+abbr T 'env VIM_MINIMAL=1 nvim ~/TODO'
