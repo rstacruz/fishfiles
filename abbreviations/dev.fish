@@ -24,12 +24,11 @@ abbr be 'bundle exec'
 
 # Autojump
 abbr j  'z'
-abbr jo 'zo'
 
 # Node.js
-abbr y  'yarn'
-abbr yt 'yarn test'
-abbr yr 'yarn run'
+abbr y   'yarn'
+abbr yui 'yarn upgrade-interactive --latest'
+abbr yt  'yarn test'
 
 # Tokei
 abbr toke 'tokei --sort code .'
