@@ -17,3 +17,6 @@ fish_variables
 !/functions/fisher.fish
 !/functions/gg.fish
 !/functions/fish_greeting.fish
+
+# Some things like Volta insist on this file
+/config.fish
