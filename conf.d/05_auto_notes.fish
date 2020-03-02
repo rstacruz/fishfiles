@@ -1,13 +1,15 @@
-if test -e "$HOME/Dev/notes"
-  set -gx PROJECT_NOTES_PATH "$HOME/Dev/notes"
-else if test -e "$HOME/org/Projects"
-  set -gx PROJECT_NOTES_PATH "$HOME/org/Projects"
+function project_notes_path
+  if test -e "$HOME/Dev/notes"
+    echo "$HOME/Dev/notes"
+  else if test -e "$HOME/org/Projects"
+    echo "$HOME/org/Projects"
+  end
 end
 
 function __auto_notes_hook --description "Auto notes" # --on-event fish_prompt
   if test "$__auto_notes_last" != (pwd)
     set project_name (basename (pwd))
-    set project_note $PROJECT_NOTES_PATH"/"$project_name".txt"
+    set project_note (project_notes_path)/$project_name.txt
 
     if test -f $project_note
       echo ""

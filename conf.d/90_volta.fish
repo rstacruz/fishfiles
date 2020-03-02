@@ -1,7 +1,6 @@
 if test -d "$HOME/.volta"
   set -gx VOLTA_HOME "$HOME/.volta"
-
-  if not contains $VOLTA_HOME/bin $PATH
-    set -gx PATH "$VOLTA_HOME/bin" $PATH
-  end
+  test -s "$VOLTA_HOME/load.fish"; and source "$VOLTA_HOME/load.fish"
+  string match -r ".volta" "$PATH" > /dev/null; or set -gx PATH "$VOLTA_HOME/bin" $PATH
 end
+
