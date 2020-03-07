@@ -2,7 +2,7 @@ function show_battery
     set -l hilite cyan
     set -l mute brblack
 
-    if type -q upower
+    if type -q upower; and grep -v Microsoft /proc/version >/dev/null
         set -l batt (upower -e /org/freedesktop/UPower/devices | grep battery | head -n 1)
         set -l perc (upower -i $batt | awk '/percentage:/ {print $2}')
         set -l state (upower -i $batt | awk '/state:/ {print $2}')
