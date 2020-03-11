@@ -22,4 +22,7 @@ abbr today "date +'%Y-%m-%d'"
 # Convert YAML to JSON
 abbr yaml 'ruby -rjson -ryaml -e "puts JSON.pretty_generate(YAML.load(STDIN.read))" <'
 
-abbr T 'env VIM_MINIMAL=1 nvim ~/TODO'
+# Notes
+abbr N 'env VIM_MINIMAL=1 nvim ~/.priv/notes/Notes/NOTES.md'
+abbr T 'env VIM_MINIMAL=1 nvim ~/.priv/notes/Todo/todo.taskpaper'
+abbr TT 'env VIM_MINIMAL=1 nvim ~/.priv/notes/Todo/todo.txt'
