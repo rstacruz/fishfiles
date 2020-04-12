@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Editor, but split
+export NVR_OPTIONS="-v"
+DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )" && pwd )"
+source "$DIR/e"
