@@ -41,13 +41,13 @@ if type -q nvim
   abbr n 'nvim'
 end
 
-if type -q nvr
-  echo "✓ Neovim remote"
-  abbr v 'nvr -s -O'
-  abbr s 'nvr -s -o'
-  abbr t 'nvr -s -p'
-  abbr e 'nvr -s'
-end
+# if type -q nvr
+#   echo "✓ Neovim remote"
+#   abbr v 'nvr -s -O'
+#   abbr s 'nvr -s -o'
+#   abbr t 'nvr -s -p'
+#   abbr e 'nvr -s'
+# end
 
 if type -q code
   echo "✓ VSCode"
