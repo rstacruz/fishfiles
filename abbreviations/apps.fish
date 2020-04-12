@@ -41,6 +41,14 @@ if type -q nvim
   abbr n 'nvim'
 end
 
+if type -q nvr
+  echo "✓ Neovim remote"
+  abbr v 'nvr -s -O'
+  abbr s 'nvr -s -o'
+  abbr t 'nvr -s -p'
+  abbr e 'nvr -s'
+end
+
 if type -q code
   echo "✓ VSCode"
   abbr c. 'code (git rev-parse --show-toplevel)'
@@ -77,4 +85,10 @@ end
 if type -q ruby
   echo "✓ Ruby"
   abbr be 'bundle exec'
+end
+
+if type -q chezmoi
+  echo "✓ Chezmoi"
+  abbr che 'chezmoi'
+  abbr chap 'chezmoi apply -v'
 end
