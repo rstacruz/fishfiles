@@ -9,7 +9,9 @@ is_x11() {
   [[ -n "${DISPLAY:-}" ]]
 }
 
-if command -v Powershell.exe &>/dev/null; then
+if command -v clip.exe &>/dev/null; then
+  clip.exe # Windows
+elif command -v Powershell.exe &>/dev/null; then
   Powershell.exe Set-Clipboard # Windows
 elif is_wayland && command -v wl-paste &>/dev/null; then
   wl-copy # Wayland
