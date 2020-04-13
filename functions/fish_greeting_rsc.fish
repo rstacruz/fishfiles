@@ -41,7 +41,7 @@ function fish_greeting_rsc
         set_color $hilite
         date +" %I:%M %p " | toilet -f future --gay
         set ind "\033[30C"
-        echo -ne "\033[u"
+        echo -ne "\033[4A"
     end
     echo ""
     echo -e $ind(set_color $hilite)"$date"(set_color normal)
