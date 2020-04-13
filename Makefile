@@ -14,12 +14,15 @@ link: ## Link files to ~/.config
 install: fisher abbr ## Installs plugins and abbreviations [alias: i]
 
 fisher:
-	echo "fisher" | fish
+	fish -c fisher
 
 abbr: ## Install abbreviations [alias: a]
 	echo "cd ~/.config/fish/abbreviations; source all.fish" | fish
 	echo "source etc/colors.fish" | fish
 
+update: install ## Update [alias: u]
+
 a: abbr
 i: install
-.PHONY: a i
+u: update
+.PHONY: a i u
