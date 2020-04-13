@@ -3,7 +3,7 @@
 NVR_OPTIONS="${NVR_OPTIONS:-}"
 if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && command -v nvr &>/dev/null; then
   if [[ "$#" == 0 ]]; then
-    echo "(No filename given)" >&2
+    nvr $NVR_OPTIONS .
   else
     nvr $NVR_OPTIONS "$@"
   fi
