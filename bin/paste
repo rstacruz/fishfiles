@@ -9,15 +9,12 @@ is_x11() {
   [[ -n "${DISPLAY:-}" ]]
 }
 
-if is_wayland && command -v wl-paste &>/dev/null; then
-  # Wayland
-  wl-paste
+if command -v Powershell.exe &>/dev/null; then
+  Powershell.exe Get-Clipboard # Windows
+elif is_wayland && command -v wl-paste &>/dev/null; then
+  wl-paste # Wayland
 elif command -v pbpaste &>/dev/null; then
-  # macOS
-  pbpaste
-elif command -v Powershell.exe &>/dev/null; then
-  # Windows
-  Powershell.exe Get-Clipboard
+  pbpaste # macOS
 elif command -v xsel &>/dev/null; then
   xsel -b
 elif command -v xclip &>/dev/null; then
