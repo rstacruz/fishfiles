@@ -10,6 +10,9 @@ end
 # source (rbenv init - | sed 's/command rbenv rehash/#&/' | psub)
 
 # Even cheaper
+set -gx PATH "$HOME/.rbenv/shims" $PATH
+set -gx RBENV_SHELL fish
+
 function rbenv
   set command $argv[1]
   set -e argv[1]
