@@ -7,11 +7,11 @@ default:
 	@grep -E '^[a-zA-Z_-]+:.*?## .*$$' Makefile | awk 'BEGIN {FS = ":.*?## "}; {printf "\033[36m  %-20s\033[0m %s\n", $$1, $$2}'
 	@echo
 
-link: ## Link files to ~/.config
+install: link fisher abbr ## Installs plugins and abbreviations [alias: i]
+
+link: # Link files to ~/.config
 	mkdir -p ~/.config
 	if [ ! . -ef ~/.config/fish ]; then ln -nfs "`pwd -LP`" ~/.config/fish; fi
-
-install: fisher abbr ## Installs plugins and abbreviations [alias: i]
 
 fisher:
 	fish -c fisher
