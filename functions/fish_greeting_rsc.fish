@@ -23,16 +23,28 @@ function show_battery
     set_color normal
 end
 
-function print_env
-    set -l suffix (set_color brblack)'@' (cat /etc/hostname)(set_color normal)
+function get_os
     if test -d /run/WSL
         echo 'Windows WSL 2' $suffix
-    else if grep -v icrosoft /proc/version >/dev/null
-        echo 'Windows WSL 1' $suffix
     else
         echo (uname -r) $suffix
     end
 end
+
+function get_hostname
+    if type -q hostname
+        hostname
+    else if test -f /etc/hostname
+        cat /etc/hostname
+    else
+        echo 'Unknown'
+    end
+end
+
+function print_env
+    echo (get_os) (set_color brblack)'@' (get_hostname)(set_color normal)
+end
+
 function fish_greeting_rsc
     if test -n "$MIN_PROMPT"
         clear
