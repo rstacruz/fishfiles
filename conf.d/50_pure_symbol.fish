@@ -8,8 +8,8 @@ set -gx pure_color_ssh_separator (set_color brblack)
 # the glyph
 # set -gx pure_symbol_prompt "─"
 
-set -gx pure_symbol_prompt "->"
-set -gx pure_symbol_reverse_prompt "|>"
+set -gx pure_symbol_prompt "›"
+set -gx pure_symbol_reverse_prompt "─"
 
 set -gx pure_symbol_git_unpulled_commits "↓ "
 set -gx pure_symbol_git_unpushed_commits "↑ "
