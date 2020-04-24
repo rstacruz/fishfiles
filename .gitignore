@@ -16,6 +16,7 @@ fish_variables
 !/functions/ls!.fish
 !/functions/fisher.fish
 !/functions/gg.fish
+!/functions/_min*.fish
 !/functions/fish_greeting.fish
 
 # Some things like Volta insist on this file
