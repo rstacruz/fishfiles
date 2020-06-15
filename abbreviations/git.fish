@@ -149,6 +149,8 @@ abbr merge 'git merge'
 abbr pull 'git pull'
 abbr co 'git checkout'
 abbr rebase 'git rebase'
+abbr reb 'git rebase'
+abbr rebi 'git rebase -i'
 
 # Typos
 abbr PSUH PUSH
