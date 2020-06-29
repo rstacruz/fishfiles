@@ -23,5 +23,10 @@ abbr today "date +'%Y-%m-%d'"
 abbr yaml 'ruby -rjson -ryaml -e "puts JSON.pretty_generate(YAML.load(STDIN.read))" <'
 
 # Notes
-abbr N 'cd ~/.priv/notes/Notes; nvim'
-abbr T 'cd ~/.priv/notes/Todo; nvim todo.taskpaper'
+abbr N 'cd ~/.priv/notes/Notes; e .'
+abbr T 'cd ~/.priv/notes/Todo; e todo.taskpaper'
+
+# Open in new tab, split, etc
+abbr es 'nvr -o'
+abbr ev 'nvr -O'
+abbr et 'nvr -p'

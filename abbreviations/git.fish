@@ -129,18 +129,21 @@ else
   echo "(Skipping 'gg' abbreviations - the_silver_searcher not found)"
 end
 
-abbr amend 'git commit --amend'
-
-if type -q hub
+if type -q gh
+  abbr PR 'gh pr create'
+  abbr pr 'gh pr'
+  abbr prb 'gh pr view --web'
+else if type -q hub
   abbr PR 'hub pull-request'
   abbr pr 'hub pr'
 else
   echo "(Skipping GitHub abbreviations - 'hub' not found)"
 end
 
-abbr pushup 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
 abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
+abbr Push 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
 abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
+abbr Pull 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
 
 # Smaller abbrevations
 abbr push 'git push'
@@ -151,10 +154,4 @@ abbr co 'git checkout'
 abbr rebase 'git rebase'
 abbr reb 'git rebase'
 abbr rebi 'git rebase -i'
-
-# Typos
-abbr PSUH PUSH
-abbr PLUL PULL
-abbr psuh push
-abbr plul pull
-abbr mrege merge
+abbr amend 'git commit --amend -v'
