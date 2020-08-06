@@ -42,7 +42,7 @@ function get_hostname
 end
 
 function print_env
-    echo (get_os) (set_color brblack)'@' (get_hostname)(set_color normal)
+    echo (set_color brblack)(get_os) '@' (get_hostname)(set_color normal)
 end
 
 function fish_greeting_rsc
@@ -72,7 +72,6 @@ function fish_greeting_rsc
 
     if test -f $HOME/.motd
         cat $HOME/.motd
+        echo ""
     end
-
-    echo ""
 end
