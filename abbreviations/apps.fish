@@ -33,6 +33,8 @@ if type -q exa
   echo "✓ Exa"
   abbr ls 'exa'
   abbr la 'exa -lah'
+  abbr lat 'exa -lah --tree'
+  abbr lt 'exa --tree'
 end
 
 if type -q nvim
