@@ -18,11 +18,6 @@ if type -q pacman
   abbr pac 'pacman'
 end
 
-if type -q git
-  echo "✓ Git"
-  source ./git.fish
-end
-
 # Tig
 if type -q tig
   echo "✓ Tig"
