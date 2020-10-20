@@ -144,7 +144,9 @@ if type -q git
   abbr g..       'git add --all .; and git commit -m Update; git pull --rebase; git push' # sync for things like notes, etc
   abbr gpr       'git pull --rebase'
   abbr gc        'git commit -v'
+
   abbr gcm       'git commit -m (read)'
+  abbr gm        'git commit -m (read)'
 
   abbr ga        'git add'
   abbr gaa       'git add --all .'
