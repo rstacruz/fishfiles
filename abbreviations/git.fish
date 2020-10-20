@@ -126,15 +126,17 @@ end
 
 if type -q git
   # Smaller abbrevations
-  abbr push 'git push'
-  abbr fetch 'git fetch'
-  abbr merge 'git merge'
-  abbr pull 'git pull'
-  abbr co 'git checkout'
+  abbr push   'git push'
+  abbr fetch  'git fetch'
+  abbr merge  'git merge'
+  abbr pull   'git pull'
+  abbr co     'git checkout'
   abbr rebase 'git rebase'
-  abbr reb 'git rebase'
-  abbr rebi 'git rebase -i'
-  abbr amend 'git commit --amend -v'
+  abbr reb    'git rebase'
+  abbr rebi   'git rebase -i'
+  abbr amend  'git commit --amend -v'
+
+  abbr gco    'git checkout'
 
   abbr gg        'git grep --heading --break -p'
   abbr ggpush    'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
@@ -143,8 +145,8 @@ if type -q git
   abbr g.        'git add --all .; and git commit -m Update'
   abbr g..       'git add --all .; and git commit -m Update; git pull --rebase; git push' # sync for things like notes, etc
   abbr gpr       'git pull --rebase'
-  abbr gc        'git commit -v'
 
+  abbr gc        'git commit -v'
   abbr gcm       'git commit -m (read)'
   abbr gm        'git commit -m (read)'
 
