@@ -18,6 +18,7 @@ fish_variables
 !/functions/gg.fish
 !/functions/_min*.fish
 !/functions/fish_greeting.fish
+!/functions/update-abbreviations.fish
 
 # Some things like Volta insist on this file
 /config.fish

@@ -148,8 +148,7 @@ if type -q git
 
   abbr gc        'git commit -v'
   abbr gcm       'git status -s; git commit -m (read)'
-  abbr g,        'git status -s; git commit -m (read)'
-  abbr g,,       'git add --all .; git status -s; git commit -m (read)'
+  abbr g,        'git commit -m (read -p \'git status -s; echo "Commit: "\')'
 
   abbr ga        'git add'
   abbr gaa       'git add --all .'
