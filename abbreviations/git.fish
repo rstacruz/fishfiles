@@ -147,8 +147,9 @@ if type -q git
   abbr gpr       'git pull --rebase'
 
   abbr gc        'git commit -v'
-  abbr gcm       'git commit -m (read)'
-  abbr gm        'git commit -m (read)'
+  abbr gcm       'git status -s; git commit -m (read)'
+  abbr g,        'git status -s; git commit -m (read)'
+  abbr g,,       'git add --all .; git status -s; git commit -m (read)'
 
   abbr ga        'git add'
   abbr gaa       'git add --all .'
