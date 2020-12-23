@@ -89,3 +89,8 @@ if type -q chezmoi
   abbr che 'chezmoi'
   abbr chap 'chezmoi apply -v'
 end
+
+if type -b bat
+  echo '✓ Bat'
+  abbr b 'bat'
+end
