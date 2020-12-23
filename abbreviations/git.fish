@@ -132,13 +132,13 @@ if type -q git
   abbr pull   'git pull'
   abbr co     'git checkout'
   abbr rebase 'git rebase'
-  abbr reb    'git rebase'
-  abbr rebi   'git rebase -i'
+  abbr rebasi 'git rebase -i'
   abbr amend  'git commit --amend -v'
+  abbr branch 'git checkout -b'
 
   abbr gco    'git checkout'
 
-  abbr gg        'git grep --heading --break -p'
+  # abbr gg        'git grep --heading --break -p'
   abbr ggpush    'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
   abbr gcd       'cd (git rev-parse --show-toplevel)'
   abbr gfrh      'git fetch; and git reset --hard'
@@ -148,13 +148,13 @@ if type -q git
 
   abbr gc        'git commit -v'
   abbr gcm       'git status -s; git commit -m (read)'
-  abbr g,        'git commit -m (read -p \'git status -s; echo "Commit: "\')'
+  abbr g,        'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
 
   abbr ga        'git add'
   abbr gaa       'git add --all .'
-  abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)-(date +"%Y-%m-%d-%H%M")'
-  abbr gas       'git rebase --autosquash'
-  abbr gpf       'git push --force'
+  # abbr gdev      'git checkout -b (git config --get user.email | cut -d@ -f1)-(date +"%Y-%m-%d-%H%M")'
+  # abbr gas       'git rebase --autosquash'
+  # abbr gpf       'git push --force'
 
   abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
   abbr Push 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
