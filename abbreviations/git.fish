@@ -130,13 +130,15 @@ if type -q git
   abbr fetch  'git fetch'
   abbr merge  'git merge'
   abbr pull   'git pull'
-  abbr co     'git checkout'
+  abbr pure   'git pull --rebase'
+  abbr cout   'git checkout'
   abbr rebase 'git rebase'
-  abbr rebasi 'git rebase -i'
+  abbr reb    'git rebase'
   abbr amend  'git commit --amend -v'
+  abbr bran   'git checkout -b'
   abbr branch 'git checkout -b'
-
-  abbr gco    'git checkout'
+  abbr comm   'git commit -v'
+  # abbr gco    'git checkout'
 
   # abbr gg        'git grep --heading --break -p'
   abbr ggpush    'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD)'
@@ -147,7 +149,7 @@ if type -q git
   abbr gpr       'git pull --rebase'
 
   abbr gc        'git commit -v'
-  abbr gcm       'git status -s; git commit -m (read)'
+  # abbr gcm       'git status -s; git commit -m (read)'
   abbr g,        'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
 
   abbr ga        'git add'
