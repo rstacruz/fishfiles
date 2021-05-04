@@ -1,17 +1,18 @@
 function fish_greeting
-  set -l date (date "+%A, %b %e")
+  set -l date1 (date "+%a")
+  set -l date2 (date "+%b %e")
   set -l time (date "+%I:%M %p")
   set -l cdir (basename (pwd))
   set -l msg ''
 
   if ! test -z $VIMRUNTIME
-    set msg ' · vim mode'
+    set msg ' (vim)'
   end
 
-  set_color cyan
-  echo ''
-  echo -e '  '$date''$msg
-  echo -e '  '$time
-
-  set_color reset
+  echo -e (set_color brblack)'┌──────────┐  ──────────'
+  echo -e (set_color brblack)'│ '(set_color blue)$time(set_color brblack)' │  '(set_color blue)$date1 (set_color reset)$date2(set_color blue)$msg(set_color reset)
+  echo -e (set_color brblack)'└──────────┘  ──────────'
+  # echo -e (set_color brblack)'┌────────────┐───────┬──────────┐'
+  # echo -e (set_color brblack)'│  '(set_color blue)$time(set_color brblack)'  │  '(set_color reset)$date1(set_color brblack)'  │  '(set_color reset)$date2(set_color brblack)'  │ '(set_color blue)$msg(set_color reset)
+  # echo -e (set_color brblack)'└────────────└───────┘──────────┘'
 end
