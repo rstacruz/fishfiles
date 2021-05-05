@@ -9,9 +9,11 @@ function fish_greeting
     set msg ' (vim)'
   end
 
-  echo -e (set_color brblack)'┌──────────┐  ──────────'
-  echo -e (set_color brblack)'│ '(set_color blue)$time(set_color brblack)' │  '(set_color blue)$date1 (set_color reset)$date2(set_color blue)$msg(set_color reset)
-  echo -e (set_color brblack)'└──────────┘  ──────────'
+  # echo -ne '\033K\r'
+  echo -ne '\n'
+  echo -e (set_color brblack)'╭─────────┄┌─────╮'
+  echo -e (set_color brblack)'│ '(set_color blue)$time(set_color brblack)' │ '(set_color green)$date1(set_color brblack)' │  '(set_color reset)$date2(set_color blue)$msg(set_color reset)
+  echo -e (set_color brblack)'╰──────────┘┄────╯'
   # echo -e (set_color brblack)'┌────────────┐───────┬──────────┐'
   # echo -e (set_color brblack)'│  '(set_color blue)$time(set_color brblack)'  │  '(set_color reset)$date1(set_color brblack)'  │  '(set_color reset)$date2(set_color brblack)'  │ '(set_color blue)$msg(set_color reset)
   # echo -e (set_color brblack)'└────────────└───────┘──────────┘'
