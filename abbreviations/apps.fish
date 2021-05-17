@@ -51,32 +51,14 @@ if type -q code
   abbr c. 'code (git rev-parse --show-toplevel)'
 end
 
-if type -q vmware-user; and type -q sway
-  echo "✓ VMWare Sway"
-  abbr S 'env WLR_NO_HARDWARE_CURSORS=1 dbus-launch sway'
-end
-
-if type -q brew
-  echo "✓ Homebrew"
-  abbr br 'brew'
-  abbr bc 'brew cask'
-  abbr bs 'brew search'
-  abbr bi 'brew install'
-end
-
 if type -q swaymsg
   echo "✓ Sway"
   abbr so 'sway-outputs'
 end
 
-if type -q kubectl
-  echo "✓ Kubectl"
-  abbr k 'kubectl'
-end
-
 if type -q nordvpn
   echo "✓ NordVPN"
-  abbr nord 'nordvpn'
+  abbr nord 'sudo systemctl start nordvpnd; nordvpn'
 end
 
 if type -q ruby
@@ -87,10 +69,10 @@ end
 if type -q chezmoi
   echo "✓ Chezmoi"
   abbr che 'chezmoi'
-  abbr chap 'chezmoi apply -v'
+  abbr chez 'chezmoi'
 end
 
-if type -q bat
-  echo '✓ Bat'
-  abbr b 'bat'
+if type -q pacman
+  echo '✓ pacman'
+  abbr pacman-packages "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
 end
