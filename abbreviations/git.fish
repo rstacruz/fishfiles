@@ -116,12 +116,10 @@ end
 if type -q gh
   abbr PR 'gh pr create'
   abbr pr 'gh pr'
+  abbr prc 'gh pr checkout'
   abbr prb 'gh pr view --web'
-else if type -q hub
-  abbr PR 'hub pull-request'
-  abbr pr 'hub pr'
 else
-  echo "(Skipping GitHub abbreviations - 'hub' not found)"
+  echo "(Skipping GitHub abbreviations - 'gh' not found)"
 end
 
 if type -q git

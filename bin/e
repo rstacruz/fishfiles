@@ -1,7 +1,8 @@
 #!/usr/bin/env bash
 # Editor
 NVR_OPTIONS="${NVR_OPTIONS:-}"
-if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && command -v nvr &>/dev/null; then
+
+if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && [[ -z "$VSCODE_GIT_IPC_HANDLE" ]] && command -v nvr &>/dev/null; then
   if [[ "$#" == 0 ]]; then
     nvr $NVR_OPTIONS .
   else
