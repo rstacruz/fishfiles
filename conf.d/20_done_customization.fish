@@ -26,28 +26,28 @@ function rsc_done_notification
     notify-send $urgency --icon=terminal --app-name=fish "$title" "$message"
 
   else  # anything else
-    echo -e "\a" # bell sound
+    # echo -e "\a" # bell sound
   end
 
-  if test $exit_status -ne 0
-    rsc_fail_sound
-  else
-    rsc_done_sound
-  end
+  # if test $exit_status -ne 0
+  #   rsc_fail_sound
+  # else
+  #   rsc_done_sound
+  # end
 end
 
-function rsc_done_sound
-  play_sound_file "$HOME/.config/fish/sounds/stairs.ogg"
-end
+# function rsc_done_sound
+#   play_sound_file "$HOME/.config/fish/sounds/stairs.ogg"
+# end
 
-function rsc_fail_sound
-  play_sound_file "$HOME/.config/fish/sounds/unsure.ogg"
-end
+# function rsc_fail_sound
+#   play_sound_file "$HOME/.config/fish/sounds/unsure.ogg"
+# end
 
-function play_sound_file
-  if type -q paplay
-    paplay $argv[1] ^/dev/null & disown
-  else if type -q afplay
-    afplay $argv[1] ^/dev/null & disown
-  end
-end
+# function play_sound_file
+#   if type -q paplay
+#     paplay $argv[1] ^/dev/null & disown
+#   else if type -q afplay
+#     afplay $argv[1] ^/dev/null & disown
+#   end
+# end
