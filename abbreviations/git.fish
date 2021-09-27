@@ -118,6 +118,7 @@ if type -q gh
   abbr pr 'gh pr'
   abbr prc 'gh pr checkout'
   abbr prb 'gh pr view --web'
+  abbr prlist 'gh pr list --search "-is:draft"'
 else
   echo "(Skipping GitHub abbreviations - 'gh' not found)"
 end
