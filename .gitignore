@@ -21,6 +21,7 @@ fish_variables
 !/functions/_min*.fish
 !/functions/fish_greeting.fish
 !/functions/update-abbreviations.fish
+!/functions/update-abbreviations-*.fish
 !/functions/fish_title.fish
 
 # Some things like Volta insist on this file
