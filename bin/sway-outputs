@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
-# Simple swaywm output management tool
+# Simple swaywm output management tool.
+#
+#   sway-outputs s [single]
+#   sway-outputs x [swap]
+#   sway-outputs m [multi]
+#
 set -eou pipefail
 
 hl="\033[31m"
@@ -8,10 +13,12 @@ clear="\033[0m"
 raw_outputs=""
 
 ok() {
+  notify-send "Sway" "$(echo "$*" | sed 's/\033[^m]*m//g')"
   echo -e "\033[34m✓\033[0m  $@"
 }
 
 info() {
+  notify-send "Sway" "$(echo "$*" | sed 's/\033[^m]*m//g')"
   echo -e "\033[34m○\033[0m  $@"
 }
 
