@@ -72,6 +72,12 @@ function update-abbreviations-apps
     abbr chez 'chezmoi'
   end
 
+  if type -q yay
+    echo "✓ yay"
+    abbr gib 'yay -S --needed'
+    abbr yeet 'yay -Rns'
+  end
+
   if type -q pacman
     echo '✓ pacman'
     abbr pacman-packages "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
