@@ -1,4 +1,10 @@
 function update-abbreviations-git
+  if type -q chezmoi
+    echo "✓ Chezmoi"
+    abbr che 'chezmoi'
+    abbr chez 'chezmoi'
+  end
+
   if type -q gh
     abbr PR 'gh pr create'
     abbr pr 'gh pr'
@@ -15,7 +21,7 @@ function update-abbreviations-git
 
     # 3-letter shortcuts
     abbr add    'git add'
-    abbr cou    'git checkout'
+    abbr che    'git checkout'
     abbr cob    'git checkout -b'
     abbr com    'git commit -v'
     abbr fet    'git fetch'
@@ -39,7 +45,7 @@ function update-abbreviations-git
     # Macros
     abbr gaa  'git add --all .'
     abbr gcd  'cd (git rev-parse --show-toplevel)'
-    abbr frh  'git fetch; and git reset --hard'
+    abbr gfr  'git fetch; and git reset --hard'
     # abbr gpr  'git pull --rebase'
     abbr g,   'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
     abbr g.   'git add --all .; and git commit -m Update'

@@ -66,12 +66,6 @@ function update-abbreviations-apps
     abbr be 'bundle exec'
   end
 
-  if type -q chezmoi
-    echo "✓ Chezmoi"
-    abbr che 'chezmoi'
-    abbr chez 'chezmoi'
-  end
-
   if type -q yay
     echo "✓ yay"
     abbr gib 'yay -S --needed'
