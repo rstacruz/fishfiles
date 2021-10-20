@@ -13,13 +13,15 @@ clear="\033[0m"
 raw_outputs=""
 
 ok() {
-  notify-send "Sway" "$(echo "$*" | sed 's/\033[^m]*m//g')"
   echo -e "\033[34m✓\033[0m  $@"
 }
 
 info() {
-  notify-send "Sway" "$(echo "$*" | sed 's/\033[^m]*m//g')"
   echo -e "\033[34m○\033[0m  $@"
+}
+
+notify() {
+  notify-send "Sway" "$*"
 }
 
 check_dependencies() {
@@ -146,15 +148,15 @@ mini_usage() {
   echo -e "${h1}Tips${clear}"
 
   if (( "$inactives" > 0 )); then
-    echo -e "  ${hl}$bin multi${clear} to go multi-display mode."
-    echo -e "  ${hl}$bin swap${clear} to switch to ${hl}$(get_first_inactive_output)${clear}."
+    echo -e "  ${hl}$bin swap${clear}   - use ${hl}$(get_first_inactive_output)${clear} only (other)."
+    echo -e "  ${hl}$bin multi${clear}  - go multi-display mode."
   fi
   if (( "$actives" > 1 )); then
-    echo -e "  ${hl}$bin single${clear} to turn off other displays."
-    echo -e "  ${hl}$bin swap${clear} to use ${hl}$(get_first_inactive_output)${clear} as a single display."
+    echo -e "  ${hl}$bin single${clear} - use ${hl}$(get_focused_output)${clear} only (this)."
+    echo -e "  ${hl}$bin swap${clear}   - use ${hl}$(get_first_inactive_output)${clear} only (other)."
   fi
 
-  echo -e "  ${hl}$bin help${clear} for more."
+  echo -e "  ${hl}$bin help${clear}   - for more."
 }
 
 single_mode() {
@@ -179,10 +181,12 @@ use_single_display() {
 
   if [[ -z "$others" ]]; then
     info "Already using ${hl}$primary${clear} as a single display."
+    notify "Already using $primary as a single display."
     return
   fi
 
   ok "Using ${hl}$primary${clear} as a single display."
+  notify "Switching to ${primary}."
 
   commands=()
   _msg output $primary enable
@@ -197,11 +201,14 @@ multi_mode() {
 
   if [[ "$(get_output_count)" == 1 ]]; then
     info "Only one display is available."
+    notify "Only one display is available."
   elif [[ -z "$list" ]]; then
     info "Multi-display mode already enabled."
+    notify "Multi-display mode already enabled."
     return
   else
     ok "Multi-display mode: enabling ${hl}$list${clear}."
+    notify "Multi-display mode: enabling $list."
   fi
 
   for output in "$list"; do
