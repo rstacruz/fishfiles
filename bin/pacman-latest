@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+# Print last installed pacman packages
+cat /var/log/pacman.log \
+  | awk '/installed/ { print $4 }' \
+  | grep -E "$(pacman -Qeq | xargs | tr ' ' '|')"

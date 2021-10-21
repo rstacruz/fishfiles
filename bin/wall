@@ -1,0 +1,19 @@
+#!/usr/bin/env bash
+# Sets a wallpaper
+
+file="$1"
+
+if [[ -z "$file" ]]; then
+  echo "Usage: $0 <file.jpg>"
+  exit 1
+fi
+
+if pgrep oguri >/dev/null; then
+  # orugi on sway?
+  cp "$file" ~/.config/wallpaper.jpg
+  pkill oguri
+  swaymsg exec oguri
+elif [[ -f ~/.fehbg ]]; then
+  # feh on x?
+  feh --bg-fill "$file"
+fi
