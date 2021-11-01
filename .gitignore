@@ -8,6 +8,9 @@ fish_variables
 /conf.d/*
 /completions/*
 
+# Local
+/local/local.fish
+
 # Allow some locally-managed configuration
 !/conf.d/_*.fish
 /conf.d/_pure_init.fish
