@@ -8,11 +8,10 @@ if [[ -z "$file" ]]; then
   exit 1
 fi
 
-if pgrep oguri >/dev/null; then
-  # orugi on sway?
+if pgrep swaybg >/dev/null; then
+  # sway
   cp "$file" ~/.config/wallpaper.jpg
-  pkill oguri
-  swaymsg exec oguri
+  swaymsg output '*' background "$(pwd)/$file" fill
 elif [[ -f ~/.fehbg ]]; then
   # feh on x?
   feh --bg-fill "$file"

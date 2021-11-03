@@ -38,6 +38,16 @@ function update-abbreviations-apps
     abbr n 'nvim'
   end
 
+  if type -q nvim-qt
+    if type -q i3-msg
+      echo "✓ neovim-qt + i3"
+      abbr N 'i3-msg layout tabbed; nvim-qt .'
+    else
+      echo "✓ neovim-qt"
+      abbr N 'nvim-qt .'
+    end
+  end
+
   # if type -q nvr
   #   echo "✓ Neovim remote"
   #   abbr v 'nvr -s -O'
