@@ -18,9 +18,7 @@ git clone https://github.com/rstacruz/fishfiles.git ~/.config/fish
 In a new shell:
 
 ```bash
-# Install dependencies
-fisher
-
-# Load abbreviations
-source ~/.config/fish/abbreviations/all.fish
+install-fisher
+fisher update
+update-abbreviations
 ```
