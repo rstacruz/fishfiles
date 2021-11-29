@@ -10,8 +10,9 @@ fi
 
 if pgrep swaybg >/dev/null; then
   # sway
-  cp "$file" ~/.config/wallpaper.jpg
-  swaymsg output '*' background "$(pwd)/$file" fill
+  target="$HOME/.config/wallpaper.jpg"
+  cp "$file" "$target"
+  swaymsg output '*' background "$target" fill
 elif [[ -f ~/.fehbg ]]; then
   # feh on x?
   feh --bg-fill "$file"
