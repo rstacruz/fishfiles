@@ -4,16 +4,16 @@ NVR_OPTIONS="${NVR_OPTIONS:-}"
 
 if [[ -n "$NVIM_LISTEN_ADDRESS" ]] && [[ -z "$VSCODE_GIT_IPC_HANDLE" ]] && command -v nvr &>/dev/null; then
   if [[ "$#" == 0 ]]; then
-    nvr $NVR_OPTIONS .
+    exec nvr $NVR_OPTIONS .
   else
-    nvr $NVR_OPTIONS "$@"
+    exec nvr $NVR_OPTIONS "$@"
   fi
 elif command -v nvim &>/dev/null; then
-  nvim "$@"
+  exec nvim "$@"
 elif command -v vim &>/dev/null; then
-  vim "$@"
+  exec vim "$@"
 elif command -v emacsclient &>/dev/null; then
-  emacsclient -t -c -a '' "$@"
+  exec emacsclient -t -c -a '' "$@"
 elif command -v nano &>/dev/null; then
-  nano "$@"
+  exec nano "$@"
 fi
