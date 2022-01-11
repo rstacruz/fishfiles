@@ -1,0 +1,89 @@
+#!/usr/bin/env bash
+# Squashes all commits ahead of a branch into one commit.
+# 
+#   git-squash-all main
+#
+# ...resets the current branch to what's in `main`, then brings back the files
+# from the current branch. This allows creating a new commit to squash all
+# changes down to one commit.
+#
+set -eou pipefail
+
+print_help() {
+  echo 'Usage:'
+  echo '  git-squash-all <main-branch>'
+  echo ''
+  echo 'Arguments:'
+  echo '  <main-branch>   The commitish intended to be merged into'
+  echo ''
+  echo 'Options:'
+  echo '  -c, --commit    Run git-commit afterwards'
+  echo ''
+  echo 'Examples:'
+  echo '  git-squash-all main'
+  echo '  git-squash-all HEAD~4  # squash the last 3 commits'
+  echo ''
+}
+
+main() {
+  local run_commit_after=''
+  local mainbranch=''
+
+  while [[ -n "${1:-}" ]]; do
+    case "${1:-}" in
+      -c | --commit)
+        run_commit_after='1'
+        shift
+        ;;
+      -h | --help)
+        print_help
+        exit
+        ;;
+      *)
+        if [[ -z "$mainbranch" ]]; then
+          mainbranch="${1:-}"
+        fi
+        shift
+        ;;
+    esac
+  done
+
+  if [[ -z "$mainbranch" ]]; then
+    echo "Usage: $0 <main-branch>" >&1
+    exit 1
+  fi
+
+  local commit=""
+  commit="$(git rev-parse HEAD)"
+  if [[ -z "$commit" ]]; then
+    echo "Error: can't find a git commit."
+    exit 1
+  fi
+
+  if git_is_dirty; then
+    echo "Error: local changes are found. Consider stashing them first"
+    exit 1
+  fi
+
+  git reset --hard "$mainbranch"  >/dev/null
+  git checkout "$commit" -- .
+
+  if ! git_is_dirty; then
+    echo "No changes found :)"
+  elif [[ -n "$run_commit_after" ]]; then
+    exec git commit
+  else
+    echo "Changes on top of $mainbranch:"
+    git status -s
+    echo ""
+    echo "Try commiting now :)"
+  fi
+}
+
+git_is_dirty() {
+  local count=""
+  count="$(git status -s 2>/dev/null | wc -c)"
+  [[ "$count" -ne 0 ]]
+}
+
+main "$@"
