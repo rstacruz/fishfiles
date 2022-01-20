@@ -44,7 +44,7 @@ commit_if_dirty() {
       message="$(get_default_message || echo 'Update')"
     fi
 
-    git commit -m "$message" >/dev/null
+    git commit -m "$message"
 
     echo ""
   fi
