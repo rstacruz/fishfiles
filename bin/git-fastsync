@@ -1,20 +1,38 @@
 #!/usr/bin/env bash
 set -eou pipefail
 
-# Commit if there are changes
-if [[ "$(git status -s | wc -c)" != "0" ]]; then
-  git add --all .
-  git commit -m "Update"
-  echo ""
-fi
+main() {
+  prompt_for_message=''
 
-# Pull changes
-echo "==> Pulling changes"
-git pull --rebase
+  if [[ "${1:-}" == "-m" ]]; then
+    prompt_for_message='1'
+  fi
 
-# Push if there are any changes
-if git status --branch -s | head -n 1 | grep -q ahead; then
-  echo ""
-  echo "==> Pushing changes"
-  git push
-fi
+  # Commit if there are changes
+  if [[ "$(git status -s | wc -c)" != "0" ]]; then
+    git status -s
+    git add --all . >/dev/null
+    message="Update"
+
+    if [[ "$prompt_for_message" == '1' ]]; then
+      echo -n "Commit message: "
+      read message
+    fi
+
+    git commit -m "$message"
+    echo ""
+  fi
+
+  # Pull changes
+  echo "==> Pulling changes"
+  git pull --rebase
+
+  # Push if there are any changes
+  if git status --branch -s | head -n 1 | grep -q ahead; then
+    echo ""
+    echo "==> Pushing changes"
+    git push
+  fi
+}
+
+main "$@"
