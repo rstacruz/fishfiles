@@ -5,10 +5,10 @@ set -eou pipefail
 if [[ "$(git status -s | wc -c)" != "0" ]]; then
   git add --all .
   git commit -m "Update"
+  echo ""
 fi
 
 # Pull changes
-echo ""
 echo "==> Pulling changes"
 git pull --rebase
 
