@@ -5,51 +5,83 @@ set -eou pipefail
 
 main() {
   local prompt_for_message=''
-  if [[ "${1:-}" == '-m' ]]; then
-    prompt_for_message='1'
-  fi
+  local dry_run=''
 
-  commit_if_dirty "$prompt_for_message"
-  pull_changes
-  push_updates
+  while true; do
+    case "${1:-}" in
+      -p | --prompt)
+        prompt_for_message='1'
+        shift 1
+        ;;
+      -n | --dry-run)
+        dry_run='1'
+        shift 1
+        ;;
+      *) break ;;
+    esac
+  done
+
+  commit_if_dirty "$dry_run" "$prompt_for_message" 
+  pull_changes "$dry_run"
+  push_updates "$dry_run"
 }
 
 commit_if_dirty() {
-  local prompt_for_message="$1"
+  local dry_run="$1"
+  local prompt_for_message="$2"
   local message=''
 
-  if [[ "$(git status -s | wc -c)" != "0" ]]; then
+  if [[ "$(git status -s | wc -l | xargs)" != "0" ]]; then
     git status -s
     git add --all . >/dev/null
 
     if [[ "$prompt_for_message" == '1' ]]; then
       echo -n "Commit message: "
-      read message
-      git commit -m "$message"
-    else
-      message="$(get_default_message)"
-      git commit -m "$message" >/dev/null
+      read -r message
     fi
+
+    if [[ -z "$message" ]]; then
+      message="$(get_default_message || echo 'Update')"
+    fi
+
+    git commit -m "$message" >/dev/null
 
     echo ""
   fi
 }
 
 get_default_message() {
-  echo 'Update'
+  local message=''
+  local count=''
+  message="$(git status -s | head -n 1 | xargs)"
+  count="$(git status -s | wc -l | xargs)"
+
+  if [[ -z "$message" ]]; then return 1; fi
+
+  # append count
+  if [[ "$count" != '1' ]]; then
+    message="$message (+$((count - 1)))"
+  fi
+
+  echo "$message"
 }
 
 pull_changes() {
+  local dry_run="$1"
+
   # Pull changes
-  echo -n "--> pull... "
+  echo -n '--> pull... '
   if ! git pull --rebase >/dev/null; then
-    echo "\nError: Failed to pull changes."
+    echo ''
+    echo 'Error: Failed to pull changes.'
     git rebase --abort >/dev/null
     exit 1
   fi
 }
 
 push_updates() {
+  local dry_run="$1"
+
   # Push if there are any changes
   if git status --branch -s | head -n 1 | grep -q ahead; then
     echo -n "push... "
