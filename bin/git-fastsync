@@ -1,0 +1,20 @@
+#!/usr/bin/env bash
+set -eou pipefail
+
+# Commit if there are changes
+if [[ "$(git status -s | wc -c)" != "0" ]]; then
+  git add --all .
+  git commit -m "Update"
+fi
+
+# Pull changes
+echo ""
+echo "==> Pulling changes"
+git pull --rebase
+
+# Push if there are any changes
+if git status --branch -s | head -n 1 | grep -q ahead; then
+  echo ""
+  echo "==> Pushing changes"
+  git push
+fi
