@@ -1,8 +1,10 @@
 #!/usr/bin/env bash
+# Commits, pulls and pushes in one go.
+# Useful for repos that only serve file syncing purposes.
 set -eou pipefail
 
 main() {
-  prompt_for_message=''
+  local prompt_for_message=''
 
   if [[ "${1:-}" == "-m" ]]; then
     prompt_for_message='1'
@@ -17,21 +19,28 @@ main() {
     if [[ "$prompt_for_message" == '1' ]]; then
       echo -n "Commit message: "
       read message
+      git commit -m "$message"
+    else
+      git commit -m "$message" >/dev/null
     fi
 
-    git commit -m "$message"
     echo ""
   fi
 
   # Pull changes
-  echo "==> Pulling changes"
-  git pull --rebase
+  echo -n "--> pull... "
+  if ! git pull --rebase >/dev/null; then
+    echo "\nError: Failed to pull changes."
+    git rebase --abort >/dev/null
+  fi
 
   # Push if there are any changes
   if git status --branch -s | head -n 1 | grep -q ahead; then
-    echo ""
-    echo "==> Pushing changes"
-    git push
+    echo -n "push... "
+    git push --quiet >/dev/null
+    echo "updated ✓"
+  else
+    echo "no changes ✓"
   fi
 }
 
