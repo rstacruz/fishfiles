@@ -88,9 +88,11 @@ push_updates() {
 }
 
 _git() {
-  echo ""
-  echo ">> git $*"
-  git "$@" >/dev/null
+  if [[ "$dry_run" == '1' ]]; then
+    echo ">> git $*"
+  else
+    git "$@" >/dev/null
+  fi
 }
 
 main "$@"
