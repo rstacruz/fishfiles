@@ -3,10 +3,11 @@
 # Useful for repos that only serve file syncing purposes.
 set -eou pipefail
 
-main() {
-  local prompt_for_message=''
-  local dry_run=''
+# global options
+prompt_for_message=''
+dry_run=''
 
+main() {
   while true; do
     case "${1:-}" in
       -p | --prompt)
@@ -21,19 +22,17 @@ main() {
     esac
   done
 
-  commit_if_dirty "$dry_run" "$prompt_for_message" 
-  pull_changes "$dry_run"
-  push_updates "$dry_run"
+  commit_if_dirty
+  pull_changes
+  push_updates
 }
 
 commit_if_dirty() {
-  local dry_run="$1"
-  local prompt_for_message="$2"
   local message=''
 
   if [[ "$(git status -s | wc -l | xargs)" != "0" ]]; then
     git status -s
-    git add --all . >/dev/null
+    _git add --all .
 
     if [[ "$prompt_for_message" == '1' ]]; then
       echo -n "Commit message: "
@@ -67,30 +66,31 @@ get_default_message() {
 }
 
 pull_changes() {
-  local dry_run="$1"
-
   # Pull changes
   echo -n '--> pull... '
-  if ! git pull --rebase >/dev/null; then
+  if ! _git pull --rebase; then
     echo ''
     echo 'Error: Failed to pull changes.'
-    git rebase --abort >/dev/null
+    _git rebase --abort
     exit 1
   fi
 }
 
 push_updates() {
-  local dry_run="$1"
-
   # Push if there are any changes
   if git status --branch -s | head -n 1 | grep -q ahead; then
     echo -n "push... "
-    git push --quiet >/dev/null
+    _git push --quiet
     echo "updated ✓"
   else
     echo "no changes ✓"
   fi
 }
 
+_git() {
+  echo ""
+  echo ">> git $*"
+  git "$@" >/dev/null
+}
 
 main "$@"
