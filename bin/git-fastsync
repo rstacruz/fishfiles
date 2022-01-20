@@ -5,35 +5,51 @@ set -eou pipefail
 
 main() {
   local prompt_for_message=''
-
-  if [[ "${1:-}" == "-m" ]]; then
+  if [[ "${1:-}" == '-m' ]]; then
     prompt_for_message='1'
   fi
 
-  # Commit if there are changes
+  commit_if_dirty "$prompt_for_message"
+  pull_changes
+  push_updates
+}
+
+commit_if_dirty() {
+  local prompt_for_message="$1"
+  local message=''
+
   if [[ "$(git status -s | wc -c)" != "0" ]]; then
     git status -s
     git add --all . >/dev/null
-    message="Update"
 
     if [[ "$prompt_for_message" == '1' ]]; then
       echo -n "Commit message: "
       read message
       git commit -m "$message"
     else
+      message="$(get_default_message)"
       git commit -m "$message" >/dev/null
     fi
 
     echo ""
   fi
+}
 
+get_default_message() {
+  echo 'Update'
+}
+
+pull_changes() {
   # Pull changes
   echo -n "--> pull... "
   if ! git pull --rebase >/dev/null; then
     echo "\nError: Failed to pull changes."
     git rebase --abort >/dev/null
+    exit 1
   fi
+}
 
+push_updates() {
   # Push if there are any changes
   if git status --branch -s | head -n 1 | grep -q ahead; then
     echo -n "push... "
@@ -43,5 +59,6 @@ main() {
     echo "no changes ✓"
   fi
 }
+
 
 main "$@"
