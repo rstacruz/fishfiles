@@ -40,13 +40,19 @@ commit_if_dirty() {
       echo 'Commit message:'
       echo "  $message"
       echo ''
-      echo -n '[Enter]accept, [s]tatus, [d]iff, [q]uit: '
-      read -r input
+      echo -n '[Enter] continue · [s] status · [d] diff · [m]essage: '
+      read -n1 input
 
       case "$input" in
         d) git diff --cached ;;
         q) exit 1 ;;
         s) echo ''; git diff --compact-summary --cached; echo '' ;;
+        m)
+          echo ''
+          echo -n 'Message: '
+          read -r message
+          break
+          ;;
         '') break ;;
         *) message="$input"; break ;;
       esac
