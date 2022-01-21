@@ -46,11 +46,12 @@ function update-abbreviations-git
     abbr gaa  'git add --all .'
     abbr gcd  'cd (git rev-parse --show-toplevel)'
     abbr gfr  'git fetch; and git reset --hard'
-    # abbr gpr  'git pull --rebase'
     abbr g,   'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
     abbr g.   'git add --all .; and git commit -m Update'
-    abbr g,.  'git fastsync -i'
-    abbr g.,  'git fastsync -i'
+
+    # fastsync
+    abbr gf   'git fastsync'
+    abbr gi   'git fastsync -i'
 
     abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
     abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
