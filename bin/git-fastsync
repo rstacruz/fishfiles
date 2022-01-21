@@ -54,7 +54,6 @@ commit_if_dirty() {
           break
           ;;
         '') break ;;
-        *) message="$input"; break ;;
       esac
     done
     echo ""
