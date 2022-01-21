@@ -59,8 +59,6 @@ commit_if_dirty() {
   fi
 
   _git commit -m "$message"
-
-  echo ""
 }
 
 get_default_message() {
@@ -81,7 +79,7 @@ get_default_message() {
 
 pull_changes() {
   # Pull changes
-  echo -n '--> pull... '
+  echo -ne "\033[2K\r[›››     ] Pulling..."
   if ! _git pull --rebase; then
     echo ''
     echo 'Error: Failed to pull changes.'
@@ -93,11 +91,11 @@ pull_changes() {
 push_updates() {
   # Push if there are any changes
   if git status --branch -s | head -n 1 | grep -q ahead; then
-    echo -n "push... "
+    echo -ne "\033[2K\r[››››››  ] Pushing..."
     _git push --quiet
-    echo "updated ✓"
+    echo -e "\033[2K\rUpdated ✓"
   else
-    echo "no changes ✓"
+    echo -e "\033[2K\rNo changes ✓"
   fi
 }
 
