@@ -82,7 +82,7 @@ get_default_message() {
 pull_changes() {
   # Pull changes
   echo -ne "\033[2K\r[›››     ] Pulling..."
-  if ! _git pull --rebase; then
+  if ! _git pull --rebase --autostash; then
     echo ''
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
