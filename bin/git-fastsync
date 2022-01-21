@@ -29,35 +29,38 @@ main() {
 
 commit_if_dirty() {
   local message=''
+  local input=''
 
-  if [[ "$(git status -s | wc -l | xargs)" != "0" ]]; then
-    _git add --all .
+  if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then return; fi
+  _git add --all .
+  message="$(get_default_message || echo 'Update')"
 
-    if [[ "$interactive" == '1' ]]; then
-      while true; do
-        git status -s
-        echo -n "Commit message ([d]diff, [q]quit): "
-        read -r message
+  if [[ "$interactive" == '1' ]]; then
+    while true; do
+      git diff --compact-summary --cached
+      echo ''
+      echo 'Commit message:'
+      echo "  $message"
+      echo ''
+      echo -n '[Enter]accept, [d]iff, [q]uit: '
+      read -r input
 
-        case "$message" in
-          d) git diff --cached ;;
-          q) exit 1 ;;
-          *) break;;
-        esac
-      done
-      echo ""
-    else
-      git status -s
-    fi
-
-    if [[ -z "$message" ]]; then
-      message="$(get_default_message || echo 'Update')"
-    fi
-
-    git commit -m "$message"
-
+      case "$input" in
+        d) git diff --cached ;;
+        q) exit 1 ;;
+        '') break ;;
+        *) message="$input"; break ;;
+      esac
+    done
+    echo ""
+  else
+    git diff --compact-summary --cached
     echo ""
   fi
+
+  _git commit -m "$message"
+
+  echo ""
 }
 
 get_default_message() {
