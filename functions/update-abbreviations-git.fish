@@ -50,6 +50,7 @@ function update-abbreviations-git
     abbr g,   'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
     abbr g.   'git add --all .; and git commit -m Update'
     abbr g,.  'git fastsync -i'
+    abbr g.,  'git fastsync -i'
 
     abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
     abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
