@@ -54,6 +54,7 @@ commit_if_dirty() {
           break
           ;;
         '') break ;;
+        *) ;;
       esac
     done
     echo ""
