@@ -37,24 +37,20 @@ commit_if_dirty() {
 
   if [[ "$interactive" == '1' ]]; then
     while true; do
-      git diff --compact-summary --cached
-      echo ''
       echo 'Commit message:'
       echo "  $message"
       echo ''
-      echo -n '[Enter]accept, [d]iff, [q]uit: '
+      echo -n '[Enter]accept, [s]tatus, [d]iff, [q]uit: '
       read -r input
 
       case "$input" in
         d) git diff --cached ;;
         q) exit 1 ;;
+        s) echo ''; git diff --compact-summary --cached; echo '' ;;
         '') break ;;
         *) message="$input"; break ;;
       esac
     done
-    echo ""
-  else
-    git diff --compact-summary --cached
     echo ""
   fi
 
