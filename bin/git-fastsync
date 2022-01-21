@@ -86,12 +86,15 @@ pull_changes() {
 
 push_updates() {
   # Push if there are any changes
+  local message=''
+
   if git status --branch -s | head -n 1 | grep -q ahead; then
     echo -ne "\033[2K\r[››››››  ] Pushing..."
     _git push --quiet
-    echo -e "\033[2K\rUpdated ✓"
+    message="$(git log -1 --pretty='format:%s')"
+    echo -e "\033[2K\r✓ ${message}"
   else
-    echo -e "\033[2K\rNo changes ✓"
+    echo -e "\033[2K\r✓ No changes"
   fi
 }
 
