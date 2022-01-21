@@ -4,14 +4,14 @@
 set -eou pipefail
 
 # global options
-prompt_for_message=''
+interactive=''
 dry_run=''
 
 main() {
   while true; do
     case "${1:-}" in
-      -p | --prompt)
-        prompt_for_message='1'
+      -p | --prompt | -i | --interactive)
+        interactive='1'
         shift 1
         ;;
       -n | --dry-run)
@@ -31,12 +31,25 @@ commit_if_dirty() {
   local message=''
 
   if [[ "$(git status -s | wc -l | xargs)" != "0" ]]; then
-    git status -s
     _git add --all .
 
-    if [[ "$prompt_for_message" == '1' ]]; then
-      echo -n "Commit message: "
+    if [[ "$interactive" == '1' ]]; then
+      while true; do
+      git status -s
+      echo -n "Commit message ([d]diff, [q]quit): "
       read -r message
+
+        case "$message" in
+          d)
+            git diff --cached
+            ;;
+          q)
+            exit 1
+            ;;
+          *)
+            break;;
+        esac
+      done
     fi
 
     if [[ -z "$message" ]]; then
