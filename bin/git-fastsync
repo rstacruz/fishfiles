@@ -30,38 +30,37 @@ main() {
 commit_if_dirty() {
   local message=''
   local input=''
-  local skip_message=''
+  local verbose=''
 
   if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then return; fi
   _git add --all .
   message="$(get_default_message || echo 'Update')"
 
   if [[ "$interactive" == '1' ]]; then
+    echo 'Commit message:'
+    echo "  $message"
+    echo ""
+
     while true; do
-      if [[ "$skip_message" == "" ]]; then
-        echo 'Commit message:'
-        echo "  $message"
-        echo ''
+      echo -ne "\033[2K\r"
+      if [[ "$verbose" == "" ]]; then
         echo -n 'Press [Enter] to continue (or [?] for more options): '
       else
-        skip_message='1'
+        echo -e 'Options:'
+        echo '  [c] continue (default)'
+        echo '  [s] show status'
+        echo '  [d] show diff'
+        echo '  [m] commit with a different message'
+        echo '  [q] quit'
+        echo -n '> '
       fi
       read -n1 input
 
       case "$input" in
-        d) git diff --cached ;;
+        d) clear; git diff --cached ;;
         q) exit 1 ;;
-        s) echo ''; git diff --compact-summary --cached; echo '' ;;
-        '?')
-          echo -e '\033[2K\rOptions:'
-          echo '  [c] continue (default)'
-          echo '  [s] show status'
-          echo '  [d] show diff'
-          echo '  [m] commit with a different message'
-          echo '  [q] quit'
-          echo -ne '> '
-          skip_message='1'
-          ;;
+        s) clear; git diff --compact-summary --cached; echo '' ;;
+        '?') verbose='1' ;;
         m)
           echo ''
           echo -n 'Message: '
