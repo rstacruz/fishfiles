@@ -40,15 +40,20 @@ commit_if_dirty() {
   local input=''
   local verbose=''
 
-  if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then return; fi
+  if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
+    echo "No local changes in $(pwd)"
+    return
+  fi
+
+  # Show status
+  echo "Local changes in $(pwd):"
+  echo ''
+  git status -s
+  echo ''
+
   message="$(get_default_message || echo 'Update')"
 
   if [[ "$interactive" == '1' ]]; then
-    echo "Changes in $(pwd):"
-    echo ''
-    git status -s
-    echo ''
-
     while true; do
       echo -ne "\033[2K\r"
       if [[ "$verbose" == "" ]]; then
@@ -123,7 +128,7 @@ get_default_message() {
 
 pull_changes() {
   # Pull changes
-  echo '[━━┄┄┄┄┄┄] Pulling...'
+  echo '[━━┄┄┄┄┄┄] Pulling changes...'
   if ! _git pull --quiet --rebase --autostash; then
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
@@ -137,7 +142,7 @@ push_updates() {
   local force="${1:-}"
 
   if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
-    echo -e "$cursor_up[━━━━━┄┄┄] Pushing..."
+    echo -e "$cursor_up[━━━━━┄┄┄] Pushing to remote..."
     if [[ "$force" == '1' ]]; then
       _git push --quiet --no-progress --force-with-lease
       message="$(git log -1 --pretty='format:%s')"
