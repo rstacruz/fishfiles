@@ -6,6 +6,7 @@ set -eou pipefail
 # global options
 interactive=''
 dry_run=''
+use_amend=''
 
 main() {
   while true; do
@@ -23,8 +24,12 @@ main() {
   done
 
   commit_if_dirty
-  pull_changes
-  push_updates
+  if [[ "$use_amend" == '1' ]]; then
+    push_updates '1'
+  else
+    pull_changes
+    push_updates
+  fi
 }
 
 commit_if_dirty() {
@@ -44,11 +49,12 @@ commit_if_dirty() {
     while true; do
       echo -ne "\033[2K\r"
       if [[ "$verbose" == "" ]]; then
-        echo -n '[Enter] sync with defaults · [m] change msg · [?] more options: '
+        echo -n '[Enter] sync now · [?] more options: '
       else
         echo -e 'Options:'
-        echo '  [enter] sync with defaults'
+        echo '  [enter] sync now'
         echo '  [m] change message'
+        echo '  [a] amend'
         echo '  [d] show diff'
         echo '  [q] quit'
         echo -n '> '
@@ -56,18 +62,27 @@ commit_if_dirty() {
       read -n1 input
 
       case "$input" in
-        d) verbose='1'; clear; git diff --cached; echo '' ;;
-        q) exit 1 ;;
-        '?') verbose='1' ;;
+        d)
+          verbose='1'
+          clear
+          git diff HEAD
+          echo '' ;;
+        q)
+          exit 1 ;;
+        a)
+          use_amend='1'
+          break ;;
+        '?')
+          verbose='1' ;;
         m)
           echo ''
           echo ''
           echo 'Enter commit message: '
           echo -n '> '
           read -r message
-          break
-          ;;
-        'c' | '') break ;;
+          echo '' ;;
+        'c' | '')
+          break ;;
         *) ;;
       esac
     done
@@ -75,7 +90,11 @@ commit_if_dirty() {
   fi
 
   _git add --all .
-  _git commit -m "$message"
+  if [[ "$use_amend" == '1' ]]; then
+    _git commit --amend -C HEAD
+  else
+    _git commit -m "$message"
+  fi
 }
 
 get_default_message() {
@@ -96,9 +115,8 @@ get_default_message() {
 
 pull_changes() {
   # Pull changes
-  echo -ne "\033[2K\r[›››     ] Pulling..."
+  echo '[›››     ] Pulling...'
   if ! _git pull --quiet --rebase --autostash; then
-    echo ''
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
     exit 1
@@ -108,23 +126,31 @@ pull_changes() {
 push_updates() {
   # Push if there are any changes
   local message=''
+  local force="${1:-}"
 
-  if git status --branch -s | head -n 1 | grep -q ahead; then
-    echo -ne "\033[2K\r[››››››  ] Pushing..."
-    _git push --quiet --no-progress
-    message="$(git log -1 --pretty='format:%s')"
-    echo -e "\033[2K\r✓ Pushed: ‘${message}’"
+  if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
+    echo -e "\033[F\033[2K\r[››››››  ] Pushing..."
+    if [[ "$force" == '1' ]]; then
+      _git push --quiet --no-progress --force-with-lease
+      message="$(git log -1 --pretty='format:%s')"
+      echo -e "\033[F\033[2K\r✓ Pushed (amend): ‘${message}’"
+    else
+      _git push --quiet --no-progress
+      message="$(git log -1 --pretty='format:%s')"
+      echo -e "\033[F\033[2K\r✓ Pushed: ‘${message}’"
+    fi
   else
-    echo -e "\033[2K\r✓ No changes"
+    echo -e "\033[F\033[2K\r✓ No changes"
   fi
 }
 
 _git() {
   if [[ "$dry_run" == '1' ]]; then
-    echo ">> git $*"
+    echo -e "\033[32m$ git $*\033[0m"
   else
     git "$@" >/dev/null
   fi
+  # asrt
 }
 
 main "$@"
