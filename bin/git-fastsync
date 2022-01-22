@@ -37,29 +37,30 @@ commit_if_dirty() {
   message="$(get_default_message || echo 'Update')"
 
   if [[ "$interactive" == '1' ]]; then
-    echo 'Commit message:'
+    echo 'This will sync changes using the message:'
+    echo ''
     echo "  $message"
-    echo ""
+    echo ''
 
     while true; do
       echo -ne "\033[2K\r"
       if [[ "$verbose" == "" ]]; then
-        echo -n 'Press [Enter] to continue (or [?] for more options): '
+        echo -n '[Enter] go · [q] cancel · [?] more options: '
       else
         echo -e 'Options:'
-        echo '  [c] continue (default)'
+        echo '  [enter] continue sync'
         echo '  [s] show status'
         echo '  [d] show diff'
-        echo '  [m] commit with a different message'
+        echo '  [m] change message'
         echo '  [q] quit'
         echo -n '> '
       fi
       read -n1 input
 
       case "$input" in
-        d) clear; git diff --cached; echo '' ;;
+        d) verbose='1'; clear; git diff --cached; echo '' ;;
         q) exit 1 ;;
-        s) clear; git diff --compact-summary --cached; echo '' ;;
+        s) verbose='1'; clear; git diff --compact-summary --cached; echo '' ;;
         '?') verbose='1' ;;
         m)
           echo ''
