@@ -102,12 +102,17 @@ get_default_message() {
   local count=''
   message="$(git status -s | head -n 1 | xargs)"
   count="$(git status -s | wc -l | xargs)"
+  message="$(
+    echo "$message" |
+      sed 's/^M /Update /' |
+      sed 's/^R /Remove /'
+  )"
 
   if [[ -z "$message" ]]; then return 1; fi
 
   # append count
   if [[ "$count" != '1' ]]; then
-    message="$message (+$((count - 1)))"
+    message="$message (+$((count - 1)) more changes)"
   fi
 
   echo "$message"
