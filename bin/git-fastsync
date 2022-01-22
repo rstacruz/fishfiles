@@ -6,10 +6,10 @@ set -eou pipefail
 interactive=''
 dry_run=''
 use_amend=''
+no_commit=''
 
 # colours
-cursor_up="\033[F\033[2K\r"
-check="\033[33m✓\033[0m"
+check="\033[33m ✓\033[0m"
 
 main() {
   while true; do
@@ -41,7 +41,7 @@ commit_if_dirty() {
   local verbose=''
 
   if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
-    echo "No local changes in $(pwd)"
+    no_commit='1'
     return
   fi
 
@@ -128,7 +128,11 @@ get_default_message() {
 
 pull_changes() {
   # Pull changes
-  echo '[━━┄┄┄┄┄┄] Pulling changes...'
+  if [[ "$no_commit" == '1' ]]; then
+    echo "─› Updating $(pwd)..."
+  else
+    echo '─› Pulling changes...'
+  fi
   if ! _git pull --quiet --rebase --autostash; then
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
@@ -142,18 +146,19 @@ push_updates() {
   local force="${1:-}"
 
   if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
-    echo -e "$cursor_up[━━━━━┄┄┄] Pushing to remote..."
     if [[ "$force" == '1' ]]; then
+      echo -e "─› Pushing to remote (forced)..."
       _git push --quiet --no-progress --force-with-lease
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$cursor_up$check Pushed (amend): ‘${message}’"
+      echo -e "$check Pushed (amend): ‘${message}’"
     else
+      echo -e "─› Pushing to remote..."
       _git push --quiet --no-progress
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$cursor_up$check Pushed: ‘${message}’"
+      echo -e "$check Pushed: ‘${message}’"
     fi
   else
-    echo -e "$cursor_up$check No changes"
+    echo -e "$check Up to date (no changes)"
   fi
 }
 
