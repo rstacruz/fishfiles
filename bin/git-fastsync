@@ -57,7 +57,7 @@ commit_if_dirty() {
       read -n1 input
 
       case "$input" in
-        d) clear; git diff --cached ;;
+        d) clear; git diff --cached; echo '' ;;
         q) exit 1 ;;
         s) clear; git diff --compact-summary --cached; echo '' ;;
         '?') verbose='1' ;;
@@ -96,7 +96,7 @@ get_default_message() {
 pull_changes() {
   # Pull changes
   echo -ne "\033[2K\r[›››     ] Pulling..."
-  if ! _git pull --rebase --autostash; then
+  if ! _git pull --quiet --rebase --autostash; then
     echo ''
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
@@ -110,7 +110,7 @@ push_updates() {
 
   if git status --branch -s | head -n 1 | grep -q ahead; then
     echo -ne "\033[2K\r[››››››  ] Pushing..."
-    _git push --quiet
+    _git push --quiet --no-progress
     message="$(git log -1 --pretty='format:%s')"
     echo -e "\033[2K\r✓ ${message}"
   else
