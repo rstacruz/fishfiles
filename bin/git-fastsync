@@ -1,12 +1,15 @@
 #!/usr/bin/env bash
 # Commits, pulls and pushes in one go.
-# Useful for repos that only serve file syncing purposes.
 set -eou pipefail
 
 # global options
 interactive=''
 dry_run=''
 use_amend=''
+
+# colours
+cursor_up="\033[F\033[2K\r"
+check="\033[33m✓\033[0m"
 
 main() {
   while true; do
@@ -80,13 +83,13 @@ commit_if_dirty() {
           echo 'Enter commit message: '
           echo -n '> '
           read -r message
-          echo '' ;;
+          break ;;
         'c' | '')
           break ;;
         *) ;;
       esac
     done
-    echo ""
+    echo ''
   fi
 
   _git add --all .
@@ -120,7 +123,7 @@ get_default_message() {
 
 pull_changes() {
   # Pull changes
-  echo '[›››     ] Pulling...'
+  echo '[━━┄┄┄┄┄┄] Pulling...'
   if ! _git pull --quiet --rebase --autostash; then
     echo 'Error: Failed to pull changes.'
     _git rebase --abort
@@ -134,18 +137,18 @@ push_updates() {
   local force="${1:-}"
 
   if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
-    echo -e "\033[F\033[2K\r[››››››  ] Pushing..."
+    echo -e "$cursor_up[━━━━━┄┄┄] Pushing..."
     if [[ "$force" == '1' ]]; then
       _git push --quiet --no-progress --force-with-lease
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "\033[F\033[2K\r✓ Pushed (amend): ‘${message}’"
+      echo -e "$cursor_up$check Pushed (amend): ‘${message}’"
     else
       _git push --quiet --no-progress
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "\033[F\033[2K\r✓ Pushed: ‘${message}’"
+      echo -e "$cursor_up$check Pushed: ‘${message}’"
     fi
   else
-    echo -e "\033[F\033[2K\r✓ No changes"
+    echo -e "$cursor_up$check No changes"
   fi
 }
 
