@@ -33,25 +33,23 @@ commit_if_dirty() {
   local verbose=''
 
   if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then return; fi
-  _git add --all .
   message="$(get_default_message || echo 'Update')"
 
   if [[ "$interactive" == '1' ]]; then
-    echo 'This will sync changes using the message:'
+    echo "Changes in $(pwd):"
     echo ''
-    echo "  $message"
+    git status -s
     echo ''
 
     while true; do
       echo -ne "\033[2K\r"
       if [[ "$verbose" == "" ]]; then
-        echo -n '[Enter] go · [q] cancel · [?] more options: '
+        echo -n '[Enter] sync with defaults · [m] change msg · [?] more options: '
       else
         echo -e 'Options:'
-        echo '  [enter] continue sync'
-        echo '  [s] show status'
-        echo '  [d] show diff'
+        echo '  [enter] sync with defaults'
         echo '  [m] change message'
+        echo '  [d] show diff'
         echo '  [q] quit'
         echo -n '> '
       fi
@@ -60,11 +58,12 @@ commit_if_dirty() {
       case "$input" in
         d) verbose='1'; clear; git diff --cached; echo '' ;;
         q) exit 1 ;;
-        s) verbose='1'; clear; git diff --compact-summary --cached; echo '' ;;
         '?') verbose='1' ;;
         m)
           echo ''
-          echo -n 'Message: '
+          echo ''
+          echo 'Enter commit message: '
+          echo -n '> '
           read -r message
           break
           ;;
@@ -75,6 +74,7 @@ commit_if_dirty() {
     echo ""
   fi
 
+  _git add --all .
   _git commit -m "$message"
 }
 
@@ -113,7 +113,7 @@ push_updates() {
     echo -ne "\033[2K\r[››››››  ] Pushing..."
     _git push --quiet --no-progress
     message="$(git log -1 --pretty='format:%s')"
-    echo -e "\033[2K\r✓ ${message}"
+    echo -e "\033[2K\r✓ Pushed: ‘${message}’"
   else
     echo -e "\033[2K\r✓ No changes"
   fi
