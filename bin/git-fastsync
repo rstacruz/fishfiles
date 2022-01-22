@@ -30,6 +30,7 @@ main() {
 commit_if_dirty() {
   local message=''
   local input=''
+  local skip_message=''
 
   if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then return; fi
   _git add --all .
@@ -37,23 +38,37 @@ commit_if_dirty() {
 
   if [[ "$interactive" == '1' ]]; then
     while true; do
-      echo 'Commit message:'
-      echo "  $message"
-      echo ''
-      echo -n '[Enter] continue · [s] status · [d] diff · [m]essage: '
+      if [[ "$skip_message" == "" ]]; then
+        echo 'Commit message:'
+        echo "  $message"
+        echo ''
+        echo -n 'Press [Enter] to continue (or [?] for more options): '
+      else
+        skip_message='1'
+      fi
       read -n1 input
 
       case "$input" in
         d) git diff --cached ;;
         q) exit 1 ;;
         s) echo ''; git diff --compact-summary --cached; echo '' ;;
+        '?')
+          echo -e '\033[2K\rOptions:'
+          echo '  [c] continue (default)'
+          echo '  [s] show status'
+          echo '  [d] show diff'
+          echo '  [m] commit with a different message'
+          echo '  [q] quit'
+          echo -ne '> '
+          skip_message='1'
+          ;;
         m)
           echo ''
           echo -n 'Message: '
           read -r message
           break
           ;;
-        '') break ;;
+        'c' | '') break ;;
         *) ;;
       esac
     done
