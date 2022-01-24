@@ -9,7 +9,9 @@ use_amend=''
 no_commit=''
 
 # colours
-check="\033[33m ✓\033[0m"
+check="\033[33m✓\033[0m"
+arrow="\033[32m─›\033[0m"
+indent="  "
 
 main() {
   while true; do
@@ -83,8 +85,7 @@ commit_if_dirty() {
         m)
           echo ''
           echo ''
-          echo 'Enter commit message: '
-          echo -n '> '
+          echo -n 'Commit msg: '
           read -r message
           break ;;
         'c' | '')
@@ -101,8 +102,10 @@ commit_if_dirty() {
   fi
 
   if [[ "$use_amend" == '1' ]]; then
+    echo -e "$arrow Amend commit: ‘${message}’ $check"
     _git commit --amend -C HEAD
   else
+    echo -e "$arrow Commit: ‘${message}’ $check"
     _git commit -m "$message"
   fi
 }
@@ -132,12 +135,12 @@ get_default_message() {
 pull_changes() {
   # Pull changes
   if [[ "$no_commit" == '1' ]]; then
-    echo "─› Updating $(pwd)..."
+    echo -e "$arrow Updating $(pwd)..."
   else
-    echo '─› Pulling changes...'
+    echo -e "$arrow Pulling changes..."
   fi
   if ! _git pull --quiet --rebase --autostash; then
-    echo 'Error: Failed to pull changes.'
+    echo "$indent Error: Failed to pull changes."
     _git rebase --abort
     exit 1
   fi
@@ -150,18 +153,18 @@ push_updates() {
 
   if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
     if [[ "$force" == '1' ]]; then
-      echo -e "─› Pushing to remote (forced)..."
+      echo -e "$arrow Pushing to remote (forced)..."
       _git push --quiet --no-progress --force-with-lease
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$check Pushed (amend): ‘${message}’"
+      echo -e "$indent Force-pushed $check"
     else
-      echo -e "─› Pushing to remote..."
+      echo -e "$arrow Pushing to remote..."
       _git push --quiet --no-progress
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$check Pushed: ‘${message}’"
+      echo -e "$indent Pushed $check"
     fi
   else
-    echo -e "$check Up to date (no changes)"
+    echo -e "$indent Up to date (no changes) $check"
   fi
 }
 
