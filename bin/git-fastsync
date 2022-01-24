@@ -8,13 +8,6 @@ dry_run=''
 use_amend=''
 no_commit=''
 
-# colours
-check="\033[33m✓"
-arrow="\033[32m─›\033[0m"
-cross="\033[31m✗"
-reset="\033[0m"
-indent="  "
-
 main() {
   while true; do
     case "${1:-}" in
@@ -72,25 +65,25 @@ commit_if_dirty() {
       read -n1 input
 
       case "$input" in
-        d)
+        'c' | '') # Continue
+          break ;;
+        d) # Diff
           verbose='1'
           clear
           git diff HEAD
           echo '' ;;
-        q)
+        q) # Quit
           exit 1 ;;
-        a)
+        a) # Amend
           use_amend='1'
           break ;;
-        '?')
+        '?') # Show options
           verbose='1' ;;
-        m)
+        m) # Commit message
           echo ''
           echo ''
           echo -n 'Commit msg: '
           read -r message
-          break ;;
-        'c' | '')
           break ;;
         *) ;;
       esac
@@ -182,9 +175,14 @@ _git() {
 }
 
 # Progress indicator helpers
-prog_start() { echo -ne "$arrow $*... "; }
-prog_ok() { echo -e "\033[4D\033[K $check $*$reset"; }
-prog_err() { echo -e "$cross $*$reset"; }
+check="\033[33m✓"
+arrow="\033[32m››"
+cross="\033[31m✗"
+reset="\033[0m"
+rewind="\033[4D\033[K "
+prog_start() { echo -ne "${arrow}${reset} $*... "; }
+prog_ok() { echo -e "${rewind}${check} $*${reset}"; }
+prog_err() { echo -e "${rewind}${cross} $*${reset}"; }
 prog_info() { prog_start "$*"; prog_ok; }
 
 main "$@"
