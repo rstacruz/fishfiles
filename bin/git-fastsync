@@ -51,8 +51,6 @@ commit_if_dirty() {
   git status -s
   echo ''
 
-  message="$(get_default_message || echo 'Update')"
-
   if [[ "$interactive" == '1' ]]; then
     while true; do
       echo -ne "\033[2K\r"
@@ -98,6 +96,10 @@ commit_if_dirty() {
   fi
 
   _git add --all .
+  if [[ -z "$message" ]]; then
+    message="$(get_default_message || echo 'Update')"
+  fi
+
   if [[ "$use_amend" == '1' ]]; then
     _git commit --amend -C HEAD
   else
@@ -113,7 +115,8 @@ get_default_message() {
   message="$(
     echo "$message" |
       sed 's/^M /Update /' |
-      sed 's/^R /Remove /'
+      sed 's/^R /Remove /' |
+      sed 's/^A /Add /'
   )"
 
   if [[ -z "$message" ]]; then return 1; fi
