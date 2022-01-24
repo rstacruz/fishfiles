@@ -9,8 +9,10 @@ use_amend=''
 no_commit=''
 
 # colours
-check="\033[33m✓\033[0m"
+check="\033[33m✓"
 arrow="\033[32m─›\033[0m"
+cross="\033[31m✗"
+reset="\033[0m"
 indent="  "
 
 main() {
@@ -57,7 +59,7 @@ commit_if_dirty() {
     while true; do
       echo -ne "\033[2K\r"
       if [[ "$verbose" == "" ]]; then
-        echo -n '[Enter] sync now · [?] more options: '
+        echo -n '   [Enter] sync now · [?] more options: '
       else
         echo -e 'Options:'
         echo '  [enter] sync now'
@@ -102,10 +104,10 @@ commit_if_dirty() {
   fi
 
   if [[ "$use_amend" == '1' ]]; then
-    echo -e "$arrow Amend commit: ‘${message}’ $check"
+    prog_info "Amend commit: ‘${message}’"
     _git commit --amend -C HEAD
   else
-    echo -e "$arrow Commit: ‘${message}’ $check"
+    prog_info "Commit: ‘${message}’"
     _git commit -m "$message"
   fi
 }
@@ -135,15 +137,18 @@ get_default_message() {
 pull_changes() {
   # Pull changes
   if [[ "$no_commit" == '1' ]]; then
-    echo -e "$arrow Updating $(pwd)..."
+    prog_start "Updating $(pwd)"
   else
-    echo -e "$arrow Pulling changes..."
+    prog_start "Pulling changes"
   fi
+
   if ! _git pull --quiet --rebase --autostash; then
-    echo "$indent Error: Failed to pull changes."
+    prog_err "Failed to pull"
     _git rebase --abort
     exit 1
   fi
+
+  prog_ok ''
 }
 
 push_updates() {
@@ -153,18 +158,18 @@ push_updates() {
 
   if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
     if [[ "$force" == '1' ]]; then
-      echo -e "$arrow Pushing to remote (forced)..."
+      prog_start 'Force-pushing'
       _git push --quiet --no-progress --force-with-lease
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$indent Force-pushed $check"
+      prog_ok ''
     else
-      echo -e "$arrow Pushing to remote..."
+      prog_start 'Pushing'
       _git push --quiet --no-progress
       message="$(git log -1 --pretty='format:%s')"
-      echo -e "$indent Pushed $check"
+      prog_ok ''
     fi
   else
-    echo -e "$indent Up to date $check"
+    prog_info "Up to date"
   fi
 }
 
@@ -174,7 +179,12 @@ _git() {
   else
     git "$@" >/dev/null
   fi
-  # asrt
 }
+
+# Progress indicator helpers
+prog_start() { echo -ne "$arrow $*... "; }
+prog_ok() { echo -e "\033[4D\033[K $check $*$reset"; }
+prog_err() { echo -e "$cross $*$reset"; }
+prog_info() { prog_start "$*"; prog_ok; }
 
 main "$@"
