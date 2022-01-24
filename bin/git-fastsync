@@ -164,7 +164,7 @@ push_updates() {
       echo -e "$indent Pushed $check"
     fi
   else
-    echo -e "$indent Up to date (no changes) $check"
+    echo -e "$indent Up to date $check"
   fi
 }
 
