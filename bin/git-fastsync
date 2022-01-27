@@ -1,5 +1,10 @@
 #!/usr/bin/env bash
+# Usage: git-fastsync [options]
 # Commits, pulls and pushes in one go.
+#
+# Options:
+#   -i, --interactive     Prompt the user for what to do
+#
 set -eou pipefail
 
 # global options
