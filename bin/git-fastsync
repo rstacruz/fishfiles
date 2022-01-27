@@ -113,7 +113,8 @@ get_default_message() {
   message="$(
     echo "$message" |
       sed 's/^M /Update /' |
-      sed 's/^R /Remove /' |
+      sed 's/^R /Rename /' |
+      sed 's/^D /Delete /' |
       sed 's/^A /Add /'
   )"
 
