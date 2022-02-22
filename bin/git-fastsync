@@ -12,6 +12,7 @@ interactive=''
 dry_run=''
 use_amend=''
 no_commit=''
+commit_only=''
 
 main() {
   while true; do
@@ -29,6 +30,8 @@ main() {
   done
 
   commit_if_dirty
+  if [[ "$commit_only" == '1' ]]; then return; fi
+
   if [[ "$use_amend" == '1' ]]; then
     push_updates '1'
   else
@@ -61,8 +64,9 @@ commit_if_dirty() {
       else
         echo -e 'Options:'
         echo '  [enter] sync now'
+        echo '  [c] commit only'
         echo '  [m] change message'
-        echo '  [a] amend'
+        echo '  [A] amend'
         echo '  [d] show diff'
         echo '  [q] quit'
         echo -n '> '
@@ -79,10 +83,13 @@ commit_if_dirty() {
           echo '' ;;
         q) # Quit
           exit 1 ;;
-        a) # Amend
+        A) # Amend
           use_amend='1'
           break ;;
-        '?') # Show options
+        c) # Commit-only
+          commit_only='1'
+          break ;;
+        '?') # Verbose
           verbose='1' ;;
         m) # Commit message
           echo ''
