@@ -2,7 +2,8 @@
 # https://github.com/dylanaraps/pywal/wiki/Getting-Started#applying-the-theme-to-new-terminals
 if test -e ~/.cache/wal/sequences; \
   and status --is-interactive; \
-  and test "$USE_WAL" != "0"
+  and test "$USE_WAL" != "0"; \
+  and test "$TERM_PROGRAM" != "vscode"
 
   if test "$TERM" = "rxvt-unicode"; \
     or test "$TERM" = "xterm-256color"; \
