@@ -3,7 +3,8 @@
 if test -e ~/.cache/wal/sequences; \
   and status --is-interactive; \
   and test "$USE_WAL" != "0"; \
-  and test "$TERM_PROGRAM" != "vscode"
+  and test "$TERM_PROGRAM" != "vscode"; \
+  and test "$WSLENV" != "" # running wsl.exe in vscode
 
   if test "$TERM" = "rxvt-unicode"; \
     or test "$TERM" = "xterm-256color"; \
