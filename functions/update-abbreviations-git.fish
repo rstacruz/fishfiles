@@ -48,6 +48,8 @@ function update-abbreviations-git
     abbr gfr  'git fetch; and git reset --hard'
     abbr g,   'git add --all .; git commit -m (read -p \'git status -s; echo "Commit: "\')'
     abbr g.   'git add --all .; and git commit -m Update'
+    abbr gsetup 'git init && git commit --allow-empty -m Initial'
+    abbr ggpush 'git push origin (git rev-parse --abbrev-ref HEAD)'
 
     # fastsync
     abbr gf   'git fastsync'
