@@ -7,6 +7,10 @@ if not contains $HOME/bin $PATH && test -d $HOME/bin
   set --prepend PATH $HOME/bin
 end
 
+if not contains $HOME/go/bin $PATH && test -d $HOME/go/bin
+  set --prepend PATH $HOME/go/bin
+end
+
 if not contains $HOME/bin/wsl $PATH && test -d $HOME/bin/wsl && test -d /mnt/c/Windows
   set --prepend PATH $HOME/bin/wsl
 end
