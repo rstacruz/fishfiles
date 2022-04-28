@@ -11,6 +11,10 @@ if not contains $HOME/go/bin $PATH && test -d $HOME/go/bin
   set --prepend PATH $HOME/go/bin
 end
 
+if not contains /opt/homebrew/bin $PATH && test -d /opt/homebrew/bin
+  set --prepend PATH /opt/homebrew/bin
+end
+
 if not contains $HOME/bin/wsl $PATH && test -d $HOME/bin/wsl && test -d /mnt/c/Windows
   set --prepend PATH $HOME/bin/wsl
 end
