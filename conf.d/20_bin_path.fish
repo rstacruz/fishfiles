@@ -1,25 +1,18 @@
-# Add bin/ to the fish user paths
-if not contains $HOME/.config/fish/bin $PATH
-  set --prepend PATH $HOME/.config/fish/bin
+if test -d $HOME/.config/fish/bin
+  fish_add_path $HOME/.config/fish/bin
 end
-
-if not contains $HOME/bin $PATH && test -d $HOME/bin
-  set --prepend PATH $HOME/bin
+if test -d $HOME/bin
+  fish_add_path $HOME/bin
 end
-
-if not contains $HOME/go/bin $PATH && test -d $HOME/go/bin
-  set --prepend PATH $HOME/go/bin
+if test -d $HOME/go/bin
+  fish_add_path $HOME/go/bin
 end
-
-if not contains /opt/homebrew/bin $PATH && test -d /opt/homebrew/bin
-  set --prepend PATH /opt/homebrew/bin
+if test -d $HOME/Library/Python/3.8/bin
+  fish_add_path $HOME/Library/Python/3.8/bin
 end
-
-if not contains $HOME/bin/wsl $PATH && test -d $HOME/bin/wsl && test -d /mnt/c/Windows
-  set --prepend PATH $HOME/bin/wsl
+if test -d /opt/homebrew/bin
+  fish_add_path /opt/homebrew/bin
 end
-
-# For pip3
-# if test -d ~/.local/bin
-#   set -gx PATH ~/.local/bin $PATH
-# end
+if test -d /mnt/c/Windows; and test -d $HOME/bin/wsl
+  fish_add_path $HOME/bin/wsl
+end
