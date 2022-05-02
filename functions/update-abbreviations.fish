@@ -1,5 +1,5 @@
 function update-abbreviations
-  f type -q git
+  if type -q git
     echo "✓ git (g, ad, com, cout, ...)"
     abbr g 'git'
 
@@ -33,6 +33,9 @@ function update-abbreviations
     # fastsync
     abbr gf   'git fastsync'
     abbr gi   'git fastsync -i'
+
+    # punishment for older aliases
+    abbr gaa   "sleep 0.5; git add --all .; # try 'ad'"
   end
 
   if type -q docker-compose
