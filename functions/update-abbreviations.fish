@@ -42,10 +42,10 @@ function update-abbreviations-apps
 
   if type -q exa
     echo "✓ Exa"
-    abbr ls 'exa'
-    abbr la 'exa -lah'
-    abbr lah 'exa -lah'
-    abbr lat 'exa -lah --tree'
+    abbr ls 'ls!'
+    abbr la 'ls! -la'
+    abbr lah 'ls! -lah'
+    abbr lat 'ls! --tree --color=always | less -RFX'
   end
 
   if type -q nvim
