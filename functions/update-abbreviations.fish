@@ -4,7 +4,7 @@ function update-abbreviations
     abbr g 'git'
 
     # Most common commands
-    abbr ad     'git add --all .'
+    abbr ad     'git add --all .; git status -s'
     abbr st     'git status'
     abbr co     'git checkout'
     abbr cob    'git checkout -b'
