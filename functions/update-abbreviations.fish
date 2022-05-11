@@ -143,6 +143,15 @@ function update-abbreviations
   #   abbr ctw 'cargo watch -x "test -- --nocapture"'
   # end
 
+  if type -q winget.exe
+     echo "✓ winget.exe (wg, ws, wi, wu, wx)"
+     abbr wg "winget.exe"
+     abbr ws "winget.exe search"
+     abbr wi "winget.exe install -e --id"
+     abbr wu "winget.exe upgrade"
+     abbr wx "winget.exe uninstall -e --id"
+  end
+
   update-abbreviations-utils
 end
 
