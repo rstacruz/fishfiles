@@ -27,7 +27,7 @@ function update-abbreviations
 
     # Macros
     abbr gcd  'cd (git rev-parse --show-toplevel)'
-    abbr g,   'git commit -m (read -p \'git status -s; echo "Commit: "\')'
+    abbr g,   'git status -s | grep -E "^[DRAM]"; git commit -m (read -p \'echo "Commit: "\')'
     abbr g.   'git add --all .; and git commit -m Update'
 
     # fastsync
