@@ -90,6 +90,7 @@ function update-abbreviations
   if type -q ruby
     echo "✓ Ruby (be)"
     abbr be 'bundle exec'
+    abbr arspec 'nodemon -e rb,haml,slim -x bin/rspec --' # auto-rspec for Rails apps
   end
 
   if type -q yay
