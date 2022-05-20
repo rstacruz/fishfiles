@@ -4,7 +4,7 @@ fish_read_history
 fish_variables
 /functions/*
 
-# These files are managed by fisherman, so let's ignore them
+# These files are managed by fisher, so let's ignore them
 /conf.d/*
 /completions/*
 
@@ -12,10 +12,7 @@ fish_variables
 /local/local.fish
 
 # Allow some locally-managed configuration
-!/conf.d/_*.fish
-/conf.d/_pure_init.fish
-!/conf.d/[0-9]*.fish
-!/completions/_*.fish
+!/conf.d/[0-9][0-9]_*.fish
 
 # Excempted functions
 !/functions/ls!.fish
