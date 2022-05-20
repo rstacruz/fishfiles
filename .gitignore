@@ -23,7 +23,6 @@ fish_variables
 !/functions/update-abbreviations.fish
 !/functions/update-abbreviations-*.fish
 !/functions/fish_title.fish
-!/functions/fish_prompt_loading_indicator.fish
 
 # Some things like Volta insist on this file
 /config.fish
