@@ -5,12 +5,8 @@
 Requires fish 2.6+.
 
 ```bash
-# macOS
-brew install fish
-brew install zoxide
-
-# Arch Linux
-sudo pacman -S fish zoxide
+brew install fish # macOS
+sudo pacman -S fish # Arch Linux
 ```
 
 Clone:
