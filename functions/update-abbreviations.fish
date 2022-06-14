@@ -144,16 +144,40 @@ function update-abbreviations
   #   abbr ctw 'cargo watch -x "test -- --nocapture"'
   # end
 
-  if type -q winget.exe
-     echo "✓ winget.exe (wg, ws, wi, wu, wx)"
-     abbr wg "winget.exe"
-     abbr ws "winget.exe search"
-     abbr wi "winget.exe install -e --id"
-     abbr wu "winget.exe upgrade"
-     abbr wx "winget.exe uninstall -e --id"
+  if test -f /mnt/c/Windows/System32/where.exe
+    set winget_path (windows_where winget)
+    if test -f /mnt/c/Windows/explorer.exe
+       echo "✓ Windows (explorer)"
+      abbr explorer /mnt/c/Windows/explorer.exe
+      abbr explorer.exe /mnt/c/Windows/explorer.exe
+      abbr where.exe /mnt/c/Windows/System32/where.exe
+    end
+
+    if test -n "$winget_path"
+       echo "✓ Windows: winget.exe (winget, wg, ws, wi, wu, wx)"
+       abbr winget $winget_path
+       abbr wg $winget_path
+       abbr ws "$winget_path search"
+       abbr wi "$winget_path install -e --id"
+       abbr wu "$winget_path upgrade"
+       abbr wx "$winget_path uninstall -e --id"
+    end
+
+    set win_code_path (windows_where code)
+    if test -n "$win_code_path"
+       echo "✓ Windows: VSCode (code)"
+       abbr code $win_code_path
+    end
   end
 
   update-abbreviations-utils
+end
+
+function windows_where
+  /mnt/c/Windows/System32/where.exe $argv[1] |
+    head -n 1 |
+    string replace --all '\\' '/' |
+    string replace 'C:' '/mnt/c'
 end
 
 function update-abbreviations-utils
