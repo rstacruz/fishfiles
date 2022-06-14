@@ -55,13 +55,6 @@ function update-abbreviations
     # abbr pacman-packages "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
   end
   
-  if type -q winget.exe
-    echo "✓ winget.exe (winget)"
-    abbr winget "winget.exe"
-    abbr wins "winget.exe search"
-    abbr wini "winget.exe install -e --id"
-  end
-
   if type -q tig
     echo "✓ tig (tigs)"
     abbr tigs 'tig status'
@@ -175,6 +168,7 @@ end
 
 function windows_where
   /mnt/c/Windows/System32/where.exe $argv[1] |
+    tr -d '\015' | # dos2unix
     head -n 1 |
     string replace --all '\\' '/' |
     string replace 'C:' '/mnt/c'
