@@ -1,4 +1,7 @@
 function update-abbreviations
+  # don't async the fish_right_prompt
+  set -U async_prompt_functions fish_prompt
+
   if type -q git
     echo "✓ git (g, ad, com, cout, ...)"
     abbr g 'git'
