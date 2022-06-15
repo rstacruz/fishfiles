@@ -1,4 +1,8 @@
 function fish_greeting
+  #fish_greeting_time
+end
+
+function fish_greeting_time
   set -l date1 (date "+%a")
   set -l date2 (date "+%b %e")
   set -l time (date "+%I:%M %p")
