@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 if test -f /mnt/c/Windows/explorer.exe
   if ! set -q DISPLAY
     export DISPLAY=:0

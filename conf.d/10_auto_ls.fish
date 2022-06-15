@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 function __autols_hook --description "Auto ls" --on-event fish_prompt
   if test "$NO_AUTO_LS" != ""
     return

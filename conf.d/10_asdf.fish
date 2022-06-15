@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 # To install asdf:
 #
 #     git clone https://github.com/asdf-vm/asdf.git ~/.asdf

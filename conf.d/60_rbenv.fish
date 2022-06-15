@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 if ! type -q rbenv
   exit
 end

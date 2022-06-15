@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 # $message ("path/ ls")
 # $exit_status
 # $wd (working dir)

@@ -1,3 +1,4 @@
+echo (date +%T.%3N) (status -f)
 if test -d $HOME/.config/fish/bin
   fish_add_path $HOME/.config/fish/bin
 end
