@@ -1,4 +1,3 @@
-echo (date +%T.%3N) (status -f)
 if set -q XDG_RUNTIME_DIR
     if ! pgrep -u "$USER" ssh-agent > /dev/null
         ssh-agent -c > "$XDG_RUNTIME_DIR/ssh-agent.env.fish"

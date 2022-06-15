@@ -1,4 +1,3 @@
-echo (date +%T.%3N) (status -f)
 # Integration for Volta (https://volta.sh/)
 # After installing Volta, you'll then be able to use
 # Volta with this

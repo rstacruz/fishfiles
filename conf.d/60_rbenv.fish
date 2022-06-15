@@ -1,9 +1,8 @@
-echo (date +%T.%3N) (status -f)
-if ! type -q rbenv
+if ! status --is-interactive
   exit
 end
 
-if ! status --is-interactive
+if ! type -q rbenv
   exit
 end
 

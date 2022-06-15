@@ -1,4 +1,3 @@
-echo (date +%T.%3N) (status -f)
 if test -d $HOME/.config/fish/bin
   fish_add_path $HOME/.config/fish/bin
 end
@@ -16,4 +15,10 @@ if test -d /opt/homebrew/bin
 end
 if test -d /mnt/c/Windows; and test -d $HOME/bin/wsl
   fish_add_path $HOME/bin/wsl
+end
+if test -d $HOME/.cargo/bin # rust
+  fish_add_path $HOME/.cargo/bin
+end
+if test -d $HOME/.local/bin # pip
+  fish_add_path $HOME/.local/bin
 end

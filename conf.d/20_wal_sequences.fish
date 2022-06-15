@@ -1,4 +1,3 @@
-echo (date +%T.%3N) (status -f)
 
 # https://github.com/dylanaraps/pywal/wiki/Getting-Started#applying-the-theme-to-new-terminals
 if test -e ~/.cache/wal/sequences; \
