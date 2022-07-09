@@ -145,8 +145,7 @@ function update-abbreviations
     if test -f /mnt/c/Windows/explorer.exe
        echo "✓ Windows (explorer)"
       abbr explorer /mnt/c/Windows/explorer.exe
-      abbr explorer.exe /mnt/c/Windows/explorer.exe
-      abbr where.exe /mnt/c/Windows/System32/where.exe
+      abbr cmd /mnt/c/Windows/System32/cmd.exe
     end
 
     if test -n "$winget_path"
