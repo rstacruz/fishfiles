@@ -141,13 +141,13 @@ function update-abbreviations
   # end
 
   if test -f /mnt/c/Windows/System32/where.exe
-    set winget_path (windows_where winget)
     if test -f /mnt/c/Windows/explorer.exe
        echo "✓ Windows (explorer)"
       abbr explorer /mnt/c/Windows/explorer.exe
       abbr cmd /mnt/c/Windows/System32/cmd.exe
     end
 
+    set winget_path (windows_where winget)
     if test -n "$winget_path"
        echo "✓ Windows: winget.exe (winget, wg, ws, wi, wu, wx)"
        abbr winget $winget_path
@@ -161,7 +161,13 @@ function update-abbreviations
     set win_code_path (windows_where code)
     if test -n "$win_code_path"
        echo "✓ Windows: VSCode (code)"
-       abbr code $win_code_path
+       abbr code "$win_code_path"
+    end
+
+    set win_git_path (windows_where git)
+    if test -n "$win_git_path"
+       echo "✓ Windows: Git (wingit)"
+      abbr wingit "$win_git_path"
     end
   end
 
