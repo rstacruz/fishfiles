@@ -53,7 +53,7 @@ function update-abbreviations
 
   if type -q pacman
     echo "✓ pacman (syu, rns)"
-    abbr syu 'sudo pacman -Syu'
+    abbr syu 'sudo pacman -Sy --needed --noconfirm archlinux-keyring && sudo pacman -Su'
     abbr rns 'sudo pacman -Rns'
     # abbr pacman-packages "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
   end
