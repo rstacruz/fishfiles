@@ -78,10 +78,10 @@ function update-abbreviations
     abbr sm 'swaymsg'
   end
 
-  if type -q nordvpn
-    echo "✓ NordVPN (nord)"
-    abbr nord 'sudo systemctl start nordvpnd; nordvpn'
-  end
+  # if type -q nordvpn
+  #   echo "✓ NordVPN (nord)"
+  #   abbr nord 'sudo systemctl start nordvpnd; nordvpn'
+  # end
 
   if type -q ruby
     echo "✓ Ruby (be)"
@@ -94,17 +94,22 @@ function update-abbreviations
     abbr yas 'yay -S --needed'
   end
 
+  if type -q tmux
+    echo "✓ tmux (ta)"
+    abbr ta 'tmux new -A -s default'
+  end
+
   if type -q z
     echo '✓ z (j ,)'
     abbr j z
     abbr , z
   end
 
-  if type -q chezmoi
-    echo "✓ Chezmoi"
-    abbr che 'chezmoi'
-    abbr chez 'chezmoi'
-  end
+  # if type -q chezmoi
+  #   echo "✓ Chezmoi"
+  #   abbr che 'chezmoi'
+  #   abbr chez 'chezmoi'
+  # end
  
   if type -q ag
     echo "✓ ag (gg)"
