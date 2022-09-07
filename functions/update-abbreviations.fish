@@ -150,6 +150,8 @@ function update-abbreviations
        echo "✓ Windows (explorer)"
       abbr explorer /mnt/c/Windows/explorer.exe
       abbr cmd /mnt/c/Windows/System32/cmd.exe
+      abbr powershell /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+      abbr pwsh /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
     end
 
     set winget_path (windows_where winget)
