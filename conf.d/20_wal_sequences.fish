@@ -4,7 +4,7 @@ if test -e ~/.cache/wal/sequences; \
   and status --is-interactive; \
   and test "$USE_WAL" != "0"; \
   and test "$TERM_PROGRAM" != "vscode"; \
-  and test "$TERM_PROGRAM" != "vscode"; \
+  and test "$TERM_PROGRAM" != "WezTerm"; \
   and test "$SSH_TTY" != ""; # not when SSH'ing remotely \
   and test "$WSLENV" != "" # running wsl.exe in vscode
 
