@@ -41,6 +41,14 @@ function update-abbreviations
     abbr gaa   "sleep 0.5; git add --all .; # try 'ad'"
   end
 
+  if type -q aria2c
+    echo "✓ Aria2 (aria5, aria16)"
+    abbr aria5 "aria2c -x5 -k1M (read)"
+
+    # Split mode (extra aggressive)
+    abbr aria16 "aria2c -x16 -j16 -s16 -k1M (read)"
+  end
+
   if type -q docker-compose
     echo "✓ Docker (dc)"
     abbr dc 'docker-compose'
