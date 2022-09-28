@@ -153,13 +153,15 @@ function update-abbreviations
   #   abbr ctw 'cargo watch -x "test -- --nocapture"'
   # end
 
+  # These are great when using `appendWindowsPath = false` in WSL. It makes
+  # common utilities available even if windows PATH appending is turned off
   if test -f /mnt/c/Windows/System32/where.exe
     if test -f /mnt/c/Windows/explorer.exe
        echo "✓ Windows (explorer)"
       abbr explorer /mnt/c/Windows/explorer.exe
       abbr cmd /mnt/c/Windows/System32/cmd.exe
-      abbr powershell /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
       abbr pwsh /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
+      abbr wsl /mnt/c/Windows/System32/wsl.exe
     end
 
     set winget_path (windows_where winget)
@@ -187,14 +189,6 @@ function update-abbreviations
   end
 
   update-abbreviations-utils
-end
-
-function windows_where
-  /mnt/c/Windows/System32/where.exe $argv[1] |
-    tr -d '\015' | # dos2unix
-    head -n 1 |
-    string replace --all '\\' '/' |
-    string replace 'C:' '/mnt/c'
 end
 
 function update-abbreviations-utils

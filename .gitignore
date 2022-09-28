@@ -24,6 +24,7 @@ fish_variables
 !/functions/update-abbreviations.fish
 !/functions/update-abbreviations-*.fish
 !/functions/fish_title.fish
+!/functions/windows_where.fish
 
 # Some things like Volta insist on this file
 /config.fish
