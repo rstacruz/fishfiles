@@ -2,6 +2,7 @@ function update-settings --description "Update environment variables and more"
   update-abbreviations
   update-bin-paths
   update-editor
+  update-ls-colors
 end
 
 function update-bin-paths --description "Update PATH variable"
@@ -36,5 +37,13 @@ function update-editor --description "Update EDITOR variable"
     set --universal --export EDITOR "nvim"
   else if type -q vim
     set --universal --export EDITOR "vim"
+  end
+end
+
+function update-ls-colors --description "Update LS_COLORS variable"
+  # Update LS_COLORS in WSL to prevent unreadable directories
+  # https://github.com/Microsoft/vscode/issues/7556
+  if test -f /mnt/c/Windows/explorer.exe
+    set --universal --export LS_COLORS 'ow=01;36;40'
   end
 end
