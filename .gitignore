@@ -16,6 +16,7 @@ fish_variables
 !/conf.d/archived
 
 # Excempted functions
+!/functions/update-settings.fish
 !/functions/ls!.fish
 !/functions/install-fisher.fish
 !/functions/gg.fish

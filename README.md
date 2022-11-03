@@ -21,5 +21,5 @@ In a new shell:
 ```bash
 install-fisher
 fisher update
-update-abbreviations
+update-settings
 ```
