@@ -80,6 +80,15 @@ function update-abbreviations
     abbr lat 'ls! --tree --color=always | less -RFX'
   end
 
+  if type -q yarn
+    echo "✓ yarn (y, yt, yd, yb)"
+    abbr y 'yarn'
+    abbr yt 'yarn test'
+    abbr yd 'yarn dev'
+    abbr yb 'yarn build'
+    abbr yui 'yarn upgrade-interactive --latest'
+  end
+
   if type -q swaymsg
     echo "✓ Sway"
     abbr so 'sway-outputs'
@@ -94,7 +103,7 @@ function update-abbreviations
   if type -q ruby
     echo "✓ Ruby (be)"
     abbr be 'bundle exec'
-    abbr arspec 'nodemon -e rb,haml,slim -x bin/rspec --' # auto-rspec for Rails apps
+    abbr arspec 'nodemon -e rb,haml,slim,erb -x bin/rspec --' # auto-rspec for Rails apps
   end
 
   if type -q yay
@@ -104,7 +113,8 @@ function update-abbreviations
 
   if type -q tmux
     echo "✓ tmux (ta)"
-    abbr ta 'tmux new -A -s default'
+    abbr ta 'sleep 0.1; tmux new -A -s default'
+    # ^ the sleep prevents the key release of enter being sent to tmux
   end
 
   if type -q z
