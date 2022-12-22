@@ -3,6 +3,7 @@ function update-settings --description "Update environment variables and more"
   update-bin-paths
   update-editor
   update-ls-colors
+  update-other-settings
 end
 
 function update-bin-paths --description "Update PATH variable"
@@ -46,4 +47,8 @@ function update-ls-colors --description "Update LS_COLORS variable"
   if test -f /mnt/c/Windows/explorer.exe
     set --universal --export LS_COLORS 'ow=01;36;40'
   end
+end
+
+function update-other-settings
+  set --universal tide_character_icon "›"
 end
