@@ -117,8 +117,7 @@ function update-abbreviations
 
   if type -q tmux
     echo "✓ tmux (ta)"
-    abbr ta 'sleep 0.1; tmux new -A -s default'
-    # ^ the sleep prevents the key release of enter being sent to tmux
+    abbr ta 'tmux new -A -s default'
   end
 
   if type -q z
