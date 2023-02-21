@@ -105,7 +105,7 @@ function update-abbreviations
     abbr be 'bundle exec'
     if type -q nodemon
       abbr arspec 'nodemon -e rb,haml,slim,erb -x bin/rspec -- --fail-fast --order defined' # auto-rspec for Rails apps
-    else if watch type -q watchexec
+    else if type -q watchexec
       abbr arspec 'watchexec -e rb,haml,slim,erb -- bin/rspec --fail-fast --order defined' # auto-rspec for Rails apps
     end
   end
