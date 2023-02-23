@@ -67,6 +67,7 @@ function update-abbreviations
   if type -q gitui
     # echo "✓ gitui (tigs)"
     abbr gui 'gitui'
+    abbr u 'gitui'
   end
 
   if type -q exa
@@ -224,4 +225,7 @@ function update-abbreviations-utils
   # exit
   abbr :q  'exit'
   abbr :cq 'exit'
+
+  abbr j z
+  abbr , z
 end
