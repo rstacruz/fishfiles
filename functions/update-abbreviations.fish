@@ -187,7 +187,32 @@ function update-abbreviations
     end
   end
 
+  update-abbreviations-clipboard
   update-abbreviations-utils
+end
+
+function update-abbreviations-clipboard
+  if type -q pbcopy # MacOS
+    abbr copy pbcopy
+    abbr paste pbpaste
+  else if type -q termux-clipboard-set # Termux
+    abbr copy termux-clipboard-set
+    abbr paste termux-clipboard-get
+  else if test -n "$WAYLAND_DISPLAY" && type -q wl-paste # Wayland
+    abbr copy wl-copy
+    abbr paste wl-paste
+  else if type -q Powershell.exe
+    abbr copy "Powershell.exe Set-Clipboard"
+    abbr paste "Powershell.exe Get-Clipboard"
+  else if test -n "$DISPLAY"
+    if type -q xsel
+      abbr copy xsel -b
+      abbr paste xsel  -b
+    else if type -q xclip
+      abbr copy xclip
+      abbr paste xclip -o
+    end
+  end
 end
 
 function update-abbreviations-utils
