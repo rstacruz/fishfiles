@@ -1,9 +1,6 @@
 function update-abbreviations
-  # don't async the fish_right_prompt
-  set -U async_prompt_functions fish_prompt
-
   if type -q git
-    echo "✓ git (g, ad, com, cout, ...)"
+    # echo "✓ git (g, ad, com, cout, ...)"
     abbr g 'git'
 
     # Most common commands
@@ -35,14 +32,10 @@ function update-abbreviations
 
     # fastsync
     abbr gf   'git fastsync'
-    abbr gi   'git fastsync -i'
-
-    # punishment for older aliases
-    abbr gaa   "sleep 0.5; git add --all .; # try 'ad'"
   end
 
   if type -q aria2c
-    echo "✓ Aria2 (aria5, aria16)"
+    # echo "✓ Aria2 (aria5, aria16)"
     abbr aria5 "aria2c -x5 -k1M (read)"
 
     # Split mode (extra aggressive)
@@ -50,29 +43,34 @@ function update-abbreviations
   end
 
   if type -q docker-compose
-    echo "✓ Docker (dc)"
+    # echo "✓ Docker (dc)"
     abbr dc 'docker-compose'
   end
 
   if type -q systemctl
-    echo "✓ systemctl (sys)"
+    # echo "✓ systemctl (sys)"
     abbr sys 'sudo systemctl'
   end
 
   if type -q pacman
-    echo "✓ pacman (syu, rns)"
+    # echo "✓ pacman (syu, rns)"
     abbr syu 'sudo pacman -Sy --needed --noconfirm archlinux-keyring && sudo pacman -Su'
     abbr rns 'sudo pacman -Rns'
     # abbr pacman-packages "pacman -Slq | fzf --multi --preview 'pacman -Si {1}' | xargs -ro sudo pacman -S"
   end
   
   if type -q tig
-    echo "✓ tig (tigs)"
+    # echo "✓ tig (tigs)"
     abbr tigs 'tig status'
   end
 
+  if type -q gitui
+    # echo "✓ gitui (tigs)"
+    abbr gui 'gitui'
+  end
+
   if type -q exa
-    echo "✓ exa (l, ls, lah, lah)"
+    # echo "✓ exa (l, ls, lah, lah)"
     abbr l 'ls!'
     abbr ls 'ls!'
     abbr la 'ls! -la'
@@ -81,7 +79,7 @@ function update-abbreviations
   end
 
   if type -q yarn
-    echo "✓ yarn (y, yt, yd, yb)"
+    # echo "✓ yarn (y, yt, yd, yb)"
     abbr y 'yarn'
     abbr yt 'yarn test'
     abbr yd 'yarn dev'
@@ -90,18 +88,12 @@ function update-abbreviations
   end
 
   if type -q swaymsg
-    echo "✓ Sway"
+    # echo "✓ Sway"
     abbr so 'sway-outputs'
     abbr sm 'swaymsg'
   end
 
-  # if type -q nordvpn
-  #   echo "✓ NordVPN (nord)"
-  #   abbr nord 'sudo systemctl start nordvpnd; nordvpn'
-  # end
-
   if type -q ruby
-    echo "✓ Ruby (be)"
     abbr be 'bundle exec'
     if type -q nodemon
       abbr arspec 'nodemon -e rb,haml,slim,erb -x bin/rspec -- --fail-fast --order defined' # auto-rspec for Rails apps
@@ -111,34 +103,28 @@ function update-abbreviations
   end
 
   if type -q yay
-    echo "✓ yay (yas)"
+    # echo "✓ yay (yas)"
     abbr yas 'yay -S --needed'
   end
 
   if type -q tmux
-    echo "✓ tmux (ta)"
+    # echo "✓ tmux (ta)"
     abbr ta 'tmux new -A -s default'
   end
 
   if type -q z
-    echo '✓ z (j ,)'
+    # echo '✓ z (j ,)'
     abbr j z
     abbr , z
   end
 
-  # if type -q chezmoi
-  #   echo "✓ Chezmoi"
-  #   abbr che 'chezmoi'
-  #   abbr chez 'chezmoi'
-  # end
- 
   if type -q ag
-    echo "✓ ag (gg)"
+    # echo "✓ ag (gg)"
     abbr gg 'ag --pager \'less -RFX\''
   end
 
   if type -q gh
-    echo "✓ gh (pr, prc, prv, prw)"
+    # echo "✓ gh (pr, prc, prv, prw)"
     abbr pr 'gh pr'
     abbr prc 'gh pr checkout'
     abbr prv 'gh pr view --web'
@@ -147,18 +133,18 @@ function update-abbreviations
   end
 
   # if type -q nvim
-  #   echo "✓ Neovim"
+  #   # echo "✓ Neovim"
   #   abbr v 'nvim'
   #   abbr n 'nvim'
   # end
 
   # if type -q code
-  #   echo "✓ VSCode"
+  #   # echo "✓ VSCode"
   #   abbr c. 'code (git rev-parse --show-toplevel)'
   # end
 
   # if type -q cargo
-  #   echo "✓ Cargo"
+  #   # echo "✓ Cargo"
   #   abbr ca 'cargo'
   #   abbr ct 'cargo test'
   #   abbr car 'cargo run'
@@ -170,7 +156,7 @@ function update-abbreviations
   # common utilities available even if windows PATH appending is turned off
   if test -f /mnt/c/Windows/System32/where.exe
     if test -f /mnt/c/Windows/explorer.exe
-       echo "✓ Windows (explorer)"
+       # echo "✓ Windows (explorer)"
       abbr explorer /mnt/c/Windows/explorer.exe
       abbr cmd /mnt/c/Windows/System32/cmd.exe
       abbr pwsh /mnt/c/Windows/System32/WindowsPowerShell/v1.0/powershell.exe
@@ -179,7 +165,7 @@ function update-abbreviations
 
     set winget_path (windows_where winget)
     if test -n "$winget_path"
-       echo "✓ Windows: winget.exe (winget, wg, ws, wi, wu, wx)"
+       # echo "✓ Windows: winget.exe (winget, wg, ws, wi, wu, wx)"
        abbr winget $winget_path
        abbr wg $winget_path
        abbr ws "$winget_path search"
@@ -190,13 +176,13 @@ function update-abbreviations
 
     set win_code_path (windows_where code)
     if test -n "$win_code_path"
-       echo "✓ Windows: VSCode (code)"
+       # echo "✓ Windows: VSCode (code)"
        abbr code "$win_code_path"
     end
 
     set win_git_path (windows_where git)
     if test -n "$win_git_path"
-       echo "✓ Windows: Git (wingit)"
+       # echo "✓ Windows: Git (wingit)"
       abbr wingit "$win_git_path"
     end
   end
@@ -205,7 +191,7 @@ function update-abbreviations
 end
 
 function update-abbreviations-utils
-  echo "✓ fish (1, 2, :q, :cq)"
+  # echo "✓ fish (1, 2, :q, :cq)"
   # push/pop
   abbr 1 prevd
   abbr 2 nextd
