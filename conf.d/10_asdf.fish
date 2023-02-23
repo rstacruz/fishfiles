@@ -7,6 +7,8 @@
 #     asdf global lua 5.3.5
 #     lua -v
 #
-if test -f ~/.asdf/asdf.fish
-  source ~/.asdf/asdf.fish
-end
+begin
+  if test -f ~/.asdf/asdf.fish
+    source ~/.asdf/asdf.fish
+  end
+end &
