@@ -65,9 +65,9 @@ function update-abbreviations
   end
 
   if type -q lazygit
-    # echo "✓ lazygit (lg, lgs)"
+    # echo "✓ lazygit (lg, s)"
     abbr lg 'lazygit'
-    abbr lgs 'lazygit status'
+    abbr s 'lazygit status'
   end
 
   if type -q gitui
