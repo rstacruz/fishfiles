@@ -64,6 +64,12 @@ function update-abbreviations
     abbr tigs 'tig status'
   end
 
+  if type -q lazygit
+    # echo "✓ lazygit (lg, lgs)"
+    abbr lg 'lazygit'
+    abbr lgs 'lazygit status'
+  end
+
   if type -q gitui
     # echo "✓ gitui (tigs)"
     abbr gui 'gitui'
