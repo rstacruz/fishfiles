@@ -140,6 +140,11 @@ function update-abbreviations
     abbr prlist 'gh pr list --search "-is:draft"'
   end
 
+  if type -q dconf
+    abbr gnome-dark "gsettings set org.gnome.desktop.interface color-scheme 'prefer-dark'"
+    abbr gnome-light "gsettings set org.gnome.desktop.interface color-scheme 'default'"
+  end
+
   # if type -q nvim
   #   # echo "✓ Neovim"
   #   abbr v 'nvim'
