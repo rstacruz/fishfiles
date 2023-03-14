@@ -126,9 +126,9 @@ function update-abbreviations
     abbr , z
   end
 
-  if type -q ag
-    # echo "✓ ag (gg)"
-    abbr gg 'ag --pager \'less -RFX\''
+  if type -q rg
+    # echo "✓ ripgrep (gg)"
+    abbr gg rg
   end
 
   if type -q gh
