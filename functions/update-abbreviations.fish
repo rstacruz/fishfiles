@@ -155,7 +155,9 @@ function update-abbreviations
         abbr light-mode "gsettings set org.gnome.desktop.interface color-scheme 'default'"
     end
 
-    if type -q nvim
+    if test -n "$VSCODE_INJECTION"
+      abbr e code
+    else if type -q nvim
         # echo "✓ Neovim"
         abbr e nvim
         abbr E "nvim +\"lua require('persistence').load()\""
