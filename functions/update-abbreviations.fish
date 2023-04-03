@@ -156,7 +156,7 @@ function update-abbreviations
     end
 
     if test -n "$VSCODE_INJECTION"
-      abbr e code
+        abbr e 'code (git rev-parse --show-toplevel)'
     else if type -q nvim
         # echo "✓ Neovim"
         abbr e nvim
