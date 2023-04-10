@@ -1,4 +1,9 @@
 function update-abbreviations
+    if type -q hyprctl
+        abbr hyp hyprctl
+        abbr hypd hyprctl dispatch
+    end
+
     if type -q git
         # echo "✓ git (g, ad, com, cout, ...)"
         abbr g git
@@ -127,7 +132,7 @@ function update-abbreviations
 
     if type -q tmux
         # echo "✓ tmux (ta)"
-        abbr ta 'tmux new -A -s default'
+        abbr ta 'tmux new -A -s'
     end
 
     if type -q z
