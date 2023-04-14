@@ -1,18 +1,19 @@
-
 # https://github.com/dylanaraps/pywal/wiki/Getting-Started#applying-the-theme-to-new-terminals
-if test -e ~/.cache/wal/sequences
-    and status --is-interactive
-    and test "$USE_WAL" != 0
+function use_wal
+    test -e ~/.cache/wal/sequences # Has to exist
+    and test -z "$DISABLE_WAL" # Not be disabled
+    and test -z "$SSH_TTY" # Not via ssh
     and test "$TERM_PROGRAM" != vscode
-    and test "$TERM_PROGRAM" != WezTerm
-    and test "$SSH_TTY" != "" # not when SSH'ing remotely
-    and test "$WSLENV" != "" # running wsl.exe in vscode
+    and test "$TERM" = foot
+end
 
-    if test "$TERM" = rxvt-unicode
-        or test "$TERM" = xterm-256color
-        or test "$TERM" = xterm-kitty
-        or test "$TERM" = alacritty
-        or test "$USE_WAL" = 1
+function load_wal
+    if use_wal
         cat ~/.cache/wal/sequences &
     end
 end
+
+# Use `pkill -USR1 -f load_wal` to reload the theme,
+# or pywal with `wal -e --theme github -l`
+trap load_wal SIGUSR1
+load_wal
