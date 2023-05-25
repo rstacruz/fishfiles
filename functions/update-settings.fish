@@ -22,6 +22,9 @@ function update-bin-paths --description "Update PATH variable"
     if test -d /opt/homebrew/bin
         fish_add_path --universal /opt/homebrew/bin
     end
+    if test -d /opt/homebrew/sbin
+        fish_add_path --universal /opt/homebrew/sbin
+    end
     if test -d /mnt/c/Windows; and test -d $HOME/bin/wsl
         fish_add_path --universal $HOME/bin/wsl
     end
