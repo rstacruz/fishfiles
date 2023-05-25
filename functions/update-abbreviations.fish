@@ -1,4 +1,8 @@
 function update-abbreviations
+    if type -q rsclock
+        # Show clock
+        abbr c 'rsclock -T -f 8 -c'
+    end
     if type -q hyprctl
         abbr hyp hyprctl
         abbr hypd hyprctl dispatch
