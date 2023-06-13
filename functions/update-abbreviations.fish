@@ -1,8 +1,9 @@
 function update-abbreviations
-    if type -q rsclock
-        # Show clock
-        abbr c 'rsclock -T -f 8 -c'
+    if type -q nerdctl
+        abbr nd nerdctl
+        abbr ndc nerdctl compose
     end
+
     if type -q hyprctl
         abbr hyp hyprctl
         abbr hypd hyprctl dispatch
@@ -185,6 +186,11 @@ function update-abbreviations
     #   abbr car 'cargo run'
     #   abbr caf 'cargo fmt'
     #   abbr ctw 'cargo watch -x "test -- --nocapture"'
+    # end
+
+    # if type -q rsclock
+    #     # Show clock
+    #     abbr c 'rsclock -T -f 8 -c'
     # end
 
     # These are great when using `appendWindowsPath = false` in WSL. It makes
