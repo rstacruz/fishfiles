@@ -47,7 +47,7 @@ monitor_for_changes() {
 debounced_do_fastsync() {
 	# Check if running already
 	if test -n "${debounce_action_pid}" && ps -p "${debounce_action_pid}" >/dev/null; then
-		return
+		kill "${debounce_action_pid}"
 	fi
 
 	# Wait N seconds then trigger a run
