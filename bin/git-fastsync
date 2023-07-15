@@ -1,10 +1,5 @@
 #!/usr/bin/env bash
-# Usage: git-fastsync [options]
 # Commits, pulls and pushes in one go.
-#
-# Options:
-#   -i, --interactive     Prompt the user for what to do
-#
 set -eou pipefail
 
 # global options
@@ -13,189 +8,271 @@ dry_run=''
 use_amend=''
 no_commit=''
 commit_only=''
+watch_mode=''
+watch_mode_wait_time='15'
+debounce_action_pid=''
+
+show_help() {
+	cat <<EOF
+Usage: git-fastsync [options]
+Commits, pulls and pushes in one go.
+
+Options:
+  -i, --interactive       Prompt the user for what to do
+  -n, --dry-run           Simulation mode
+      --commit-only       Don't push and pull
+	-w, --watch             Rerun on file changes
+	-W, --wait-for <secs>   Wait time for watch mode
+
+  -h, --help              Show this help message and exit
+EOF
+}
 
 main() {
-  while true; do
-    case "${1:-}" in
-      -p | --prompt | -i | --interactive)
-        interactive='1'
-        shift 1
-        ;;
-      -n | --dry-run)
-        dry_run='1'
-        shift 1
-        ;;
-      *) break ;;
-    esac
-  done
+	set_options_from_argv "$@"
 
-  commit_if_dirty
-  if [[ "$commit_only" == '1' ]]; then return; fi
+	do_fastsync
 
-  if [[ "$use_amend" == '1' ]]; then
-    push_updates '1'
-  else
-    pull_changes
-    push_updates
-  fi
+	if [[ "$watch_mode" == "1" ]]; then
+		monitor_for_changes | while read -r _update; do
+			debounced_do_fastsync
+		done
+	fi
+}
+
+monitor_for_changes() {
+	inotifywait --quiet --event modify,delete,create --monitor --recursive . --exclude "\\.git"
+}
+
+debounced_do_fastsync() {
+	# Check if running already
+	if test -n "${debounce_action_pid}" && ps -p "${debounce_action_pid}" >/dev/null; then
+		return
+	fi
+
+	# Wait N seconds then trigger a run
+	(
+		sleep "$watch_mode_wait_time"
+		do_fastsync
+	) &
+
+	debounce_action_pid="${!}"
+}
+
+do_fastsync() {
+	commit_if_dirty
+	if [[ "$commit_only" == '1' ]]; then return; fi
+
+	if [[ "$use_amend" == '1' ]]; then
+		push_updates '1'
+	else
+		pull_changes
+		push_updates
+	fi
+}
+
+set_options_from_argv() {
+	while true; do
+		case "${1:-}" in
+		-h | --help)
+			show_help
+			exit
+			;;
+		-w | --watch)
+			watch_mode='1'
+			shift 1
+			;;
+		-W | --wait-for)
+			watch_mode_wait_time="$2"
+			shift 2
+			;;
+		-i | --interactive)
+			interactive='1'
+			shift 1
+			;;
+		--commit-only)
+			commit_only='1'
+			shift 1
+			;;
+		-n | --dry-run)
+			dry_run='1'
+			shift 1
+			;;
+		*) break ;;
+		esac
+	done
+}
+
+# Runs an interactive prompt
+interactive_prompt() {
+	while true; do
+		echo -ne "\033[2K\r"
+		if [[ "$verbose" == "" ]]; then
+			echo -n '   [Enter] sync now · [?] more options: '
+		else
+			echo -e 'Options:'
+			echo '  [enter] sync now'
+			echo '  [c] commit only'
+			echo '  [m] change message'
+			echo '  [A] amend'
+			echo '  [d] show diff'
+			echo '  [q] quit'
+			echo -n '> '
+		fi
+		read -n1 input
+
+		case "$input" in
+		'c' | '') # Continue
+			break ;;
+		d) # Diff
+			verbose='1'
+			clear
+			git diff HEAD
+			echo ''
+			;;
+		q) # Quit
+			exit 1 ;;
+		A) # Amend
+			use_amend='1'
+			break
+			;;
+		c) # Commit-only
+			commit_only='1'
+			break
+			;;
+		'?') # Verbose
+			verbose='1' ;;
+		m) # Commit message
+			echo ''
+			echo ''
+			echo -n 'Commit msg: '
+			read -r message
+			break
+			;;
+		*) ;;
+		esac
+	done
+	echo ''
 }
 
 commit_if_dirty() {
-  local message=''
-  local input=''
-  local verbose=''
+	local message=''
+	local input=''
+	local verbose=''
 
-  if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
-    no_commit='1'
-    return
-  fi
+	if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
+		no_commit='1'
+		return
+	fi
 
-  # Show status
-  echo "Local changes in $(pwd):"
-  echo ''
-  git status -s
-  echo ''
+	# Show status
+	echo "Local changes in $(pwd):"
+	echo ''
+	git status -s
+	echo ''
 
-  if [[ "$interactive" == '1' ]]; then
-    while true; do
-      echo -ne "\033[2K\r"
-      if [[ "$verbose" == "" ]]; then
-        echo -n '   [Enter] sync now · [?] more options: '
-      else
-        echo -e 'Options:'
-        echo '  [enter] sync now'
-        echo '  [c] commit only'
-        echo '  [m] change message'
-        echo '  [A] amend'
-        echo '  [d] show diff'
-        echo '  [q] quit'
-        echo -n '> '
-      fi
-      read -n1 input
+	if [[ "$interactive" == '1' ]]; then
+		interactive_prompt
+	fi
 
-      case "$input" in
-        'c' | '') # Continue
-          break ;;
-        d) # Diff
-          verbose='1'
-          clear
-          git diff HEAD
-          echo '' ;;
-        q) # Quit
-          exit 1 ;;
-        A) # Amend
-          use_amend='1'
-          break ;;
-        c) # Commit-only
-          commit_only='1'
-          break ;;
-        '?') # Verbose
-          verbose='1' ;;
-        m) # Commit message
-          echo ''
-          echo ''
-          echo -n 'Commit msg: '
-          read -r message
-          break ;;
-        *) ;;
-      esac
-    done
-    echo ''
-  fi
+	_git add --all .
+	if [[ -z "$message" ]]; then
+		message="$(get_default_message || echo 'Update')"
+	fi
 
-  _git add --all .
-  if [[ -z "$message" ]]; then
-    message="$(get_default_message || echo 'Update')"
-  fi
-
-  if [[ "$use_amend" == '1' ]]; then
-    prog_info "Amend commit: ‘${message}’"
-    _git commit --amend -C HEAD
-  else
-    prog_info "Commit: ‘${message}’"
-    _git commit -m "$message"
-  fi
+	if [[ "$use_amend" == '1' ]]; then
+		prog_info "Amend commit: ‘${message}’"
+		_git commit --amend -C HEAD
+	else
+		prog_info "Commit: ‘${message}’"
+		_git commit -m "$message"
+	fi
 }
 
+# Generate a default commit message
 get_default_message() {
-  local message=''
-  local count=''
-  message="$(git status -s | head -n 1 | xargs)"
-  count="$(git status -s | wc -l | xargs)"
-  message="$(
-    echo "$message" |
-      sed 's/^M /Update /' |
-      sed 's/^R /Rename /' |
-      sed 's/^D /Delete /' |
-      sed 's/^A /Add /'
-  )"
+	local message=''
+	local count=''
+	message="$(git status -s | head -n 1 | xargs)"
+	count="$(git status -s | wc -l | xargs)"
+	message="$(
+		echo "$message" |
+			sed 's/^M /Update /' |
+			sed 's/^R /Rename /' |
+			sed 's/^D /Delete /' |
+			sed 's/^A /Add /'
+	)"
 
-  if [[ -z "$message" ]]; then return 1; fi
+	if [[ -z "$message" ]]; then return 1; fi
 
-  # append count
-  if [[ "$count" != '1' ]]; then
-    message="$message (+$((count - 1)) more changes)"
-  fi
+	# append count
+	if [[ "$count" != '1' ]]; then
+		message="$message (+$((count - 1)) more changes)"
+	fi
 
-  echo "$message"
+	echo "$message"
 }
 
+# Pull changes
 pull_changes() {
-  # Pull changes
-  if [[ "$no_commit" == '1' ]]; then
-    prog_start "Updating $(pwd)"
-  else
-    prog_start "Pulling changes"
-  fi
+	if [[ "$no_commit" == '1' ]]; then
+		prog_start "Update $(pwd)"
+	else
+		prog_start "Pull changes"
+	fi
 
-  if ! _git pull --quiet --rebase --autostash; then
-    prog_err "Failed to pull"
-    _git rebase --abort
-    exit 1
-  fi
+	if ! _git pull --quiet --rebase --autostash; then
+		prog_err "Failed to pull"
+		_git rebase --abort
+		exit 1
+	fi
 
-  prog_ok ''
+	prog_ok ''
 }
 
+# Push if there are any changes
 push_updates() {
-  # Push if there are any changes
-  local message=''
-  local force="${1:-}"
+	local message=''
+	local force="${1:-}"
 
-  if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
-    if [[ "$force" == '1' ]]; then
-      prog_start 'Force-pushing'
-      _git push --quiet --no-progress --force-with-lease
-      message="$(git log -1 --pretty='format:%s')"
-      prog_ok ''
-    else
-      prog_start 'Pushing'
-      _git push --quiet --no-progress
-      message="$(git log -1 --pretty='format:%s')"
-      prog_ok ''
-    fi
-  else
-    prog_info "Up to date"
-  fi
+	if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
+		if [[ "$force" == '1' ]]; then
+			prog_start 'Force-push'
+			_git push --quiet --no-progress --force-with-lease
+			message="$(git log -1 --pretty='format:%s')"
+			prog_ok ''
+		else
+			prog_start 'Push'
+			_git push --quiet --no-progress
+			message="$(git log -1 --pretty='format:%s')"
+			prog_ok ''
+		fi
+	else
+		prog_info "Up to date"
+	fi
 }
 
+# Runs a Git action. In dry run mode, it only prints
 _git() {
-  if [[ "$dry_run" == '1' ]]; then
-    echo -e "\033[32m$ git $*\033[0m"
-  else
-    git "$@" >/dev/null
-  fi
+	if [[ "$dry_run" == '1' ]]; then
+		echo -e "\n\033[32m$ git $*\033[0m"
+	else
+		git "$@" >/dev/null
+	fi
 }
 
 # Progress indicator helpers
-check="\033[33m✓"
-arrow="\033[32m››"
-cross="\033[31m✗"
+check="\033[32m● "
+arrow="\033[30m○ "
+cross="\033[31m✗ "
 reset="\033[0m"
-rewind="\033[4D\033[K "
+rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
 prog_start() { echo -ne "${arrow}${reset} $*... "; }
 prog_ok() { echo -e "${rewind}${check} $*${reset}"; }
 prog_err() { echo -e "${rewind}${cross} $*${reset}"; }
-prog_info() { prog_start "$*"; prog_ok; }
+prog_info() {
+	prog_start "$*"
+	prog_ok
+}
 
 main "$@"
