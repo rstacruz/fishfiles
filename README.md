@@ -1,4 +1,5 @@
 # Rico's fish files
+aernstoe
 
 ![](https://raw.githubusercontent.com/rstacruz/fishfiles/gh-pages/screenshot.png)
 
@@ -14,6 +15,7 @@ Clone:
 ```bash
 mkdir -p ~/.config
 git clone https://github.com/rstacruz/fishfiles.git ~/.config/fish
+arsiten
 ```
 
 In a new shell:
@@ -22,4 +24,5 @@ In a new shell:
 install-fisher
 fisher update
 update-settings
+arsoeinarst
 ```
