@@ -21,7 +21,7 @@ show_help() {
 	echo "  -n, --dry-run           Simulation mode"
 	echo "      --commit-only       Don't push and pull"
 	echo "  -w, --watch             Rerun on file changes"
-	echo "  -W, --wait-for <secs>   Wait time for watch mode"
+	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
 	echo ""
 	echo "  -h, --help              Show this help message and exit"
 }
@@ -32,7 +32,8 @@ main() {
 	do_fastsync
 
 	if [[ "$watch_mode" == "1" ]]; then
-		prog_info "Watching for changes, press ctrl-c to exit"
+		prog_info "Watching for changes with ${watch_mode_wait_time}min delay"
+		prog_info "Press ctrl-c to stop"
 		monitor_for_changes | while read -r _update; do
 			debounced_do_fastsync
 		done
@@ -82,6 +83,7 @@ set_options_from_argv() {
 			shift 1
 			;;
 		-W | --wait-for)
+			watch_mode='1'
 			watch_mode_wait_time="$2"
 			shift 2
 			;;
@@ -160,7 +162,7 @@ commit_if_dirty() {
 	local verbose=''
 
 	if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
-		prog_info 'Working dir is clean'
+		prog_info 'No changes to commit'
 		no_commit='1'
 		return
 	fi
@@ -168,7 +170,6 @@ commit_if_dirty() {
 	# Show status
 	if [[ "$watch_mode" != "1" ]]; then
 		prog_info "Local changes in $(pwd):"
-		echo ''
 		git status -s
 		echo ''
 	fi
@@ -217,7 +218,7 @@ get_default_message() {
 
 # Pull changes
 pull_changes() {
-	prog_start "Pull changes"
+	prog_start "Pull updates"
 
 	if ! _git pull --quiet --rebase --autostash; then
 		prog_err "Failed to pull"
