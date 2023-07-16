@@ -160,13 +160,14 @@ commit_if_dirty() {
 	local verbose=''
 
 	if [[ "$(git status -s | wc -l | xargs)" == "0" ]]; then
+		prog_info 'Working dir is clean'
 		no_commit='1'
 		return
 	fi
 
 	# Show status
 	if [[ "$watch_mode" != "1" ]]; then
-		echo "Local changes in $(pwd):"
+		prog_info "Local changes in $(pwd):"
 		echo ''
 		git status -s
 		echo ''
@@ -244,8 +245,6 @@ push_updates() {
 			message="$(git log -1 --pretty='format:%s')"
 			prog_ok ''
 		fi
-	else
-		prog_info "Up to date"
 	fi
 }
 
