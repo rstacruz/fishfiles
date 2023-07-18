@@ -4,6 +4,11 @@ function update-abbreviations
         abbr ndc nerdctl compose
     end
 
+    if type -q deno
+        abbr dt 'deno task'
+        abbr dr 'deno run -A'
+    end
+
     if type -q hyprctl
         abbr hyp hyprctl
         abbr hypd hyprctl dispatch
