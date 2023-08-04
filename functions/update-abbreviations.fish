@@ -27,8 +27,8 @@ function update-abbreviations
         abbr dif 'git diff'
         abbr dic 'git diff --cached'
 
-        abbr push 'git push'
-        abbr pull 'git pull'
+        # abbr push 'git push'
+        # abbr pull 'git pull'
         abbr PUSH 'git push --set-upstream origin (git rev-parse --abbrev-ref HEAD) --force-with-lease'
         abbr PULL 'git fetch; and git reset --hard origin/(git rev-parse --abbrev-ref HEAD)'
         abbr pur 'git pull --rebase'
@@ -36,7 +36,7 @@ function update-abbreviations
         # A little less common
         abbr amend 'git commit --amend -v'
         abbr fetch 'git fetch'
-        abbr merge 'git merge'
+        # abbr merge 'git merge'
         abbr rebase 'git rebase'
         abbr stash 'git stash'
 
