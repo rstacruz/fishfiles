@@ -1,6 +1,4 @@
 # Rico's fish files
-aernstoe
-
 ![](https://raw.githubusercontent.com/rstacruz/fishfiles/gh-pages/screenshot.png)
 
 Requires fish 2.6+.
