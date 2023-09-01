@@ -82,7 +82,7 @@ function update-abbreviations
     if type -q lazygit
         # echo "✓ lazygit (lg, s)"
         abbr lg lazygit
-        abbr s 'lazygit status'
+        abbr s lazygit
         abbr ad 'git add --all .; lazygit status'
     end
 
