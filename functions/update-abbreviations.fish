@@ -81,15 +81,8 @@ function update-abbreviations
 
     if type -q lazygit
         # echo "✓ lazygit (lg, s)"
-        abbr lg lazygit
         abbr s lazygit
         abbr ad 'git add --all .; lazygit status'
-    end
-
-    if type -q gitui
-        # echo "✓ gitui (tigs)"
-        abbr gui gitui
-        abbr u gitui
     end
 
     if type -q exa
@@ -128,6 +121,7 @@ function update-abbreviations
     if type -q yay
         # echo "✓ yay (yas)"
         abbr yas 'yay -S --needed'
+        abbr yar 'yay -Rns'
     end
 
     if type -q pkg # Termux
@@ -138,17 +132,12 @@ function update-abbreviations
     if type -q brew # Homebrew
         abbr yas 'brew install'
         abbr yay 'brew search'
+        abbr yar 'brew uninstall'
     end
 
     if type -q tmux
         # echo "✓ tmux (ta)"
         abbr ta 'tmux new -A -s'
-    end
-
-    if type -q z
-        # echo '✓ z (j ,)'
-        abbr j z
-        abbr , z
     end
 
     if type -q rg
@@ -157,12 +146,16 @@ function update-abbreviations
     end
 
     if type -q gh
-        # echo "✓ gh (pr, prc, prv, prw)"
+        # echo "✓ gh (pr, issue, run)"
+        abbr issue 'gh issue'
+        abbr issues 'gh issue list'
+        abbr run 'gh run'
+        abbr runs 'gh run list'
         abbr pr 'gh pr'
+        abbr prs 'gh pr list'
         abbr prc 'gh pr checkout'
         abbr prv 'gh pr view --web'
         abbr prw 'gh pr create --web'
-        abbr prlist 'gh pr list --search "-is:draft"'
     end
 
     if type -q dconf
@@ -178,25 +171,6 @@ function update-abbreviations
         abbr E "nvim +\"lua require('persistence').load()\""
         # ^ resume session
     end
-
-    # if type -q code
-    #   # echo "✓ VSCode"
-    #   abbr c. 'code (git rev-parse --show-toplevel)'
-    # end
-
-    # if type -q cargo
-    #   # echo "✓ Cargo"
-    #   abbr ca 'cargo'
-    #   abbr ct 'cargo test'
-    #   abbr car 'cargo run'
-    #   abbr caf 'cargo fmt'
-    #   abbr ctw 'cargo watch -x "test -- --nocapture"'
-    # end
-
-    # if type -q rsclock
-    #     # Show clock
-    #     abbr c 'rsclock -T -f 8 -c'
-    # end
 
     # These are great when using `appendWindowsPath = false` in WSL. It makes
     # common utilities available even if windows PATH appending is turned off
