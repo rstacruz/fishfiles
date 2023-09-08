@@ -94,6 +94,10 @@ function update-abbreviations
         abbr lat 'ls! --tree --color=always | less -RFX'
     end
 
+    if type -q npm
+        abbr nr 'npm run'
+    end
+
     if type -q yarn
         # echo "✓ yarn (y, yt, yd, yb)"
         abbr y yarn
