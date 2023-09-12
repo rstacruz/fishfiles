@@ -1,4 +1,9 @@
 function update-abbreviations
+    if type -q aichat
+        abbr ac aichat
+        abbr ar 'aichat -r' # Select a role (`ar reword`)
+    end
+
     if type -q nerdctl
         abbr nd nerdctl
         abbr ndc nerdctl compose
