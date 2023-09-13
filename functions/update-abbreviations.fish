@@ -1,4 +1,8 @@
 function update-abbreviations
+    if type -q bun
+        abbr br "bun run"
+    end
+
     if type -q aichat
         abbr ac aichat
         abbr ar 'aichat -r' # Select a role (`ar reword`)
