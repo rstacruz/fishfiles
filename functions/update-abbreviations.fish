@@ -1,4 +1,8 @@
 function update-abbreviations
+    if type -q helix
+        abbr hx "helix"
+    end
+
     if type -q bun
         abbr br "bun run"
     end
