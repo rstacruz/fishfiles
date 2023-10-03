@@ -1,10 +1,10 @@
 function update-abbreviations
     if type -q helix
-        abbr hx "helix"
+        abbr hx helix
     end
 
     if type -q bun
-        abbr br "bun run"
+        abbr brun "bun run" # br is taken by broot
     end
 
     if type -q aichat
