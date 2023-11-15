@@ -1,8 +1,0 @@
-#!/usr/bin/env sh
-# Add syntax highlighting to clipboard using highlight
-#
-#     brew install highlight
-
-pbcopy \
-  | highlight --syntax=js -O rtf -s bclear --font=Menlo --font-size=24 \
-  | pbcopy

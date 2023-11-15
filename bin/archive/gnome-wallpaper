@@ -1,6 +1,0 @@
-#!/usr/bin/env sh
-relpath="$1"
-abspath="$(readlink -e "$relpath")"
-gsettings set org.gnome.desktop.background picture-uri "file://$abspath"
-gsettings set org.gnome.desktop.background picture-options zoom
-

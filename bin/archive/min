@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-env MIN_PROMPT=1 fish

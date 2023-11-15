@@ -1,8 +1,0 @@
-#!/usr/bin/env bash
-
-source="$1"
-dest="${2:-__$source}"
-
-git clone "$source" "$dest"
-rm -rf "$dest/.git"
-cp -R "$source/.git" "$dest/.git"

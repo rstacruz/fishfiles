@@ -1,2 +1,0 @@
-#!/usr/bin/env sh
-code . $(git rev-parse --show-toplevel)
