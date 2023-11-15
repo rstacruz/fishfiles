@@ -1,4 +1,10 @@
 function update-abbreviations
+    if type -q flatpak
+        abbr fp flatpak
+        abbr fps "flatpak search"
+        abbr fpi "flatpak install"
+    end
+
     if type -q helix
         abbr hx helix
     end
