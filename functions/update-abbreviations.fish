@@ -115,6 +115,7 @@ function update-abbreviations
 
     if type -q npm
         abbr nr 'npm run'
+        abbr nx 'npm exec'
     end
 
     if type -q yarn
