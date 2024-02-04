@@ -14,10 +14,11 @@
 #     git clone https://github.com/asdf-vm/asdf.git ~/.asdf
 #     ...then do the commands above with asdf instead of rtx
 begin
-    if type -q rtx
-        rtx activate fish | source
-        abbr asdf rtx
-        abbr arst rtx
+    if type -q $HOME/.local/bin/mise
+        $HOME/.local/bin/mise activate fish | source
+        abbr asdf mise
+        abbr arst mise
+        abbr rtx mise
     else if test -f ~/.asdf/asdf.fish
         source ~/.asdf/asdf.fish
         abbr arst asdf
