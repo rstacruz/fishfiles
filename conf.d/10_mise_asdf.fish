@@ -15,10 +15,13 @@
 #     ...then do the commands above with asdf instead of rtx
 begin
     if type -q $HOME/.local/bin/mise
-        $HOME/.local/bin/mise activate fish | source
+        if status is-interactive
+            $HOME/.local/bin/mise activate fish | source
+        else
+            $HOME/.local/bin/mise activate fish --shims | source
+        end
         abbr asdf mise
         abbr arst mise
-        abbr rtx mise
     else if test -f ~/.asdf/asdf.fish
         source ~/.asdf/asdf.fish
         abbr arst asdf
