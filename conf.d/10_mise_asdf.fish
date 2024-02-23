@@ -26,4 +26,4 @@ begin
         source ~/.asdf/asdf.fish
         abbr arst asdf
     end
-end
+end &
