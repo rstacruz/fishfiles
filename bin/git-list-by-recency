@@ -1,0 +1,8 @@
+#!/usr/bin/env bash
+# https://stackoverflow.com/a/62303500
+git log --pretty="format:" --name-only 4b825dc642cb6eb9a060e54bf8d69288fbee4904..HEAD | awk NF | tac
+
+# https://stackoverflow.com/a/51762492
+# while read FILE; do
+# 	git log --pretty="%ad $FILE" --date=iso8601-strict -1 -- "$FILE"
+# done < <(git ls-files)
