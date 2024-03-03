@@ -116,6 +116,7 @@ function update-abbreviations
     if type -q npm
         abbr nr 'npm run'
         abbr nx 'npm exec'
+        abbr pn pnpm
     end
 
     if type -q yarn
@@ -176,7 +177,7 @@ function update-abbreviations
         abbr run 'gh run'
         abbr runs 'gh run list'
         abbr pr 'gh pr'
-        abbr prs 'gh pr list'
+        # abbr prs 'gh pr list'
         abbr prc 'gh pr checkout'
         abbr prv 'gh pr view --web'
         abbr prw 'gh pr create --web'
