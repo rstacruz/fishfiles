@@ -13,9 +13,8 @@ watch_mode_wait_time='15'
 debounce_action_pid=''
 
 # Progress indicator helpers
-check="\033[32m──"
-arrow="\033[30m──"
-cross="\033[31m✗ "
+check="\033[32m✓"
+cross="\033[31m✗"
 reset="\033[0m"
 rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
 
@@ -27,7 +26,7 @@ show_help() {
 	echo "  -i, --interactive       Prompt for what to do"
 	echo "  -n, --dry-run           Simulation mode"
 	echo "      --commit-only       Don't push and pull"
-	echo "      --amend             Amend the last commit"
+	echo "  -A, --amend             Amend the last commit"
 	echo "  -w, --watch             Rerun on file changes"
 	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
 	echo ""
@@ -121,7 +120,7 @@ set_options_from_argv() {
 			commit_only='1'
 			shift 1
 			;;
-		--amend)
+		-A | --amend)
 			use_amend='1'
 			shift 1
 			;;
@@ -258,7 +257,7 @@ pull_changes() {
 		exit 1
 	fi
 
-	prog_ok ''
+	prog_ok
 }
 
 # Push if there are any changes
@@ -271,12 +270,12 @@ push_updates() {
 			prog_start 'Force-push'
 			_git push --quiet --no-progress --force-with-lease
 			message="$(git log -1 --pretty='format:%s')"
-			prog_ok ''
+			prog_ok
 		else
 			prog_start 'Push'
 			_git push --quiet --no-progress
 			message="$(git log -1 --pretty='format:%s')"
-			prog_ok ''
+			prog_ok
 		fi
 	fi
 }
@@ -290,7 +289,7 @@ is_rebase_ongoing() {
 }
 
 has_remote_branch() {
-	git ls-remote --heads origin "$1"
+	test -n "$(git ls-remote --heads origin "$1")"
 }
 
 # Runs a Git action. In dry run mode, it only prints
@@ -302,9 +301,9 @@ _git() {
 	fi
 }
 
-prog_start() { echo -ne "${arrow}${reset} $*... "; }
-prog_ok() { echo -e "${rewind}${check} $*${reset}"; }
-prog_err() { echo -e "${rewind}${cross} $*${reset}"; }
+prog_start() { echo -ne "${rewind}$*... "; }
+prog_ok() { echo -e "\033[4D ${check}  ${reset}"; }
+prog_err() { echo -e "\n${reset}$* ${cross}${reset}"; }
 prog_info() {
 	prog_start "$*"
 	prog_ok
