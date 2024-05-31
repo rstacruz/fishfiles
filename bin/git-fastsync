@@ -20,6 +20,7 @@ show_help() {
 	echo "  -i, --interactive       Prompt for what to do"
 	echo "  -n, --dry-run           Simulation mode"
 	echo "      --commit-only       Don't push and pull"
+	echo "      --amend             Amend the last commit"
 	echo "  -w, --watch             Rerun on file changes"
 	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
 	echo ""
@@ -60,6 +61,16 @@ debounced_do_fastsync() {
 }
 
 do_fastsync() {
+	if is_merge_ongoing; then
+		prog_err "ERR: merge is ongoing. Resolve this merge before continuing."
+		exit 1
+	fi
+
+	if is_rebase_ongoing; then
+		prog_err "ERR: rebase is ongoing. Resolve this rebase before continuing."
+		exit 1
+	fi
+
 	commit_if_dirty
 	if [[ "$commit_only" == '1' ]]; then return; fi
 
@@ -95,6 +106,10 @@ set_options_from_argv() {
 			commit_only='1'
 			shift 1
 			;;
+		--amend)
+			use_amend='1'
+			shift 1
+			;;
 		-n | --dry-run)
 			dry_run='1'
 			shift 1
@@ -109,7 +124,7 @@ interactive_prompt() {
 	while true; do
 		echo -ne "\033[2K\r"
 		if [[ "$verbose" == "" ]]; then
-			echo -n '   [Enter] sync now · [?] more options: '
+			echo -n '[Enter] sync now, [d] show diff, [?] more options: '
 		else
 			echo -e 'Options:'
 			echo '  [enter] sync now'
@@ -169,7 +184,13 @@ commit_if_dirty() {
 
 	# Show status
 	if [[ "$watch_mode" != "1" ]]; then
+		message="$(get_default_message || echo 'Update')"
+		prog_info "Commit msg:"
+		echo ''
+		echo "   $message"
+		echo ''
 		prog_info "Local changes in $(pwd):"
+		echo ''
 		git status -s
 		echo ''
 	fi
@@ -249,6 +270,14 @@ push_updates() {
 	fi
 }
 
+is_merge_ongoing() {
+	test -f "$(git rev-parse --git-dir)/MERGE_HEAD"
+}
+
+is_rebase_ongoing() {
+	test -f "$(git rev-parse --git-dir)/rebase-merge"
+}
+
 # Runs a Git action. In dry run mode, it only prints
 _git() {
 	if [[ "$dry_run" == '1' ]]; then
@@ -259,8 +288,8 @@ _git() {
 }
 
 # Progress indicator helpers
-check="\033[32m● "
-arrow="\033[30m○ "
+check="\033[32m──"
+arrow="\033[30m──"
 cross="\033[31m✗ "
 reset="\033[0m"
 rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
