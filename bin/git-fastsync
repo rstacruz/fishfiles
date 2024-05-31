@@ -9,6 +9,7 @@ use_amend=''
 no_commit=''
 commit_only=''
 watch_mode=''
+edit_mode=''
 watch_mode_wait_time='15'
 debounce_action_pid=''
 
@@ -28,6 +29,7 @@ show_help() {
 	echo "      --commit-only       Don't push and pull"
 	echo "  -A, --amend             Amend the last commit"
 	echo "  -w, --watch             Rerun on file changes"
+	echo "      --edit              Edit the commit after"
 	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
 	echo ""
 	echo "  -h, --help              Show this help message and exit"
@@ -105,6 +107,10 @@ set_options_from_argv() {
 			;;
 		-w | --watch)
 			watch_mode='1'
+			shift 1
+			;;
+		--edit)
+			edit_mode='1'
 			shift 1
 			;;
 		-W | --wait-for)
@@ -220,6 +226,10 @@ commit_if_dirty() {
 	else
 		prog_info "Commit: ‘${message}’"
 		_git commit -m "$message"
+	fi
+
+	if [[ "$edit_mode" == '1' ]]; then
+		git commit --amend -v
 	fi
 }
 
