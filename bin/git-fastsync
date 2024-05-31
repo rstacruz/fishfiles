@@ -12,6 +12,13 @@ watch_mode=''
 watch_mode_wait_time='15'
 debounce_action_pid=''
 
+# Progress indicator helpers
+check="\033[32m──"
+arrow="\033[30m──"
+cross="\033[31m✗ "
+reset="\033[0m"
+rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
+
 show_help() {
 	echo "Usage: git-fastsync [options]"
 	echo "Commits, pulls and pushes in one go."
@@ -71,13 +78,21 @@ do_fastsync() {
 		exit 1
 	fi
 
+	branch="$(git rev-parse --abbrev-ref HEAD)"
+	if [[ "$branch" == "HEAD" ]]; then
+		prog_err "ERR: not on a branch"
+		exit 1
+	fi
+
 	commit_if_dirty
 	if [[ "$commit_only" == '1' ]]; then return; fi
 
 	if [[ "$use_amend" == '1' ]]; then
 		push_updates '1'
 	else
-		pull_changes
+		if has_remote_branch "$branch"; then
+			pull_changes
+		fi
 		push_updates
 	fi
 }
@@ -124,7 +139,7 @@ interactive_prompt() {
 	while true; do
 		echo -ne "\033[2K\r"
 		if [[ "$verbose" == "" ]]; then
-			echo -n '[Enter] sync now, [d] show diff, [?] more options: '
+			echo -ne "   [Enter] sync now, [d] show diff, [?] more options: "
 		else
 			echo -e 'Options:'
 			echo '  [enter] sync now'
@@ -184,18 +199,14 @@ commit_if_dirty() {
 
 	# Show status
 	if [[ "$watch_mode" != "1" ]]; then
-		message="$(get_default_message || echo 'Update')"
-		prog_info "Commit msg:"
-		echo ''
-		echo "   $message"
-		echo ''
 		prog_info "Local changes in $(pwd):"
-		echo ''
 		git status -s
 		echo ''
 	fi
 
 	if [[ "$interactive" == '1' ]]; then
+		message="$(get_default_message || echo 'Update')"
+		prog_info "Commit msg: '$message'"
 		interactive_prompt
 	fi
 
@@ -278,6 +289,10 @@ is_rebase_ongoing() {
 	test -f "$(git rev-parse --git-dir)/rebase-merge"
 }
 
+has_remote_branch() {
+	git ls-remote --heads origin "$1"
+}
+
 # Runs a Git action. In dry run mode, it only prints
 _git() {
 	if [[ "$dry_run" == '1' ]]; then
@@ -287,12 +302,6 @@ _git() {
 	fi
 }
 
-# Progress indicator helpers
-check="\033[32m──"
-arrow="\033[30m──"
-cross="\033[31m✗ "
-reset="\033[0m"
-rewind="\033[4D\033[K\r" # Cursor back, erase in line, start
 prog_start() { echo -ne "${arrow}${reset} $*... "; }
 prog_ok() { echo -e "${rewind}${check} $*${reset}"; }
 prog_err() { echo -e "${rewind}${cross} $*${reset}"; }
