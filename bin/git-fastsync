@@ -29,7 +29,7 @@ show_help() {
 	echo "      --commit-only       Don't push and pull"
 	echo "  -A, --amend             Amend the last commit"
 	echo "  -w, --watch             Rerun on file changes"
-	echo "      --edit              Edit the commit after"
+	echo "      --edit              Commit using editor"
 	echo "  -W, --wait-for <secs>   Wait time for watch mode, implies -w"
 	echo ""
 	echo "  -h, --help              Show this help message and exit"
@@ -220,16 +220,20 @@ commit_if_dirty() {
 		message="$(get_default_message || echo 'Update')"
 	fi
 
+	if [[ "$edit_mode" == '1' ]]; then
+		if [[ "$use_amend" == '1' ]]; then
+			git commit --amend -v
+		else
+			git commit -v
+		fi
+	fi
+
 	if [[ "$use_amend" == '1' ]]; then
 		prog_info "Amend commit: ‘${message}’"
 		_git commit --amend -C HEAD
 	else
 		prog_info "Commit: ‘${message}’"
 		_git commit -m "$message"
-	fi
-
-	if [[ "$edit_mode" == '1' ]]; then
-		git commit --amend -v
 	fi
 }
 

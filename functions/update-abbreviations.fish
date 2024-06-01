@@ -61,11 +61,13 @@ function update-abbreviations
 
         # Macros
         abbr gcd 'cd (git rev-parse --show-toplevel)'
-        abbr g, 'git status -s | grep -E "^[DRAM]"; git commit -m (read -p \'echo "Commit: "\')'
-        abbr g. 'git add --all .; and git commit -m Update'
+        # abbr g, 'git status -s | grep -E "^[DRAM]"; git commit -m (read -p \'echo "Commit: "\')'
+        # abbr g. 'git add --all .; and git commit -m Update'
 
         # fastsync
         abbr gf 'git fastsync'
+        abbr g. 'git fastsync --edit'
+        abbr g, 'git fastsync --edit'
     end
 
     if type -q aria2c
