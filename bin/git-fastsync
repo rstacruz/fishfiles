@@ -10,7 +10,7 @@ no_commit=''
 commit_only=''
 watch_mode=''
 edit_mode=''
-watch_mode_wait_time='15'
+watch_mode_wait_time='10'
 debounce_action_pid=''
 
 # Progress indicator helpers
@@ -41,7 +41,7 @@ main() {
 	do_fastsync
 
 	if [[ "$watch_mode" == "1" ]]; then
-		prog_info "Watching for changes with ${watch_mode_wait_time}min delay"
+		prog_info "Watching for changes with ${watch_mode_wait_time}sec delay"
 		prog_info "Press ctrl-c to stop"
 		monitor_for_changes | while read -r _update; do
 			debounced_do_fastsync
@@ -91,7 +91,7 @@ do_fastsync() {
 	if [[ "$use_amend" == '1' ]]; then
 		push_updates '1'
 	else
-		prog_start 'Pulling'
+		prog_start 'Pull'
 		_git fetch
 		local upstream
 		upstream="$(get_upstream_reference)"
