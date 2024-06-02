@@ -91,9 +91,15 @@ do_fastsync() {
 	if [[ "$use_amend" == '1' ]]; then
 		push_updates '1'
 	else
+		prog_start 'Checking if remote branch exists'
+
 		if has_remote_branch "$branch"; then
+			prog_ok
 			pull_changes
+		else
+			prog_ok
 		fi
+
 		push_updates
 	fi
 }
@@ -279,7 +285,7 @@ push_updates() {
 	local message=''
 	local force="${1:-}"
 
-	if [[ "$dry_run" == '1' ]] || git status --branch -s | head -n 1 | grep -q ahead; then
+	if [[ "$dry_run" == '1' ]] || is_push_needed; then
 		if [[ "$force" == '1' ]]; then
 			prog_start 'Force-push'
 			_git push --quiet --no-progress --force-with-lease
@@ -304,6 +310,10 @@ is_rebase_ongoing() {
 
 has_remote_branch() {
 	test -n "$(git ls-remote --heads origin "$1")"
+}
+
+is_push_needed() {
+	git status --branch -s | head -n 1 | grep -q ahead
 }
 
 # Runs a Git action. In dry run mode, it only prints
