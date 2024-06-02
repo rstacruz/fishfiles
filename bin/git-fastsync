@@ -232,14 +232,14 @@ commit_if_dirty() {
 		else
 			git commit -v
 		fi
-	fi
-
-	if [[ "$use_amend" == '1' ]]; then
-		prog_info "Amend commit: ‘${message}’"
-		_git commit --amend -C HEAD
 	else
-		prog_info "Commit: ‘${message}’"
-		_git commit -m "$message"
+		if [[ "$use_amend" == '1' ]]; then
+			prog_info "Amend commit: ‘${message}’"
+			_git commit --amend -C HEAD
+		else
+			prog_info "Commit: ‘${message}’"
+			_git commit -m "$message"
+		fi
 	fi
 }
 
