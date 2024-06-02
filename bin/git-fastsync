@@ -93,10 +93,12 @@ do_fastsync() {
 	else
 		prog_start 'Fetching remote updates'
 		_git fetch
+		local upstream
+		upstream="$(get_upstream_reference)"
 
-		if has_remote_branch "$branch"; then
+		if [[ -n "$upstream" ]] && has_remote_branch "$upstream"; then
 			prog_ok
-			pull_changes
+			pull_changes "$upstream"
 		else
 			prog_ok
 		fi
@@ -270,9 +272,10 @@ get_default_message() {
 
 # Pull changes
 pull_changes() {
+	local upstream="$1"
 	prog_start "Pull updates"
 
-	if ! _git pull --quiet --rebase --autostash; then
+	if ! _git rebase --quiet --autostash "$upstream"; then
 		prog_err "Failed to pull"
 		_git rebase --abort
 		exit 1
@@ -310,11 +313,17 @@ is_rebase_ongoing() {
 }
 
 has_remote_branch() {
-	git branch -a | grep -q "remotes/origin/$1"
+	git branch -a | grep -q "remotes/$(get_upstream_reference)"
 }
 
 is_push_needed() {
 	git status --branch -s | head -n 1 | grep -q ahead
+}
+
+# eg, origin/main
+# Returns blank if not available
+get_upstream_reference() {
+	git rev-parse --abbrev-ref --symbolic-full-name @{u} 2>/dev/null || echo ''
 }
 
 # Runs a Git action. In dry run mode, it only prints
