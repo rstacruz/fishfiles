@@ -91,7 +91,7 @@ do_fastsync() {
 	if [[ "$use_amend" == '1' ]]; then
 		push_updates '1'
 	else
-		prog_start 'Fetching remote updates'
+		prog_start 'Pulling'
 		_git fetch
 		local upstream
 		upstream="$(get_upstream_reference)"
@@ -273,15 +273,12 @@ get_default_message() {
 # Pull changes
 pull_changes() {
 	local upstream="$1"
-	prog_start "Pull updates"
 
 	if ! _git rebase --quiet --autostash "$upstream"; then
 		prog_err "Failed to pull"
 		_git rebase --abort
 		exit 1
 	fi
-
-	prog_ok
 }
 
 # Push if there are any changes
