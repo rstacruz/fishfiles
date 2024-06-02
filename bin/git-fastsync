@@ -91,7 +91,8 @@ do_fastsync() {
 	if [[ "$use_amend" == '1' ]]; then
 		push_updates '1'
 	else
-		prog_start 'Checking if remote branch exists'
+		prog_start 'Fetching remote updates'
+		_git fetch
 
 		if has_remote_branch "$branch"; then
 			prog_ok
@@ -309,7 +310,7 @@ is_rebase_ongoing() {
 }
 
 has_remote_branch() {
-	test -n "$(git ls-remote --heads origin "$1")"
+	git branch -a | grep -q "remotes/origin/$1"
 }
 
 is_push_needed() {
