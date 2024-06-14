@@ -55,7 +55,7 @@ function update-abbreviations
         # A little less common
         abbr amend 'git commit --amend -v'
         abbr fetch 'git fetch'
-        # abbr merge 'git merge'
+        abbr merge 'git fetch && git merge'
         abbr rebase 'git rebase'
         abbr stash 'git stash'
 
