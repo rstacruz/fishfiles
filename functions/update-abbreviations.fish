@@ -234,6 +234,14 @@ function update-abbreviations
         end
     end
 
+    if test -e ~/Documents/Vaults/Notes
+        abbr N 'cd ~/Documents/Vaults/Notes && nvim'
+    end
+
+    if test -e ~/Documents/Vaults/Extranotes
+        abbr X 'cd ~/Documents/Vaults/Extranotes && nvim'
+    end
+
     update-abbreviations-clipboard
     update-abbreviations-utils
 end
